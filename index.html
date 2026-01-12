@@ -243,11 +243,16 @@
             overflow: hidden;
             box-shadow: var(--shadow);
             transition: var(--transition);
+            cursor: pointer;
         }
 
         .category-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .category-card.active {
+            border: 3px solid var(--secondary-color);
         }
 
         .category-icon {
@@ -269,6 +274,32 @@
             margin-bottom: 10px;
         }
 
+        /* Filtres de produits */
+        .product-filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .filter-select {
+            padding: 12px 20px;
+            border: 2px solid #ddd;
+            border-radius: var(--border-radius);
+            font-family: 'Roboto', sans-serif;
+            font-size: 1rem;
+            min-width: 200px;
+            background-color: var(--white);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-select:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+
         /* Produits populaires */
         .products {
             background-color: #f1f5f9;
@@ -286,10 +317,16 @@
             overflow: hidden;
             box-shadow: var(--shadow);
             transition: var(--transition);
+            opacity: 1;
+            transform: scale(1);
         }
 
         .product-card:hover {
             transform: translateY(-5px);
+        }
+
+        .product-card.hidden {
+            display: none;
         }
 
         .product-image {
@@ -302,9 +339,14 @@
         }
 
         .product-image img {
-            max-width: 80%;
-            max-height: 80%;
-            object-fit: contain;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
         }
 
         .product-content {
@@ -314,6 +356,17 @@
         .product-title {
             font-size: 1.3rem;
             margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .product-category {
+            display: inline-block;
+            background-color: #e9ecef;
+            color: var(--gray-color);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
         }
 
         .product-price {
@@ -321,6 +374,55 @@
             font-weight: 700;
             font-size: 1.2rem;
             margin-bottom: 15px;
+        }
+
+        /* Galerie de produits */
+        .gallery-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .gallery-nav {
+            display: flex;
+            gap: 10px;
+        }
+
+        .gallery-btn {
+            background-color: var(--white);
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .gallery-btn:hover {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+
+        .gallery-btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .gallery-btn.disabled:hover {
+            background-color: var(--white);
+            color: var(--primary-color);
+        }
+
+        .product-counter {
+            font-weight: 600;
+            color: var(--primary-color);
         }
 
         /* À propos */
@@ -383,7 +485,8 @@
         }
 
         .contact-form input,
-        .contact-form textarea {
+        .contact-form textarea,
+        .contact-form select {
             width: 100%;
             padding: 12px 15px;
             margin-bottom: 20px;
@@ -396,6 +499,46 @@
         .contact-form textarea {
             min-height: 150px;
             resize: vertical;
+        }
+
+        /* Modal pour afficher l'image en grand */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+        }
+
+        .modal-content img {
+            width: 100%;
+            height: auto;
+            border-radius: var(--border-radius);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: var(--white);
+            font-size: 2.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .close-modal:hover {
+            color: var(--secondary-color);
         }
 
         /* Footer */
@@ -521,6 +664,11 @@
             .section {
                 padding: 60px 0;
             }
+
+            .gallery-controls {
+                flex-direction: column;
+                align-items: flex-start;
+            }
         }
 
         @media (max-width: 576px) {
@@ -530,6 +678,10 @@
 
             .btn {
                 padding: 10px 20px;
+            }
+
+            .filter-select {
+                min-width: 100%;
             }
         }
     </style>
@@ -556,6 +708,7 @@
                     <li><a href="#accueil">Accueil</a></li>
                     <li><a href="#categories">Catégories</a></li>
                     <li><a href="#produits">Produits</a></li>
+                    <li><a href="#galerie">Galerie</a></li>
                     <li><a href="#apropos">À propos</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
@@ -584,7 +737,17 @@
             </div>
             
             <div class="category-grid">
-                <div class="category-card">
+                <div class="category-card active" data-category="all">
+                    <div class="category-icon">
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <div class="category-content">
+                        <h3>Tous les produits</h3>
+                        <p>Voir l'ensemble de notre catalogue de produits high-tech.</p>
+                    </div>
+                </div>
+                
+                <div class="category-card" data-category="ordinateurs">
                     <div class="category-icon">
                         <i class="fas fa-laptop"></i>
                     </div>
@@ -594,7 +757,7 @@
                     </div>
                 </div>
                 
-                <div class="category-card">
+                <div class="category-card" data-category="telephones">
                     <div class="category-icon">
                         <i class="fas fa-mobile-alt"></i>
                     </div>
@@ -604,7 +767,7 @@
                     </div>
                 </div>
                 
-                <div class="category-card">
+                <div class="category-card" data-category="accessoires">
                     <div class="category-icon">
                         <i class="fas fa-headphones"></i>
                     </div>
@@ -614,7 +777,7 @@
                     </div>
                 </div>
                 
-                <div class="category-card">
+                <div class="category-card" data-category="montres">
                     <div class="category-icon">
                         <i class="fas fa-clock"></i>
                     </div>
@@ -635,54 +798,70 @@
                 <p>Découvrez nos best-sellers du moment</p>
             </div>
             
-            <div class="product-grid">
-                <div class="product-card">
-                    <div class="product-image">
-                        <i class="fas fa-laptop" style="font-size: 5rem; color: var(--primary-color);"></i>
-                    </div>
-                    <div class="product-content">
-                        <h3 class="product-title">Laptop HP EliteBook</h3>
-                        <p>Ordinateur portable professionnel avec processeur Intel i7, 16GB RAM, 512GB SSD.</p>
-                        <div class="product-price">850,000 FCFA</div>
-                        <a href="#contact" class="btn">Demander un devis</a>
-                    </div>
-                </div>
+            <!-- Filtres pour les produits -->
+            <div class="product-filters">
+                <select class="filter-select" id="categoryFilter">
+                    <option value="all">Toutes les catégories</option>
+                    <option value="ordinateurs">Ordinateurs</option>
+                    <option value="telephones">Téléphones & Tablettes</option>
+                    <option value="accessoires">Accessoires</option>
+                    <option value="montres">Montres Connectées</option>
+                </select>
                 
-                <div class="product-card">
-                    <div class="product-image">
-                        <i class="fas fa-mobile-alt" style="font-size: 5rem; color: var(--primary-color);"></i>
-                    </div>
-                    <div class="product-content">
-                        <h3 class="product-title">Samsung Galaxy S23</h3>
-                        <p>Smartphone Android avec écran AMOLED 6.1", 128GB de stockage, appareil photo 50MP.</p>
-                        <div class="product-price">550,000 FCFA</div>
-                        <a href="#contact" class="btn">Demander un devis</a>
-                    </div>
-                </div>
+                <select class="filter-select" id="priceFilter">
+                    <option value="all">Tous les prix</option>
+                    <option value="0-100">Moins de 100,000 FCFA</option>
+                    <option value="100-300">100,000 - 300,000 FCFA</option>
+                    <option value="300-500">300,000 - 500,000 FCFA</option>
+                    <option value="500+">Plus de 500,000 FCFA</option>
+                </select>
                 
-                <div class="product-card">
-                    <div class="product-image">
-                        <i class="fas fa-clock" style="font-size: 5rem; color: var(--primary-color);"></i>
-                    </div>
-                    <div class="product-content">
-                        <h3 class="product-title">Apple Watch Series 8</h3>
-                        <p>Montre connectée avec écran Retina, GPS, monitoring cardiaque et applications santé.</p>
-                        <div class="product-price">300,000 FCFA</div>
-                        <a href="#contact" class="btn">Demander un devis</a>
-                    </div>
-                </div>
+                <select class="filter-select" id="brandFilter">
+                    <option value="all">Toutes les marques</option>
+                    <option value="hp">HP</option>
+                    <option value="dell">Dell</option>
+                    <option value="samsung">Samsung</option>
+                    <option value="apple">Apple</option>
+                    <option value="sony">Sony</option>
+                </select>
+            </div>
+            
+            <div class="product-grid" id="productGrid">
+                <!-- Les produits seront générés dynamiquement par JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Galerie de produits -->
+    <section class="section gallery" id="galerie" style="background-color: var(--white);">
+        <div class="container">
+            <div class="section-title text-center">
+                <h2>Galerie de Nos Produits</h2>
+                <p>Visualisez nos produits en images</p>
+            </div>
+            
+            <div class="gallery-controls">
+                <select class="filter-select" id="galleryCategoryFilter">
+                    <option value="all">Toutes les catégories</option>
+                    <option value="ordinateurs">Ordinateurs</option>
+                    <option value="telephones">Téléphones</option>
+                    <option value="accessoires">Accessoires</option>
+                    <option value="montres">Montres</option>
+                </select>
                 
-                <div class="product-card">
-                    <div class="product-image">
-                        <i class="fas fa-headphones" style="font-size: 5rem; color: var(--primary-color);"></i>
-                    </div>
-                    <div class="product-content">
-                        <h3 class="product-title">Casque Sony WH-1000XM5</h3>
-                        <p>Casque audio sans fil avec réduction de bruit active et autonomie de 30 heures.</p>
-                        <div class="product-price">120,000 FCFA</div>
-                        <a href="#contact" class="btn">Demander un devis</a>
-                    </div>
+                <div class="gallery-nav">
+                    <button class="gallery-btn" id="prevGallery">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <span class="product-counter" id="galleryCounter">1/12</span>
+                    <button class="gallery-btn" id="nextGallery">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
                 </div>
+            </div>
+            
+            <div class="product-grid" id="galleryGrid">
+                <!-- Les images de la galerie seront générées dynamiquement par JavaScript -->
             </div>
         </div>
     </section>
@@ -732,7 +911,7 @@
                         </div>
                         <div>
                             <h3>Adresse</h3>
-                            <p>123 Avenue de la Technologie<br>Ouagadougou, Burkina Faso</p>
+                            <p>Koulouba pres du siege de Orange <br>Ouagadougou, Burkina Faso</p>
                         </div>
                     </div>
                     
@@ -742,7 +921,7 @@
                         </div>
                         <div>
                             <h3>Téléphone</h3>
-                            <p>+226 XX XX XX XX<br>+226 XX XX XX XX</p>
+                            <p>+226 74 95 85 09 <br>+226 73 85 84 61 </p>
                         </div>
                     </div>
                     
@@ -772,7 +951,13 @@
                         <input type="text" placeholder="Votre nom complet" required>
                         <input type="email" placeholder="Votre adresse email" required>
                         <input type="tel" placeholder="Votre numéro de téléphone">
-                        <input type="text" placeholder="Sujet de votre message">
+                        <select required>
+                            <option value="" disabled selected>Sujet de votre message</option>
+                            <option value="devis">Demande de devis</option>
+                            <option value="info">Demande d'information</option>
+                            <option value="support">Support technique</option>
+                            <option value="autre">Autre</option>
+                        </select>
                         <textarea placeholder="Votre message" required></textarea>
                         <button type="submit" class="btn btn-primary">Envoyer le message</button>
                     </form>
@@ -796,6 +981,7 @@
                         <li><a href="#accueil">Accueil</a></li>
                         <li><a href="#categories">Catégories</a></li>
                         <li><a href="#produits">Produits</a></li>
+                        <li><a href="#galerie">Galerie</a></li>
                         <li><a href="#apropos">À propos</a></li>
                         <li><a href="#contact">Contact</a></li>
                     </ul>
@@ -819,7 +1005,132 @@
         </div>
     </footer>
 
+    <!-- Modal pour afficher les images en grand -->
+    <div class="modal" id="imageModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <img id="modalImage" src="" alt="Produit en grand">
+        </div>
+    </div>
+
     <script>
+        // Données des produits
+        const products = [
+            {
+                id: 1,
+                name: "Laptop HP EliteBook",
+                category: "ordinateurs",
+                brand: "hp",
+                price: 850000,
+                image: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80",
+                description: "Ordinateur portable professionnel avec processeur Intel i7, 16GB RAM, 512GB SSD."
+            },
+            {
+                id: 2,
+                name: "Samsung Galaxy S23",
+                category: "telephones",
+                brand: "samsung",
+                price: 550000,
+                image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1160&q=80",
+                description: "Smartphone Android avec écran AMOLED 6.1\", 128GB de stockage, appareil photo 50MP."
+            },
+            {
+                id: 3,
+                name: "Apple Watch Series 8",
+                category: "montres",
+                brand: "apple",
+                price: 300000,
+                image: "https://images.unsplash.com/photo-1546868871-7041f2a55e12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1064&q=80",
+                description: "Montre connectée avec écran Retina, GPS, monitoring cardiaque et applications santé."
+            },
+            {
+                id: 4,
+                name: "Casque Sony WH-1000XM5",
+                category: "accessoires",
+                brand: "sony",
+                price: 120000,
+                image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+                description: "Casque audio sans fil avec réduction de bruit active et autonomie de 30 heures."
+            },
+            {
+                id: 5,
+                name: "MacBook Pro M2",
+                category: "ordinateurs",
+                brand: "apple",
+                price: 1200000,
+                image: "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
+                description: "Ordinateur portable Apple avec puce M2, 16GB RAM, 512GB SSD."
+            },
+            {
+                id: 6,
+                name: "iPhone 14 Pro",
+                category: "telephones",
+                brand: "apple",
+                price: 750000,
+                image: "https://images.unsplash.com/photo-1678652173913-c2125d0a5e0a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+                description: "Smartphone Apple avec écran Dynamic Island, caméra 48MP et puce A16 Bionic."
+            },
+            {
+                id: 7,
+                name: "Disque Dur Externe 2TB",
+                category: "accessoires",
+                brand: "seagate",
+                price: 80000,
+                image: "https://images.unsplash.com/photo-1593640408182-31c70c8268f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1142&q=80",
+                description: "Disque dur externe portable de 2TB pour le stockage et la sauvegarde de données."
+            },
+            {
+                id: 8,
+                name: "Montre Samsung Galaxy Watch 5",
+                category: "montres",
+                brand: "samsung",
+                price: 180000,
+                image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1099&q=80",
+                description: "Montre connectée Samsung avec écran Super AMOLED et capteurs de santé avancés."
+            },
+            {
+                id: 9,
+                name: "PC Gamer Dell Alienware",
+                category: "ordinateurs",
+                brand: "dell",
+                price: 1500000,
+                image: "https://images.unsplash.com/photo-1593640408182-31c70c8268f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1142&q=80",
+                description: "PC portable gaming avec processeur Intel i9, RTX 4080, 32GB RAM et écran 240Hz."
+            },
+            {
+                id: 10,
+                name: "Clavier Mécanique RGB",
+                category: "accessoires",
+                brand: "razer",
+                price: 65000,
+                image: "https://images.unsplash.com/photo-1541140532154-b024d705b90a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1167&q=80",
+                description: "Clavier gaming mécanique avec rétroéclairage RGB personnalisable et switches rapides."
+            },
+            {
+                id: 11,
+                name: "Tablette Samsung Galaxy Tab S8",
+                category: "telephones",
+                brand: "samsung",
+                price: 450000,
+                image: "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1115&q=80",
+                description: "Tablette Android avec écran 11\" 120Hz, S-Pen incluse et processeur Snapdragon 8 Gen 1."
+            },
+            {
+                id: 12,
+                name: "Souris Gaming Sans Fil",
+                category: "accessoires",
+                brand: "logitech",
+                price: 45000,
+                image: "https://images.unsplash.com/photo-1527814050087-3793815479db?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1128&q=80",
+                description: "Souris gaming sans fil avec capteur haute précision, 6 boutons programmables et RGB."
+            }
+        ];
+
+        // Variables pour la galerie
+        let currentGalleryIndex = 0;
+        let filteredGalleryProducts = [...products];
+        const productsPerPage = 4;
+
         // Menu mobile
         const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
         const navLinks = document.querySelector('.nav-links');
@@ -874,6 +1185,197 @@
                         top: targetElement.offsetTop - 80,
                         behavior: 'smooth'
                     });
+                }
+            });
+        });
+
+        // Fonction pour formater le prix
+        function formatPrice(price) {
+            return new Intl.NumberFormat('fr-FR').format(price) + ' FCFA';
+        }
+
+        // Fonction pour créer une carte de produit
+        function createProductCard(product) {
+            return `
+                <div class="product-card" data-category="${product.category}" data-brand="${product.brand}" data-price="${product.price}">
+                    <div class="product-image">
+                        <img src="${product.image}" alt="${product.name}" loading="lazy">
+                    </div>
+                    <div class="product-content">
+                        <span class="product-category">${product.category}</span>
+                        <h3 class="product-title">${product.name}</h3>
+                        <p>${product.description}</p>
+                        <div class="product-price">${formatPrice(product.price)}</div>
+                        <a href="#contact" class="btn">Demander un devis</a>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Fonction pour créer une carte de galerie
+        function createGalleryCard(product) {
+            return `
+                <div class="product-card" data-category="${product.category}">
+                    <div class="product-image" onclick="openModal('${product.image}', '${product.name}')">
+                        <img src="${product.image}" alt="${product.name}" loading="lazy">
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-title">${product.name}</h3>
+                        <div class="product-price">${formatPrice(product.price)}</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Fonction pour afficher les produits
+        function displayProducts(filteredProducts, containerId, createCardFunction) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = '';
+            
+            filteredProducts.forEach(product => {
+                container.innerHTML += createCardFunction(product);
+            });
+        }
+
+        // Fonction pour filtrer les produits
+        function filterProducts() {
+            const categoryFilter = document.getElementById('categoryFilter').value;
+            const priceFilter = document.getElementById('priceFilter').value;
+            const brandFilter = document.getElementById('brandFilter').value;
+            
+            let filtered = products;
+            
+            // Filtrer par catégorie
+            if (categoryFilter !== 'all') {
+                filtered = filtered.filter(product => product.category === categoryFilter);
+            }
+            
+            // Filtrer par prix
+            if (priceFilter !== 'all') {
+                if (priceFilter === '0-100') {
+                    filtered = filtered.filter(product => product.price < 100000);
+                } else if (priceFilter === '100-300') {
+                    filtered = filtered.filter(product => product.price >= 100000 && product.price <= 300000);
+                } else if (priceFilter === '300-500') {
+                    filtered = filtered.filter(product => product.price >= 300000 && product.price <= 500000);
+                } else if (priceFilter === '500+') {
+                    filtered = filtered.filter(product => product.price > 500000);
+                }
+            }
+            
+            // Filtrer par marque
+            if (brandFilter !== 'all') {
+                filtered = filtered.filter(product => product.brand === brandFilter);
+            }
+            
+            // Afficher les produits filtrés
+            displayProducts(filtered, 'productGrid', createProductCard);
+            
+            // Mettre à jour le compteur de produits
+            document.querySelector('.product-counter')?.textContent = `${filtered.length} produits`;
+        }
+
+        // Fonction pour filtrer la galerie
+        function filterGallery() {
+            const galleryCategoryFilter = document.getElementById('galleryCategoryFilter').value;
+            
+            if (galleryCategoryFilter === 'all') {
+                filteredGalleryProducts = [...products];
+            } else {
+                filteredGalleryProducts = products.filter(product => product.category === galleryCategoryFilter);
+            }
+            
+            currentGalleryIndex = 0;
+            updateGallery();
+        }
+
+        // Fonction pour mettre à jour la galerie
+        function updateGallery() {
+            const startIndex = currentGalleryIndex * productsPerPage;
+            const endIndex = startIndex + productsPerPage;
+            const productsToShow = filteredGalleryProducts.slice(startIndex, endIndex);
+            
+            displayProducts(productsToShow, 'galleryGrid', createGalleryCard);
+            
+            // Mettre à jour le compteur
+            const totalPages = Math.ceil(filteredGalleryProducts.length / productsPerPage);
+            document.getElementById('galleryCounter').textContent = `${currentGalleryIndex + 1}/${totalPages}`;
+            
+            // Activer/désactiver les boutons de navigation
+            document.getElementById('prevGallery').classList.toggle('disabled', currentGalleryIndex === 0);
+            document.getElementById('nextGallery').classList.toggle('disabled', currentGalleryIndex >= totalPages - 1);
+        }
+
+        // Fonction pour ouvrir le modal avec l'image en grand
+        window.openModal = function(imageSrc, productName) {
+            const modal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            
+            modalImage.src = imageSrc;
+            modalImage.alt = productName;
+            modal.style.display = 'flex';
+        }
+
+        // Fermer le modal
+        document.querySelector('.close-modal').addEventListener('click', function() {
+            document.getElementById('imageModal').style.display = 'none';
+        });
+
+        // Fermer le modal en cliquant à l'extérieur
+        window.addEventListener('click', function(event) {
+            const modal = document.getElementById('imageModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        // Gestion des catégories
+        document.querySelectorAll('.category-card').forEach(card => {
+            card.addEventListener('click', function() {
+                // Retirer la classe active de toutes les cartes
+                document.querySelectorAll('.category-card').forEach(c => {
+                    c.classList.remove('active');
+                });
+                
+                // Ajouter la classe active à la carte cliquée
+                this.classList.add('active');
+                
+                // Mettre à jour le filtre de catégorie
+                const category = this.getAttribute('data-category');
+                document.getElementById('categoryFilter').value = category;
+                
+                // Appliquer le filtre
+                filterProducts();
+            });
+        });
+
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Afficher tous les produits au chargement
+            displayProducts(products, 'productGrid', createProductCard);
+            
+            // Afficher la première page de la galerie
+            updateGallery();
+            
+            // Ajouter les événements aux filtres
+            document.getElementById('categoryFilter').addEventListener('change', filterProducts);
+            document.getElementById('priceFilter').addEventListener('change', filterProducts);
+            document.getElementById('brandFilter').addEventListener('change', filterProducts);
+            document.getElementById('galleryCategoryFilter').addEventListener('change', filterGallery);
+            
+            // Navigation de la galerie
+            document.getElementById('prevGallery').addEventListener('click', function() {
+                if (currentGalleryIndex > 0) {
+                    currentGalleryIndex--;
+                    updateGallery();
+                }
+            });
+            
+            document.getElementById('nextGallery').addEventListener('click', function() {
+                const totalPages = Math.ceil(filteredGalleryProducts.length / productsPerPage);
+                if (currentGalleryIndex < totalPages - 1) {
+                    currentGalleryIndex++;
+                    updateGallery();
                 }
             });
         });
