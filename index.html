@@ -18,7 +18,7 @@
 
         :root {
             --primary-color: #0047AB;
-            --secondary-color: #FF6B00;
+            --secondary-color: #FFD700; /* Jaune or au lieu d'orange */
             --dark-color: #333333;
             --light-color: #F8F9FA;
             --gray-color: #6C757D;
@@ -90,7 +90,7 @@
         .btn {
             display: inline-block;
             background-color: var(--secondary-color);
-            color: var(--white);
+            color: #333;
             padding: 12px 28px;
             border-radius: var(--border-radius);
             font-weight: 600;
@@ -102,13 +102,14 @@
         }
 
         .btn:hover {
-            background-color: #e05a00;
+            background-color: #E6C300; /* Jaune or plus foncé */
             transform: translateY(-3px);
             box-shadow: var(--shadow);
         }
 
         .btn-primary {
             background-color: var(--primary-color);
+            color: var(--white);
         }
 
         .btn-primary:hover {
@@ -299,12 +300,18 @@
             align-items: center;
             justify-content: center;
             overflow: hidden;
+            padding: 10px;
         }
 
         .product-image img {
-            max-width: 80%;
-            max-height: 80%;
+            max-width: 100%;
+            max-height: 100%;
             object-fit: contain;
+            transition: var(--transition);
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
         }
 
         .product-content {
@@ -314,6 +321,7 @@
         .product-title {
             font-size: 1.3rem;
             margin-bottom: 10px;
+            color: var(--primary-color);
         }
 
         .product-price {
@@ -454,6 +462,7 @@
 
         .social-icons a:hover {
             background-color: var(--secondary-color);
+            color: #333;
             transform: translateY(-5px);
         }
 
@@ -638,7 +647,7 @@
             <div class="product-grid">
                 <div class="product-card">
                     <div class="product-image">
-                        <i class="fas fa-laptop" style="font-size: 5rem; color: var(--primary-color);"></i>
+                        <img src="HP.jpg" alt="HP EliteBook">
                     </div>
                     <div class="product-content">
                         <h3 class="product-title">Laptop HP EliteBook</h3>
@@ -650,19 +659,19 @@
                 
                 <div class="product-card">
                     <div class="product-image">
-                        <i class="fas fa-mobile-alt" style="font-size: 5rem; color: var(--primary-color);"></i>
+                        <img src="HP1.jpg" alt="HP Pavilion">
                     </div>
                     <div class="product-content">
-                        <h3 class="product-title">Samsung Galaxy S23</h3>
-                        <p>Smartphone Android avec écran AMOLED 6.1", 128GB de stockage, appareil photo 50MP.</p>
-                        <div class="product-price">550,000 FCFA</div>
+                        <h3 class="product-title">HP Pavilion Gaming</h3>
+                        <p>PC portable gaming avec écran 144Hz, RTX 3060, 16GB RAM, 1TB SSD.</p>
+                        <div class="product-price">950,000 FCFA</div>
                         <a href="#contact" class="btn">Demander un devis</a>
                     </div>
                 </div>
                 
                 <div class="product-card">
                     <div class="product-image">
-                        <i class="fas fa-clock" style="font-size: 5rem; color: var(--primary-color);"></i>
+                        <img src="Montre.jpg" alt="Apple Watch">
                     </div>
                     <div class="product-content">
                         <h3 class="product-title">Apple Watch Series 8</h3>
@@ -674,15 +683,19 @@
                 
                 <div class="product-card">
                     <div class="product-image">
-                        <i class="fas fa-headphones" style="font-size: 5rem; color: var(--primary-color);"></i>
+                        <img src="montre2.jpg" alt="Montre connectée">
                     </div>
                     <div class="product-content">
-                        <h3 class="product-title">Casque Sony WH-1000XM5</h3>
-                        <p>Casque audio sans fil avec réduction de bruit active et autonomie de 30 heures.</p>
-                        <div class="product-price">120,000 FCFA</div>
+                        <h3 class="product-title">Montre Connectée Premium</h3>
+                        <p>Montre intelligente avec écran AMOLED, autonomie 7 jours, tracking sportif complet.</p>
+                        <div class="product-price">150,000 FCFA</div>
                         <a href="#contact" class="btn">Demander un devis</a>
                     </div>
                 </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 50px;">
+                <a href="#contact" class="btn btn-primary">Voir tous nos produits</a>
             </div>
         </div>
     </section>
@@ -696,7 +709,7 @@
             
             <div class="about-content">
                 <div class="about-text">
-                    <p>, <strong>Faso High Tech</strong> est une référence dans la vente de matériel informatique et high-tech au Burkina Faso.</p>
+                    <p><strong>Faso High Tech</strong> est une référence dans la vente de matériel informatique et high-tech au Burkina Faso.</p>
                     <p>Notre mission est de fournir des produits technologiques de qualité à des prix compétitifs, accompagnés d'un service client exceptionnel.</p>
                     <p>Nous proposons une large gamme de produits :</p>
                     <ul style="list-style-type: disc; padding-left: 20px; margin-bottom: 20px;">
