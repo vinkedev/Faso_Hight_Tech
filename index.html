@@ -446,11 +446,13 @@
             transform: scale(1.1);
         }
 
-        /* Catégories */
+        /* ============ CATÉGORIES ============ */
         .categories {
             background-color: var(--white);
+            overflow: hidden;
         }
 
+        /* Desktop : grille normale */
         .category-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -502,11 +504,13 @@
             margin-bottom: 10px;
         }
 
-        /* Produits populaires */
+        /* ============ PRODUITS POPULAIRES ============ */
         .products {
             background-color: #f1f5f9;
+            overflow: hidden;
         }
 
+        /* Desktop : grille normale */
         .product-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -558,6 +562,27 @@
             font-weight: 700;
             font-size: 1.2rem;
             margin-bottom: 15px;
+        }
+
+        /* Indicateurs de scroll (points) */
+        .scroll-indicators {
+            display: none;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 20px;
+        }
+
+        .scroll-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: rgba(0, 71, 171, 0.3);
+            transition: var(--transition);
+        }
+
+        .scroll-indicator.active {
+            background-color: var(--primary-color);
+            transform: scale(1.3);
         }
 
         /* À propos */
@@ -846,20 +871,89 @@
                 font-size: 1rem;
             }
 
-            /* Cartes produits mobile */
-            .product-grid, .category-grid, .why-grid {
-                grid-template-columns: 1fr !important;
-                gap: 20px;
+            /* ============ CARTES MOBILE (CARROUSEL) ============ */
+            /* Masquer les grilles sur mobile */
+            .category-grid,
+            .product-grid {
+                display: none !important;
             }
 
-            .product-image {
+            /* Afficher les conteneurs carrousel sur mobile */
+            .category-carousel-container,
+            .product-carousel-container {
+                display: block !important;
+            }
+
+            /* Conteneur carrousel */
+            .carousel-container {
+                position: relative;
+                overflow: visible;
+            }
+
+            /* Wrapper carrousel */
+            .carousel-wrapper {
+                display: flex;
+                gap: 20px;
+                padding: 10px 20px;
+                overflow-x: auto;
+                overflow-y: hidden;
+                scroll-snap-type: x mandatory;
+                scroll-behavior: smooth;
+                -webkit-overflow-scrolling: touch;
+                padding-bottom: 20px;
+                margin-bottom: 10px;
+            }
+
+            /* Masquer la scrollbar pour une meilleure apparence */
+            .carousel-wrapper::-webkit-scrollbar {
+                display: none;
+            }
+
+            .carousel-wrapper {
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
+
+            /* Cartes dans le carrousel */
+            .carousel-wrapper .category-card,
+            .carousel-wrapper .product-card {
+                flex: 0 0 calc(85vw - 40px);
+                min-width: calc(85vw - 40px);
+                scroll-snap-align: start;
+                transform: none;
+                opacity: 1;
+                box-shadow: var(--shadow);
+                margin: 0;
+                animation: none;
+                transition: none;
+            }
+
+            /* Désactiver les effets 3D sur mobile pour performance */
+            .carousel-wrapper .product-card {
+                transform-style: flat;
+                perspective: none;
+            }
+
+            .carousel-wrapper .product-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            }
+
+            .carousel-wrapper .category-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            }
+
+            /* Ajustement des images produits pour mobile */
+            .carousel-wrapper .product-image {
                 height: 250px !important;
             }
 
-            .product-card:hover {
-                transform: translateY(-5px);
+            /* Indicateurs de scroll */
+            .scroll-indicators {
+                display: flex;
             }
-            
+
             /* À propos mobile */
             .about-content {
                 flex-direction: column;
@@ -934,6 +1028,18 @@
             
             .product-price {
                 font-size: 1.1rem;
+            }
+
+            /* Cartes carrousel sur très petits écrans */
+            .carousel-wrapper .category-card,
+            .carousel-wrapper .product-card {
+                flex: 0 0 calc(90vw - 40px);
+                min-width: calc(90vw - 40px);
+            }
+
+            .carousel-wrapper {
+                padding: 10px 15px;
+                gap: 15px;
             }
         }
     </style>
@@ -1014,6 +1120,7 @@
                 <p>Découvrez notre large gamme de produits high-tech</p>
             </div>
             
+            <!-- Version Desktop : Grille normale -->
             <div class="category-grid">
                 <div class="category-card">
                     <div class="category-icon">
@@ -1055,6 +1162,60 @@
                     </div>
                 </div>
             </div>
+            
+            <!-- Version Mobile : Carrousel horizontal -->
+            <div class="category-carousel-container" style="display: none;">
+                <div class="carousel-container">
+                    <div class="carousel-wrapper">
+                        <div class="category-card">
+                            <div class="category-icon">
+                                <i class="fas fa-laptop"></i>
+                            </div>
+                            <div class="category-content">
+                                <h3>Ordinateurs</h3>
+                                <p>PC portables, ordinateurs de bureau, stations de travail pour professionnels et particuliers.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="category-card">
+                            <div class="category-icon">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <div class="category-content">
+                                <h3>Téléphones & Tablettes</h3>
+                                <p>Smartphones, tablettes, accessoires mobiles des marques les plus populaires.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="category-card">
+                            <div class="category-icon">
+                                <i class="fas fa-headphones"></i>
+                            </div>
+                            <div class="category-content">
+                                <h3>Accessoires</h3>
+                                <p>Casques, claviers, souris, disques durs externes, câbles et bien plus encore.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="category-card">
+                            <div class="category-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="category-content">
+                                <h3>Montres Connectées</h3>
+                                <p>Montres intelligentes et bracelets connectés pour suivre votre activité physique.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Indicateurs de scroll -->
+                    <div class="scroll-indicators" id="category-indicators">
+                        <div class="scroll-indicator active"></div>
+                        <div class="scroll-indicator"></div>
+                        <div class="scroll-indicator"></div>
+                        <div class="scroll-indicator"></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -1066,6 +1227,7 @@
                 <p>Découvrez nos best-sellers du moment</p>
             </div>
             
+            <!-- Version Desktop : Grille normale -->
             <div class="product-grid">
                 <!-- Produit 1: HP EliteBook -->
                 <div class="product-card">
@@ -1160,6 +1322,118 @@
                         <a href="https://wa.me/22674958509?text=Bonjour,%20je%20suis%20intéressé(e)%20par%20le%20HP%20Pavilion%20Gaming" class="btn btn-whatsapp" target="_blank">
                             <i class="fab fa-whatsapp"></i> Commander
                         </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Version Mobile : Carrousel horizontal -->
+            <div class="product-carousel-container" style="display: none;">
+                <div class="carousel-container">
+                    <div class="carousel-wrapper">
+                        <!-- Produit 1: HP EliteBook -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <div class="badge hot">🔥 Best Seller</div>
+                                <img src="image/HP_EliteBook_G3.jpg" alt="HP EliteBook G3">
+                            </div>
+                            <div class="product-content">
+                                <h3 class="product-title">HP EliteBook G3 💻</h3>
+                                <p>Ordinateur portable professionnel avec processeur Intel i5, 8GB RAM, 256GB SSD.</p>
+                                <div class="product-price">650,000 FCFA</div>
+                                <a href="https://wa.me/22674958509?text=Bonjour,%20je%20suis%20intéressé(e)%20par%20le%20HP%20EliteBook%20G3" class="btn btn-whatsapp" target="_blank">
+                                    <i class="fab fa-whatsapp"></i> Commander
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Produit 2: HP EliteBook G6 -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <div class="badge new">Nouveau</div>
+                                <img src="image/HP_Elitebook_G6.jpg" alt="HP EliteBook G6">
+                            </div>
+                            <div class="product-content">
+                                <h3 class="product-title">HP EliteBook G6 🎯</h3>
+                                <p>PC portable professionnel avec processeur Intel i7, 16GB RAM, 512GB SSD.</p>
+                                <div class="product-price">850,000 FCFA</div>
+                                <a href="https://wa.me/22674958509?text=Bonjour,%20je%20suis%20intéressé(e)%20par%20le%20HP%20EliteBook%20G6" class="btn btn-whatsapp" target="_blank">
+                                    <i class="fab fa-whatsapp"></i> Commander
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Produit 3: HP ProBook G5 -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <div class="badge hot">🔥 Best Seller</div>
+                                <img src="image/HP_probook_G5.jpg" alt="HP ProBook G5">
+                            </div>
+                            <div class="product-content">
+                                <h3 class="product-title">HP ProBook G5 💼</h3>
+                                <p>PC portable d'affaires avec écran Full HD, 8GB RAM, 256GB SSD.</p>
+                                <div class="product-price">550,000 FCFA</div>
+                                <a href="https://wa.me/22674958509?text=Bonjour,%20je%20suis%20intéressé(e)%20par%20le%20HP%20ProBook%20G5" class="btn btn-whatsapp" target="_blank">
+                                    <i class="fab fa-whatsapp"></i> Commander
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Produit 4: Lenovo ThinkPad -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <div class="badge promo">Promo</div>
+                                <img src="image/Lenovo_thinkpad.jpg" alt="Lenovo ThinkPad">
+                            </div>
+                            <div class="product-content">
+                                <h3 class="product-title">Lenovo ThinkPad 🖥️</h3>
+                                <p>Ordinateur portable robuste pour professionnels, Intel i5, 16GB RAM, 512GB SSD.</p>
+                                <div class="product-price">700,000 FCFA</div>
+                                <a href="https://wa.me/22674958509?text=Bonjour,%20je%20suis%20intéressé(e)%20par%20le%20Lenovo%20ThinkPad" class="btn btn-whatsapp" target="_blank">
+                                    <i class="fab fa-whatsapp"></i> Commander
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Produit 5: Montre connectée -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <div class="badge new">Nouveau</div>
+                                <img src="image/montre2.jpg" alt="Montre Connectée">
+                            </div>
+                            <div class="product-content">
+                                <h3 class="product-title">Montre Connectée ⌚</h3>
+                                <p>Montre intelligente avec écran tactile, GPS, monitoring cardiaque et applications santé.</p>
+                                <div class="product-price">85,000 FCFA</div>
+                                <a href="https://wa.me/22674958509?text=Bonjour,%20je%20suis%20intéressé(e)%20par%20la%20montre%20connectée" class="btn btn-whatsapp" target="_blank">
+                                    <i class="fab fa-whatsapp"></i> Commander
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Produit 6: HP Pavilion -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <div class="badge hot">🔥 Best Seller</div>
+                                <img src="image/HP4.jpg" alt="HP Pavilion">
+                            </div>
+                            <div class="product-content">
+                                <h3 class="product-title">HP Pavilion Gaming 🎮</h3>
+                                <p>PC portable gaming avec écran 144Hz, GTX 1650, 16GB RAM, 1TB SSD.</p>
+                                <div class="product-price">950,000 FCFA</div>
+                                <a href="https://wa.me/22674958509?text=Bonjour,%20je%20suis%20intéressé(e)%20par%20le%20HP%20Pavilion%20Gaming" class="btn btn-whatsapp" target="_blank">
+                                    <i class="fab fa-whatsapp"></i> Commander
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Indicateurs de scroll -->
+                    <div class="scroll-indicators" id="product-indicators">
+                        <div class="scroll-indicator active"></div>
+                        <div class="scroll-indicator"></div>
+                        <div class="scroll-indicator"></div>
+                        <div class="scroll-indicator"></div>
+                        <div class="scroll-indicator"></div>
+                        <div class="scroll-indicator"></div>
                     </div>
                 </div>
             </div>
@@ -1391,7 +1665,7 @@
                         setTimeout(update, 20);
                     }
                 };
-                setTimeout(update, 1000);
+                update(); // Démarrer immédiatement
             });
         }
 
@@ -1456,58 +1730,155 @@
             });
         });
 
-        // Animation au défilement
-        function checkScroll() {
+        // === INTERSECTION OBSERVER POUR ANIMATIONS ===
+        const observerOptions = {
+            root: null,
+            rootMargin: '-50px 0px -100px 0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    if (entry.target.classList.contains('section')) {
+                        entry.target.classList.add('visible');
+                    }
+                    
+                    if (entry.target.classList.contains('product-card') || 
+                        entry.target.classList.contains('category-card') || 
+                        entry.target.classList.contains('why-card')) {
+                        entry.target.classList.add('visible');
+                    }
+                    
+                    if (entry.target.classList.contains('stats')) {
+                        if (!entry.target.classList.contains('animated')) {
+                            entry.target.classList.add('animated');
+                            animateCounters();
+                        }
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observer tous les éléments qui doivent être animés
+        document.addEventListener('DOMContentLoaded', () => {
             // Sections principales
-            const sections = document.querySelectorAll('.section');
-            
-            sections.forEach(section => {
-                const sectionTop = section.getBoundingClientRect().top;
-                const windowHeight = window.innerHeight;
-                
-                if (sectionTop < windowHeight - 100) {
-                    section.classList.add('visible');
-                }
+            document.querySelectorAll('.section').forEach(section => {
+                observer.observe(section);
             });
             
-            // Cartes produits
-            const productCards = document.querySelectorAll('.product-card, .category-card, .why-card');
-            
-            productCards.forEach((card, index) => {
-                const cardTop = card.getBoundingClientRect().top;
-                const windowHeight = window.innerHeight;
-                
-                if (cardTop < windowHeight - 100) {
-                    setTimeout(() => {
-                        card.classList.add('visible');
-                    }, index * 100); // Délai progressif pour un effet cascade
-                }
+            // Cartes produits (desktop)
+            document.querySelectorAll('.product-card').forEach(card => {
+                observer.observe(card);
             });
             
-            // Statistiques - déclencher l'animation des compteurs
+            // Cartes catégories (desktop)
+            document.querySelectorAll('.category-card').forEach(card => {
+                observer.observe(card);
+            });
+            
+            // Cartes "Pourquoi nous choisir"
+            document.querySelectorAll('.why-card').forEach(card => {
+                observer.observe(card);
+            });
+            
+            // Section statistiques
             const statsSection = document.querySelector('.stats');
             if (statsSection) {
-                const statsTop = statsSection.getBoundingClientRect().top;
-                if (statsTop < window.innerHeight - 100 && !statsSection.classList.contains('animated')) {
-                    statsSection.classList.add('animated');
-                    animateCounters();
-                }
+                observer.observe(statsSection);
             }
-        }
-
-        // Initialiser l'animation au chargement
-        window.addEventListener('load', () => {
-            checkScroll();
             
-            // Vérifier immédiatement quelles sections sont visibles
-            setTimeout(checkScroll, 100);
+            // === GESTION DES CARROUSELS MOBILE ===
+            setupMobileCarousels();
         });
 
-        // Vérifier le défilement
-        window.addEventListener('scroll', checkScroll);
-        
-        // Vérifier aussi lors du redimensionnement
-        window.addEventListener('resize', checkScroll);
+        // Fonction pour gérer les carrousels mobiles
+        function setupMobileCarousels() {
+            // Vérifier si on est sur mobile
+            const isMobile = window.innerWidth <= 768;
+            
+            if (isMobile) {
+                // Afficher les carrousels et masquer les grilles
+                document.querySelector('.category-carousel-container').style.display = 'block';
+                document.querySelector('.product-carousel-container').style.display = 'block';
+                
+                // Masquer les grilles desktop
+                document.querySelector('.category-grid').style.display = 'none';
+                document.querySelector('.product-grid').style.display = 'none';
+                
+                // Configurer les indicateurs de scroll
+                setupScrollIndicators('category');
+                setupScrollIndicators('product');
+            } else {
+                // Sur desktop, masquer les carrousels
+                document.querySelector('.category-carousel-container').style.display = 'none';
+                document.querySelector('.product-carousel-container').style.display = 'none';
+                
+                // Afficher les grilles desktop
+                document.querySelector('.category-grid').style.display = 'grid';
+                document.querySelector('.product-grid').style.display = 'grid';
+            }
+            
+            // Réagir au redimensionnement de la fenêtre
+            window.addEventListener('resize', () => {
+                const isMobileNow = window.innerWidth <= 768;
+                
+                if (isMobileNow && !isMobile) {
+                    // Passer de desktop à mobile
+                    document.querySelector('.category-carousel-container').style.display = 'block';
+                    document.querySelector('.product-carousel-container').style.display = 'block';
+                    document.querySelector('.category-grid').style.display = 'none';
+                    document.querySelector('.product-grid').style.display = 'none';
+                    
+                    setupScrollIndicators('category');
+                    setupScrollIndicators('product');
+                } else if (!isMobileNow && isMobile) {
+                    // Passer de mobile à desktop
+                    document.querySelector('.category-carousel-container').style.display = 'none';
+                    document.querySelector('.product-carousel-container').style.display = 'none';
+                    document.querySelector('.category-grid').style.display = 'grid';
+                    document.querySelector('.product-grid').style.display = 'grid';
+                }
+            });
+        }
+
+        // Fonction pour configurer les indicateurs de scroll
+        function setupScrollIndicators(type) {
+            const carouselWrapper = document.querySelector(`.${type}-carousel-container .carousel-wrapper`);
+            const indicators = document.querySelectorAll(`#${type}-indicators .scroll-indicator`);
+            
+            if (!carouselWrapper || !indicators.length) return;
+            
+            // Calculer la largeur d'une carte
+            const cardWidth = carouselWrapper.querySelector(`.${type === 'category' ? 'category-card' : 'product-card'}`).offsetWidth;
+            const gap = 20; // gap du carousel-wrapper
+            const totalWidth = cardWidth + gap;
+            
+            // Mettre à jour les indicateurs lors du scroll
+            carouselWrapper.addEventListener('scroll', () => {
+                const scrollPosition = carouselWrapper.scrollLeft;
+                const activeIndex = Math.round(scrollPosition / totalWidth);
+                
+                // Mettre à jour les indicateurs
+                indicators.forEach((indicator, index) => {
+                    if (index === activeIndex) {
+                        indicator.classList.add('active');
+                    } else {
+                        indicator.classList.remove('active');
+                    }
+                });
+            });
+            
+            // Ajouter le clic sur les indicateurs pour faire défiler
+            indicators.forEach((indicator, index) => {
+                indicator.addEventListener('click', () => {
+                    carouselWrapper.scrollTo({
+                        left: index * totalWidth,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        }
     </script>
 </body>
 </html>
