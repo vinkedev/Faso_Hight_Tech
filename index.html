@@ -18,7 +18,7 @@
 
         :root {
             --primary-color: #0047AB;
-            --secondary-color: #D4A13A; /* Jaune or au lieu d'orange */
+            --secondary-color: #D4A13A;
             --dark-color: #333333;
             --light-color: #F8F9FA;
             --gray-color: #6C757D;
@@ -103,7 +103,7 @@
         }
 
         .btn:hover {
-            background-color: #E6C300; /* Jaune or plus foncé */
+            background-color: #E6C300;
             transform: translateY(-3px);
             box-shadow: var(--shadow);
         }
@@ -175,12 +175,6 @@
             }
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
         @keyframes pulseWhatsapp {
             0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
             70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
@@ -214,6 +208,8 @@
 
         .logo img {
             height: 50px;
+            max-width: 200px;
+            object-fit: contain;
         }
 
         .logo-text h1 {
@@ -269,9 +265,9 @@
             color: var(--primary-color);
         }
 
-        /* Hero section avec effet machine à écrire */
+        /* Hero section avec vos images */
         .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/image/Splash.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -280,29 +276,6 @@
             padding: 180px 20px 100px;
             margin-top: 80px;
             animation: fadeIn 1.2s ease-out;
-        }
-
-        .hero h1 {
-            font-size: 3.2rem;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-        }
-
-        #typing {
-            display: block;
-            font-size: 1.8rem;
-            margin: 20px 0 30px;
-            min-height: 60px;
-            color: var(--secondary-color);
-            font-weight: 600;
-            letter-spacing: 1px;
-        }
-
-        .hero-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
         }
 
         /* Badges produits */
@@ -332,10 +305,6 @@
         .product-card:hover {
             transform: perspective(1000px) rotateX(5deg) rotateY(-5deg) translateY(-10px);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-        }
-
-        .product-image {
-            position: relative;
         }
 
         /* Section "Pourquoi nous choisir ?" */
@@ -787,16 +756,20 @@
             .btn {
                 padding: 10px 20px;
             }
+            
+            .logo img {
+                height: 40px;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Header avec navigation -->
+    <!-- Header avec votre logo -->
     <header>
         <div class="container header-container">
             <div class="logo">
                 <div class="logo-img">
-                    <i class="fas fa-laptop-code" style="font-size: 2.5rem; color: var(--primary-color);"></i>
+                    <img src="image/Logo.jpg" alt="Faso High Tech Logo">
                 </div>
                 <div class="logo-text">
                     <h1>Faso <span>High Tech</span></h1>
@@ -820,7 +793,7 @@
         </div>
     </header>
 
-    <!-- Section Hero avec effet machine à écrire -->
+    <!-- Section Hero avec votre image Splash -->
     <section class="hero" id="accueil">
         <div class="container">
             <h1>Faso High Tech<br></h1>
@@ -910,7 +883,7 @@
         </div>
     </section>
 
-    <!-- Section Produits Populaires -->
+    <!-- Section Produits Populaires avec VOS images -->
     <section class="section products" id="produits">
         <div class="container">
             <div class="section-title text-center">
@@ -919,91 +892,97 @@
             </div>
             
             <div class="product-grid">
+                <!-- Produit 1: HP EliteBook -->
                 <div class="product-card">
                     <div class="product-image">
                         <div class="badge hot">🔥 Best Seller</div>
-                        <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80" alt="HP EliteBook">
+                        <img src="image/HP_EliteBook_G3.jpg" alt="HP EliteBook G3">
                     </div>
                     <div class="product-content">
-                        <h3 class="product-title">Laptop HP EliteBook 💻</h3>
-                        <p>Ordinateur portable professionnel avec processeur Intel i7, 16GB RAM, 512GB SSD.</p>
-                        <div class="product-price">850,000 FCFA</div>
-                        <a href="https://wa.me/22673858446?text=Bonjour,%20je%20suis%20intéressé(e)%20par%20le%20Laptop%20HP%20EliteBook" class="btn btn-whatsapp" target="_blank">
+                        <h3 class="product-title">HP EliteBook G3 💻</h3>
+                        <p>Ordinateur portable professionnel avec processeur Intel i5, 8GB RAM, 256GB SSD.</p>
+                        <div class="product-price">650,000 FCFA</div>
+                        <a href="https://wa.me/22673858446?text=Bonjour,%20je%20suis%20intéressé(e)%20par%20le%20HP%20EliteBook%20G3" class="btn btn-whatsapp" target="_blank">
                             <i class="fab fa-whatsapp"></i> Commander
                         </a>
                     </div>
                 </div>
                 
+                <!-- Produit 2: HP EliteBook G6 -->
                 <div class="product-card">
                     <div class="product-image">
                         <div class="badge new">Nouveau</div>
-                        <img src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1142&q=80" alt="HP Pavilion">
+                        <img src="image/HP_Elitebook_G6.jpg" alt="HP EliteBook G6">
                     </div>
                     <div class="product-content">
-                        <h3 class="product-title">HP Pavilion Gaming 🎮</h3>
-                        <p>PC portable gaming avec écran 144Hz, RTX 3060, 16GB RAM, 1TB SSD.</p>
-                        <div class="product-price">950,000 FCFA</div>
-                        <a href="https://wa.me/22673858446?text=Bonjour,%20je%20suis%20intéressé(e)%20par%20le%20HP%20Pavilion%20Gaming" class="btn btn-whatsapp" target="_blank">
+                        <h3 class="product-title">HP EliteBook G6 🎯</h3>
+                        <p>PC portable professionnel avec processeur Intel i7, 16GB RAM, 512GB SSD.</p>
+                        <div class="product-price">850,000 FCFA</div>
+                        <a href="https://wa.me/22673858446?text=Bonjour,%20je%20suis%20intéressé(e)%20par%20le%20HP%20EliteBook%20G6" class="btn btn-whatsapp" target="_blank">
                             <i class="fab fa-whatsapp"></i> Commander
                         </a>
                     </div>
                 </div>
                 
+                <!-- Produit 3: HP ProBook G5 -->
                 <div class="product-card">
                     <div class="product-image">
                         <div class="badge hot">🔥 Best Seller</div>
-                        <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1160&q=80" alt="iPhone">
+                        <img src="image/HP_probook_G5.jpg" alt="HP ProBook G5">
                     </div>
                     <div class="product-content">
-                        <h3 class="product-title">iPhone 14 Pro Max 📱</h3>
-                        <p>Smartphone Apple avec écran Super Retina XDR, triple caméra, 256GB de stockage.</p>
-                        <div class="product-price">800,000 FCFA</div>
-                        <a href="https://wa.me/22673858446?text=Bonjour,%20je%20suis%20intéressé(e)%20par%20l'iPhone%2014%20Pro%20Max" class="btn btn-whatsapp" target="_blank">
+                        <h3 class="product-title">HP ProBook G5 💼</h3>
+                        <p>PC portable d'affaires avec écran Full HD, 8GB RAM, 256GB SSD.</p>
+                        <div class="product-price">550,000 FCFA</div>
+                        <a href="https://wa.me/22673858446?text=Bonjour,%20je%20suis%20intéressé(e)%20par%20le%20HP%20ProBook%20G5" class="btn btn-whatsapp" target="_blank">
                             <i class="fab fa-whatsapp"></i> Commander
                         </a>
                     </div>
                 </div>
                 
+                <!-- Produit 4: Lenovo ThinkPad -->
                 <div class="product-card">
                     <div class="product-image">
                         <div class="badge promo">Promo</div>
-                        <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Appareil photo">
+                        <img src="/image/Lenovo_thinkpad.jpg" alt="Lenovo ThinkPad">
                     </div>
                     <div class="product-content">
-                        <h3 class="product-title">Appareil Photo Canon 📸</h3>
-                        <p>Appareil photo reflex numérique 24.1MP avec objectif 18-55mm, idéal pour débutants.</p>
-                        <div class="product-price">450,000 FCFA</div>
-                        <a href="https://wa.me/22673858446?text=Bonjour,%20je%20suis%20intéressé(e)%20par%20l'appareil%20photo%20Canon" class="btn btn-whatsapp" target="_blank">
+                        <h3 class="product-title">Lenovo ThinkPad 🖥️</h3>
+                        <p>Ordinateur portable robuste pour professionnels, Intel i5, 16GB RAM, 512GB SSD.</p>
+                        <div class="product-price">700,000 FCFA</div>
+                        <a href="https://wa.me/22673858446?text=Bonjour,%20je%20suis%20intéressé(e)%20par%20le%20Lenovo%20ThinkPad" class="btn btn-whatsapp" target="_blank">
                             <i class="fab fa-whatsapp"></i> Commander
                         </a>
                     </div>
                 </div>
                 
+                <!-- Produit 5: Montre connectée -->
                 <div class="product-card">
                     <div class="product-image">
                         <div class="badge new">Nouveau</div>
-                        <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1164&q=80" alt="Apple Watch">
+                        <img src="image/montre2.jpg" alt="Montre Connectée">
                     </div>
                     <div class="product-content">
-                        <h3 class="product-title">Apple Watch Series 8 ⌚</h3>
-                        <p>Montre connectée avec écran Retina, GPS, monitoring cardiaque et applications santé.</p>
-                        <div class="product-price">300,000 FCFA</div>
-                        <a href="https://wa.me/22673858446?text=Bonjour,%20je%20suis%20intéressé(e)%20par%20l'Apple%20Watch%20Series%208" class="btn btn-whatsapp" target="_blank">
+                        <h3 class="product-title">Montre Connectée ⌚</h3>
+                        <p>Montre intelligente avec écran tactile, GPS, monitoring cardiaque et applications santé.</p>
+                        <div class="product-price">85,000 FCFA</div>
+                        <a href="https://wa.me/22673858446?text=Bonjour,%20je%20suis%20intéressé(e)%20par%20la%20montre%20connectée" class="btn btn-whatsapp" target="_blank">
                             <i class="fab fa-whatsapp"></i> Commander
                         </a>
                     </div>
                 </div>
                 
+                <!-- Produit 6: HP Pavilion -->
                 <div class="product-card">
                     <div class="product-image">
                         <div class="badge hot">🔥 Best Seller</div>
-                        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Casque audio">
+                        <img src="/image/HP4.jpg" alt="HP Pavilion">
                     </div>
                     <div class="product-content">
-                        <h3 class="product-title">Casque Audio Sony 🎧</h3>
-                        <p>Casque sans fil avec réduction de bruit, autonomie 30h, qualité audio exceptionnelle.</p>
-                        <div class="product-price">120,000 FCFA</div>
-                        <a href="https://wa.me/22673858446?text=Bonjour,%20je%20suis%20intéressé(e)%20par%20le%20casque%20audio%20Sony" class="btn btn-whatsapp" target="_blank">
+                        <h3 class="product-title">HP Pavilion Gaming 🎮</h3>
+                        <p>PC portable gaming avec écran 144Hz, GTX 1650, 16GB RAM, 1TB SSD.</p>
+                        <div class="product-price">950,000 FCFA</div>
+                        <a href="https://wa.me/22673858446?text=Bonjour,%20je%20suis%20intéressé(e)%20par%20le%20HP%20Pavilion%20Gaming" class="btn btn-whatsapp" target="_blank">
                             <i class="fab fa-whatsapp"></i> Commander
                         </a>
                     </div>
@@ -1051,7 +1030,7 @@
         </div>
     </section>
 
-    <!-- Section À propos -->
+    <!-- Section À propos avec VOTRE image -->
     <section class="section about" id="apropos">
         <div class="container">
             <div class="section-title">
@@ -1076,7 +1055,7 @@
                     </a>
                 </div>
                 <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80" alt="Équipe Faso High Tech">
+                    <img src="image/Propos.jpg" alt="À propos de Faso High Tech">
                 </div>
             </div>
         </div>
