@@ -265,17 +265,51 @@
             color: var(--primary-color);
         }
 
-        /* Hero section avec vos images */
+        /* Hero section avec votre image Splash comme fond */
         .hero {
             background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/image/Splash.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
+            background-repeat: no-repeat;
             color: var(--white);
             text-align: center;
             padding: 180px 20px 100px;
             margin-top: 80px;
             animation: fadeIn 1.2s ease-out;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero .container {
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        #typing {
+            display: block;
+            font-size: 1.8rem;
+            margin: 20px 0 30px;
+            min-height: 60px;
+            color: var(--secondary-color);
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 30px;
         }
 
         /* Badges produits */
@@ -718,6 +752,7 @@
 
             .hero {
                 padding: 150px 20px 80px;
+                min-height: 80vh;
             }
 
             .hero h1 {
@@ -744,6 +779,10 @@
         }
 
         @media (max-width: 576px) {
+            .hero {
+                min-height: 70vh;
+            }
+            
             .hero h1 {
                 font-size: 2rem;
             }
@@ -760,6 +799,12 @@
             .logo img {
                 height: 40px;
             }
+            
+            .hero-buttons .btn {
+                width: 100%;
+                max-width: 300px;
+                text-align: center;
+            }
         }
     </style>
 </head>
@@ -769,7 +814,7 @@
         <div class="container header-container">
             <div class="logo">
                 <div class="logo-img">
-                    <img src="image/Logo.jpg" alt="Faso High Tech Logo">
+                    <img src="/image/Logo.jpg" alt="Faso High Tech Logo">
                 </div>
                 <div class="logo-text">
                     <h1>Faso <span>High Tech</span></h1>
@@ -793,14 +838,14 @@
         </div>
     </header>
 
-    <!-- Section Hero avec votre image Splash -->
+    <!-- Section Hero avec votre image Splash comme fond -->
     <section class="hero" id="accueil">
         <div class="container">
-            <h1>Faso High Tech<br></h1>
+            <h1>Faso High Tech</h1>
             <span id="typing"></span>
             <div class="hero-buttons">
                 <a href="#produits" class="btn">Découvrir nos produits 🚀</a>
-                <a href="https://wa.me/22673858446" class="btn btn-whatsapp" target="_blank">
+                <a href="https://wa.me/22674958509" class="btn btn-whatsapp" target="_blank">
                     <i class="fab fa-whatsapp"></i> Commander sur WhatsApp
                 </a>
             </div>
@@ -896,13 +941,13 @@
                 <div class="product-card">
                     <div class="product-image">
                         <div class="badge hot">🔥 Best Seller</div>
-                        <img src="image/HP_EliteBook_G3.jpg" alt="HP EliteBook G3">
+                        <img src="/image/HP_EliteBook_G3.jpg" alt="HP EliteBook G3">
                     </div>
                     <div class="product-content">
                         <h3 class="product-title">HP EliteBook G3 💻</h3>
                         <p>Ordinateur portable professionnel avec processeur Intel i5, 8GB RAM, 256GB SSD.</p>
                         <div class="product-price">650,000 FCFA</div>
-                        <a href="https://wa.me/22673858446?text=Bonjour,%20je%20suis%20intéressé(e)%20par%20le%20HP%20EliteBook%20G3" class="btn btn-whatsapp" target="_blank">
+                        <a href="https://wa.me/22674958509?text=Bonjour,%20je%20suis%20intéressé(e)%20par%20le%20HP%20EliteBook%20G3" class="btn btn-whatsapp" target="_blank">
                             <i class="fab fa-whatsapp"></i> Commander
                         </a>
                     </div>
@@ -912,13 +957,13 @@
                 <div class="product-card">
                     <div class="product-image">
                         <div class="badge new">Nouveau</div>
-                        <img src="image/HP_Elitebook_G6.jpg" alt="HP EliteBook G6">
+                        <img src="/image/HP_Elitebook_G6.jpg" alt="HP EliteBook G6">
                     </div>
                     <div class="product-content">
                         <h3 class="product-title">HP EliteBook G6 🎯</h3>
                         <p>PC portable professionnel avec processeur Intel i7, 16GB RAM, 512GB SSD.</p>
                         <div class="product-price">850,000 FCFA</div>
-                        <a href="https://wa.me/22673858446?text=Bonjour,%20je%20suis%20intéressé(e)%20par%20le%20HP%20EliteBook%20G6" class="btn btn-whatsapp" target="_blank">
+                        <a href="https://wa.me/22674958509?text=Bonjour,%20je%20suis%20intéressé(e)%20par%20le%20HP%20EliteBook%20G6" class="btn btn-whatsapp" target="_blank">
                             <i class="fab fa-whatsapp"></i> Commander
                         </a>
                     </div>
@@ -928,13 +973,13 @@
                 <div class="product-card">
                     <div class="product-image">
                         <div class="badge hot">🔥 Best Seller</div>
-                        <img src="image/HP_probook_G5.jpg" alt="HP ProBook G5">
+                        <img src="/image/HP_probook_G5.jpg" alt="HP ProBook G5">
                     </div>
                     <div class="product-content">
                         <h3 class="product-title">HP ProBook G5 💼</h3>
                         <p>PC portable d'affaires avec écran Full HD, 8GB RAM, 256GB SSD.</p>
                         <div class="product-price">550,000 FCFA</div>
-                        <a href="https://wa.me/22673858446?text=Bonjour,%20je%20suis%20intéressé(e)%20par%20le%20HP%20ProBook%20G5" class="btn btn-whatsapp" target="_blank">
+                        <a href="https://wa.me/22674958509?text=Bonjour,%20je%20suis%20intéressé(e)%20par%20le%20HP%20ProBook%20G5" class="btn btn-whatsapp" target="_blank">
                             <i class="fab fa-whatsapp"></i> Commander
                         </a>
                     </div>
@@ -950,7 +995,7 @@
                         <h3 class="product-title">Lenovo ThinkPad 🖥️</h3>
                         <p>Ordinateur portable robuste pour professionnels, Intel i5, 16GB RAM, 512GB SSD.</p>
                         <div class="product-price">700,000 FCFA</div>
-                        <a href="https://wa.me/22673858446?text=Bonjour,%20je%20suis%20intéressé(e)%20par%20le%20Lenovo%20ThinkPad" class="btn btn-whatsapp" target="_blank">
+                        <a href="https://wa.me/22674958509?text=Bonjour,%20je%20suis%20intéressé(e)%20par%20le%20Lenovo%20ThinkPad" class="btn btn-whatsapp" target="_blank">
                             <i class="fab fa-whatsapp"></i> Commander
                         </a>
                     </div>
@@ -960,13 +1005,13 @@
                 <div class="product-card">
                     <div class="product-image">
                         <div class="badge new">Nouveau</div>
-                        <img src="image/montre2.jpg" alt="Montre Connectée">
+                        <img src="/image/montre2.jpg" alt="Montre Connectée">
                     </div>
                     <div class="product-content">
                         <h3 class="product-title">Montre Connectée ⌚</h3>
                         <p>Montre intelligente avec écran tactile, GPS, monitoring cardiaque et applications santé.</p>
                         <div class="product-price">85,000 FCFA</div>
-                        <a href="https://wa.me/22673858446?text=Bonjour,%20je%20suis%20intéressé(e)%20par%20la%20montre%20connectée" class="btn btn-whatsapp" target="_blank">
+                        <a href="https://wa.me/22674958509?text=Bonjour,%20je%20suis%20intéressé(e)%20par%20la%20montre%20connectée" class="btn btn-whatsapp" target="_blank">
                             <i class="fab fa-whatsapp"></i> Commander
                         </a>
                     </div>
@@ -982,7 +1027,7 @@
                         <h3 class="product-title">HP Pavilion Gaming 🎮</h3>
                         <p>PC portable gaming avec écran 144Hz, GTX 1650, 16GB RAM, 1TB SSD.</p>
                         <div class="product-price">950,000 FCFA</div>
-                        <a href="https://wa.me/22673858446?text=Bonjour,%20je%20suis%20intéressé(e)%20par%20le%20HP%20Pavilion%20Gaming" class="btn btn-whatsapp" target="_blank">
+                        <a href="https://wa.me/22674958509?text=Bonjour,%20je%20suis%20intéressé(e)%20par%20le%20HP%20Pavilion%20Gaming" class="btn btn-whatsapp" target="_blank">
                             <i class="fab fa-whatsapp"></i> Commander
                         </a>
                     </div>
@@ -990,7 +1035,7 @@
             </div>
             
             <div style="text-align: center; margin-top: 50px;">
-                <a href="https://wa.me/22673858446?text=Bonjour,%20je%20voudrais%20voir%20tous%20vos%20produits" class="btn btn-primary" target="_blank">
+                <a href="https://wa.me/22674958509?text=Bonjour,%20je%20voudrais%20voir%20tous%20vos%20produits" class="btn btn-primary" target="_blank">
                     <i class="fab fa-whatsapp"></i> Voir tous nos produits
                 </a>
             </div>
@@ -1050,12 +1095,12 @@
                         <li>Équipements réseau et périphériques</li>
                     </ul>
                     <p>Notre équipe de techniciens certifiés assure également le support technique et la maintenance de vos équipements.</p>
-                    <a href="https://wa.me/22673858446" class="btn btn-whatsapp" target="_blank">
+                    <a href="https://wa.me/22674958509" class="btn btn-whatsapp" target="_blank">
                         <i class="fab fa-whatsapp"></i> Commander sur WhatsApp
                     </a>
                 </div>
                 <div class="about-image">
-                    <img src="image/Propos.jpg" alt="À propos de Faso High Tech">
+                    <img src="/image/Propos.jpg" alt="À propos de Faso High Tech">
                 </div>
             </div>
         </div>
@@ -1087,7 +1132,7 @@
                         </div>
                         <div>
                             <h3>Téléphone</h3>
-                            <p>+226 73 85 84 46<br>+226 74 95 85 09</p>
+                            <p>+226 74 95 85 09<br>+226 73 85 84 46</p>
                         </div>
                     </div>
                     
@@ -1153,7 +1198,7 @@
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
                         <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://wa.me/22674958509" target="_blank"><i class="fab fa-whatsapp"></i></a>
                     </div>
                     <p style="margin-top: 20px;">Commandez directement sur WhatsApp pour un service rapide et personnalisé !</p>
                 </div>
@@ -1165,8 +1210,8 @@
         </div>
     </footer>
 
-    <!-- Bouton WhatsApp flottant -->
-    <a href="https://wa.me/22673858446" class="whatsapp-float" target="_blank">
+    <!-- Bouton WhatsApp flottant avec le bon numéro -->
+    <a href="https://wa.me/22674958509" class="whatsapp-float" target="_blank">
         <i class="fab fa-whatsapp"></i>
     </a>
 
