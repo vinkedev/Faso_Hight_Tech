@@ -350,6 +350,108 @@
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
         }
 
+        /* ============ SERVICES ============ */
+        .services {
+            background-color: #f1f5f9;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            padding: 40px 30px;
+            text-align: center;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.3s ease;
+        }
+
+        .service-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-icon {
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            background-color: rgba(0, 71, 171, 0.1);
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            transition: var(--transition);
+        }
+
+        .service-card:hover .service-icon {
+            background-color: var(--primary-color);
+            color: white;
+            transform: rotateY(180deg);
+        }
+
+        .service-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .service-content h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .service-content ul {
+            list-style: none;
+            text-align: left;
+            margin: 15px 0 20px;
+            padding: 0;
+        }
+
+        .service-content ul li {
+            margin-bottom: 8px;
+            padding-left: 5px;
+            font-size: 0.95rem;
+        }
+
+        .service-content .btn {
+            margin-top: auto;
+            margin-top: 20px;
+        }
+
+        /* Responsive pour les services */
+        @media (max-width: 768px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .service-card {
+                padding: 30px 20px;
+            }
+            
+            .service-content ul li {
+                font-size: 0.9rem;
+            }
+        }
+
         /* Section "Pourquoi nous choisir ?" */
         .why-us {
             background-color: var(--white);
@@ -946,7 +1048,7 @@
 
             /* Ajustement des images produits pour mobile */
             .carousel-wrapper .product-image {
-                height: 250px !important;
+                height: 300px !important;
             }
 
             /* Indicateurs de scroll */
@@ -1067,6 +1169,7 @@
                     <li><a href="#categories">Catégories</a></li>
                     <li><a href="#produits">Produits</a></li>
                     <li><a href="#pourquoi">Pourquoi nous ?</a></li>
+                    <li><a href="#services">Services</a></li>
                     <li><a href="#apropos">À propos</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
@@ -1285,8 +1388,8 @@
                     </div>
                     <div class="product-content">
                         <h3 class="product-title">Lenovo ThinkPad 🖥️</h3>
-                        <p>Ordinateur portable robuste pour professionnels, Intel i5, 16GB RAM, 512GB SSD.</p>
-                        <div class="product-price">700,000 FCFA</div>
+                        <p>Ordinateur portable robuste pour professionnels, Intel i5, 8GB RAM, 256GB SSD.</p>
+                        <div class="product-price">550,000 FCFA</div>
                         <a href="https://wa.me/22674958509?text=Bonjour,%20je%20suis%20intéressé(e)%20par%20le%20Lenovo%20ThinkPad" class="btn btn-whatsapp" target="_blank">
                             <i class="fab fa-whatsapp"></i> Commander
                         </a>
@@ -1302,23 +1405,23 @@
                     <div class="product-content">
                         <h3 class="product-title">Montre Connectée ⌚</h3>
                         <p>Montre intelligente avec écran tactile, GPS, monitoring cardiaque et applications santé.</p>
-                        <div class="product-price">85,000 FCFA</div>
+                        <div class="product-price">12,500 FCFA</div>
                         <a href="https://wa.me/22674958509?text=Bonjour,%20je%20suis%20intéressé(e)%20par%20la%20montre%20connectée" class="btn btn-whatsapp" target="_blank">
                             <i class="fab fa-whatsapp"></i> Commander
                         </a>
                     </div>
                 </div>
                 
-                <!-- Produit 6: HP Pavilion -->
+                <!-- Produit 6: HP Pavilion (CORRIGÉ) -->
                 <div class="product-card">
                     <div class="product-image">
                         <div class="badge hot">🔥 Best Seller</div>
-                        <img src="image/HP4.jpg" alt="HP Pavilion">
+                        <img src="image/HP4.jpg" alt="HP Pavilion Gaming">
                     </div>
                     <div class="product-content">
                         <h3 class="product-title">HP Pavilion Gaming 🎮</h3>
                         <p>PC portable gaming avec écran 144Hz, GTX 1650, 16GB RAM, 1TB SSD.</p>
-                        <div class="product-price">950,000 FCFA</div>
+                        <div class="product-price">750,000 FCFA</div>
                         <a href="https://wa.me/22674958509?text=Bonjour,%20je%20suis%20intéressé(e)%20par%20le%20HP%20Pavilion%20Gaming" class="btn btn-whatsapp" target="_blank">
                             <i class="fab fa-whatsapp"></i> Commander
                         </a>
@@ -1386,8 +1489,8 @@
                             </div>
                             <div class="product-content">
                                 <h3 class="product-title">Lenovo ThinkPad 🖥️</h3>
-                                <p>Ordinateur portable robuste pour professionnels, Intel i5, 16GB RAM, 512GB SSD.</p>
-                                <div class="product-price">700,000 FCFA</div>
+                                <p>Ordinateur portable robuste pour professionnels, Intel i5, 8GB RAM, 256GB SSD.</p>
+                                <div class="product-price">550,000 FCFA</div>
                                 <a href="https://wa.me/22674958509?text=Bonjour,%20je%20suis%20intéressé(e)%20par%20le%20Lenovo%20ThinkPad" class="btn btn-whatsapp" target="_blank">
                                     <i class="fab fa-whatsapp"></i> Commander
                                 </a>
@@ -1403,23 +1506,23 @@
                             <div class="product-content">
                                 <h3 class="product-title">Montre Connectée ⌚</h3>
                                 <p>Montre intelligente avec écran tactile, GPS, monitoring cardiaque et applications santé.</p>
-                                <div class="product-price">85,000 FCFA</div>
+                                <div class="product-price">12,500 FCFA</div>
                                 <a href="https://wa.me/22674958509?text=Bonjour,%20je%20suis%20intéressé(e)%20par%20la%20montre%20connectée" class="btn btn-whatsapp" target="_blank">
                                     <i class="fab fa-whatsapp"></i> Commander
                                 </a>
                             </div>
                         </div>
                         
-                        <!-- Produit 6: HP Pavilion -->
+                        <!-- Produit 6: HP Pavilion (CORRIGÉ) -->
                         <div class="product-card">
                             <div class="product-image">
                                 <div class="badge hot">🔥 Best Seller</div>
-                                <img src="image/HP4.jpg" alt="HP Pavilion">
+                                <img src="image/HP4.jpg" alt="HP Pavilion Gaming">
                             </div>
                             <div class="product-content">
                                 <h3 class="product-title">HP Pavilion Gaming 🎮</h3>
                                 <p>PC portable gaming avec écran 144Hz, GTX 1650, 16GB RAM, 1TB SSD.</p>
-                                <div class="product-price">950,000 FCFA</div>
+                                <div class="product-price">750,000 FCFA</div>
                                 <a href="https://wa.me/22674958509?text=Bonjour,%20je%20suis%20intéressé(e)%20par%20le%20HP%20Pavilion%20Gaming" class="btn btn-whatsapp" target="_blank">
                                     <i class="fab fa-whatsapp"></i> Commander
                                 </a>
@@ -1479,6 +1582,82 @@
         </div>
     </section>
 
+    <!-- Section Nouveaux Services -->
+    <section class="section services" id="services">
+        <div class="container">
+            <div class="section-title text-center">
+                <h2>Nos Services Professionnels 🛠️</h2>
+                <p>En plus de la vente, nous proposons des services complémentaires pour répondre à tous vos besoins informatiques</p>
+            </div>
+            
+            <div class="services-grid">
+                <!-- Service 1: Location -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-laptop-house fa-3x"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Location d'Équipements</h3>
+                        <p><strong>Location à court et long terme :</strong></p>
+                        <ul>
+                            <li>💻 Ordinateurs portables (PC/Mac)</li>
+                            <li>🖥️ Ordinateurs de bureau</li>
+                            <li>📽️ Vidéoprojecteurs HD & 4K</li>
+                            <li>🎤 Équipements audiovisuels</li>
+                        </ul>
+                        <p>Idéal pour formations, conférences, événements ou besoins temporaires.</p>
+                        <a href="https://wa.me/22674958509?text=Bonjour,%20je%20suis%20intéressé(e)%20par%20la%20location%20d'équipements%20informatiques" class="btn btn-primary" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Demander un devis
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Service 2: Maintenance -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-tools fa-3x"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Maintenance Informatique</h3>
+                        <p><strong>Services de maintenance complète :</strong></p>
+                        <ul>
+                            <li>🔧 Dépannage et réparation PC/Mac</li>
+                            <li>🛡️ Installation antivirus & sécurité</li>
+                            <li>☁️ Sauvegarde et récupération de données</li>
+                            <li>🔌 Installation réseau et Wi-Fi</li>
+                            <li>⚡ Nettoyage et optimisation</li>
+                        </ul>
+                        <p>Intervention à domicile ou en entreprise. Service rapide et fiable.</p>
+                        <a href="https://wa.me/22674958509?text=Bonjour,%20je%20voudrais%20un%20service%20de%20maintenance%20informatique" class="btn btn-primary" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Demander une intervention
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Service 3: Support -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-headset fa-3x"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Support Technique</h3>
+                        <p><strong>Assistance et conseils :</strong></p>
+                        <ul>
+                            <li>📞 Support téléphonique et à distance</li>
+                            <li>🎓 Formation aux logiciels</li>
+                            <li>💡 Conseil en équipements</li>
+                            <li>📋 Contrats de maintenance annuels</li>
+                        </ul>
+                        <p>Nos techniciens certifiés sont disponibles pour vous accompagner.</p>
+                        <a href="https://wa.me/22674958509?text=Bonjour,%20je%20voudrais%20du%20support%20technique" class="btn btn-primary" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Contacter le support
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Section À propos avec VOTRE image -->
     <section class="section about" id="apropos">
         <div class="container">
@@ -1498,6 +1677,14 @@
                         <li>Montres connectées et wearables</li>
                         <li>Équipements réseau et périphériques</li>
                     </ul>
+                    
+                    <p><strong>Nos services professionnels :</strong></p>
+                    <ul style="list-style-type: disc; padding-left: 20px; margin-bottom: 20px;">
+                        <li>📍 <strong>Location d'équipements</strong> : ordinateurs et vidéoprojecteurs</li>
+                        <li>🔧 <strong>Maintenance informatique</strong> : dépannage, installation, réparation</li>
+                        <li>🛡️ <strong>Support technique</strong> : assistance et conseils personnalisés</li>
+                    </ul>
+                    
                     <p>Notre équipe de techniciens certifiés assure également le support technique et la maintenance de vos équipements.</p>
                     <a href="https://wa.me/22674958509" class="btn btn-whatsapp" target="_blank">
                         <i class="fab fa-whatsapp"></i> Commander sur WhatsApp
@@ -1591,6 +1778,7 @@
                         <li><a href="#categories">Catégories</a></li>
                         <li><a href="#produits">Produits</a></li>
                         <li><a href="#pourquoi">Pourquoi nous ?</a></li>
+                        <li><a href="#services">Services</a></li>
                         <li><a href="#apropos">À propos</a></li>
                         <li><a href="#contact">Contact</a></li>
                     </ul>
@@ -1624,6 +1812,7 @@
         const texts = [
             "La technologie à portée de main 🚀",
             "Ordinateurs • Téléphones • Accessoires",
+            "Location • Maintenance • Support 🔧",
             "Qualité & Fiabilité au Burkina Faso 🇧🇫"
         ];
         let index = 0, charIndex = 0;
@@ -1746,7 +1935,8 @@
                     
                     if (entry.target.classList.contains('product-card') || 
                         entry.target.classList.contains('category-card') || 
-                        entry.target.classList.contains('why-card')) {
+                        entry.target.classList.contains('why-card') ||
+                        entry.target.classList.contains('service-card')) {
                         entry.target.classList.add('visible');
                     }
                     
@@ -1779,6 +1969,11 @@
             
             // Cartes "Pourquoi nous choisir"
             document.querySelectorAll('.why-card').forEach(card => {
+                observer.observe(card);
+            });
+            
+            // Cartes services
+            document.querySelectorAll('.service-card').forEach(card => {
                 observer.observe(card);
             });
             
