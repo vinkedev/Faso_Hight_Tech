@@ -843,9 +843,7 @@
             color: var(--gray-color);
         }
 
-        /* =========================================== */
-        /* RESPONSIVE : TOUTES LES MODIFICATIONS MOBILE */
-        /* =========================================== */
+        /* Responsive */
         @media (max-width: 992px) {
             h1 {
                 font-size: 2.4rem;
@@ -869,39 +867,6 @@
         }
 
         @media (max-width: 768px) {
-            /* --- MENU MOBILE : BOUTON À GAUCHE --- */
-            .header-container {
-                justify-content: flex-start;  /* on reprend le contrôle */
-                gap: 10px;
-            }
-
-            .mobile-menu-btn {
-                display: block;
-                order: -1;                 /* le bouton en premier */
-                flex-shrink: 0;
-                margin-right: 0;
-            }
-
-            .mobile-menu-btn i {
-                font-size: 1.8rem;          /* plus gros pour le tactile */
-            }
-
-            .logo {
-                order: 0;                   /* le logo juste après */
-                flex: 1;                    /* prend l'espace restant */
-                justify-content: flex-start; /* logo collé à gauche */
-            }
-
-            .logo img {
-                height: 35px;
-            }
-
-            .logo-text h1 {
-                font-size: 1.3rem;
-            }
-
-            /* --- Fin menu --- */
-
             /* Ajustements des polices pour mobile */
             h1 {
                 font-size: 1.8rem !important;
@@ -920,6 +885,10 @@
             p {
                 font-size: 0.95rem;
                 line-height: 1.5;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
             }
 
             .nav-links {
@@ -1123,6 +1092,14 @@
             .section-title h2 {
                 margin-bottom: 10px;
             }
+
+            .logo img {
+                height: 35px !important;
+            }
+
+            .logo-text h1 {
+                font-size: 1.3rem !important;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1173,9 +1150,6 @@
     <!-- Header avec votre logo -->
     <header>
         <div class="container header-container">
-            <div class="mobile-menu-btn">
-                <i class="fas fa-bars"></i>
-            </div>
             <div class="logo">
                 <div class="logo-img">
                     <img src="image/Logo.jpg" alt="Faso High Tech Logo">
@@ -1183,6 +1157,10 @@
                 <div class="logo-text">
                     <h1>Faso <span>High Tech</span></h1>
                 </div>
+            </div>
+            
+            <div class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
             </div>
             
             <nav>
@@ -1441,9 +1419,9 @@
                         <img src="image/HP4.jpg" alt="HP Pavilion Gaming">
                     </div>
                     <div class="product-content">
-                        <h3 class="product-title">HP Pavilion Gaming 🎮</h3>
-                        <p>PC portable gamer avec processeur Intel i7, 16GB RAM, 512GB SSD et carte graphique dédiée.</p>
-                        <div class="product-price">210,000 FCFA</div>
+                        <h3 class="product-title">Montre Connectée ⌚</h3>
+                        <p>>Montre intelligente avec écran tactile, GPS, monitoring cardiaque et applications santé.</p>
+                        <div class="product-price">12500 FCFA</div>
                         <a href="https://wa.me/22674958509?text=Bonjour,%20je%20suis%20intéressé(e)%20par%20le%20HP%20Pavilion%20Gaming" class="btn btn-whatsapp" target="_blank">
                             <i class="fab fa-whatsapp"></i> Commander
                         </a>
@@ -1542,9 +1520,9 @@
                                 <img src="image/HP4.jpg" alt="HP Pavilion Gaming">
                             </div>
                             <div class="product-content">
-                                <h3 class="product-title">HP Pavilion Gaming 🎮</h3>
-                                <p>PC portable gamer avec processeur Intel i7, 16GB RAM, 512GB SSD et carte graphique dédiée.</p>
-                                <div class="product-price">210,000 FCFA</div>
+                                <h3 class="product-title">">Montre Connectée </h3>
+                                <p>>Montre intelligente avec écran tactile, GPS, monitoring cardiaque et applications santé.</p>
+                                <div class="product-price">12 500 FCFA</div>
                                 <a href="https://wa.me/22674958509?text=Bonjour,%20je%20suis%20intéressé(e)%20par%20le%20HP%20Pavilion%20Gaming" class="btn btn-whatsapp" target="_blank">
                                     <i class="fab fa-whatsapp"></i> Commander
                                 </a>
