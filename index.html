@@ -843,6 +843,33 @@
             color: var(--gray-color);
         }
 
+        /* ===== CRÉDIT MAHMARGROUP ===== */
+        .footer-credit {
+            margin-top: 8px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.55);
+            letter-spacing: 0.02em;
+        }
+        .footer-credit a {
+            color: var(--secondary-color);
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+            transition: color 0.3s ease;
+        }
+        .footer-credit a::after {
+            content: '';
+            position: absolute;
+            left: 0; right: 0; bottom: -2px;
+            height: 1.5px;
+            background: var(--secondary-color);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .footer-credit a:hover { color: #E6C300; }
+        .footer-credit a:hover::after { transform: scaleX(1); background: #E6C300; }
+
         /* Responsive */
         @media (max-width: 992px) {
             h1 {
@@ -1420,7 +1447,7 @@
                     </div>
                     <div class="product-content">
                         <h3 class="product-title">Montre Connectée ⌚</h3>
-                        <p>>Montre intelligente avec écran tactile, GPS, monitoring cardiaque et applications santé.</p>
+                        <p>Montre intelligente avec écran tactile, GPS, monitoring cardiaque et applications santé.</p>
                         <div class="product-price">12500 FCFA</div>
                         <a href="https://wa.me/22674958509?text=Bonjour,%20je%20suis%20intéressé(e)%20par%20le%20HP%20Pavilion%20Gaming" class="btn btn-whatsapp" target="_blank">
                             <i class="fab fa-whatsapp"></i> Commander
@@ -1520,8 +1547,8 @@
                                 <img src="image/HP4.jpg" alt="HP Pavilion Gaming">
                             </div>
                             <div class="product-content">
-                                <h3 class="product-title">">Montre Connectée </h3>
-                                <p>>Montre intelligente avec écran tactile, GPS, monitoring cardiaque et applications santé.</p>
+                                <h3 class="product-title">Montre Connectée ⌚</h3>
+                                <p>Montre intelligente avec écran tactile, GPS, monitoring cardiaque et applications santé.</p>
                                 <div class="product-price">12 500 FCFA</div>
                                 <a href="https://wa.me/22674958509?text=Bonjour,%20je%20suis%20intéressé(e)%20par%20le%20HP%20Pavilion%20Gaming" class="btn btn-whatsapp" target="_blank">
                                     <i class="fab fa-whatsapp"></i> Commander
@@ -1797,7 +1824,8 @@
             </div>
             
             <div class="copyright">
-                <p>&copy; 2026 Faso High Tech. Tous droits réservés. | Réalisé par Sion Tech 🇧🇫</p>
+                <p>&copy; 2026 Faso High Tech. Tous droits réservés.</p>
+                <p class="footer-credit">Conçu par <a href="#" target="_blank" rel="noopener">MahmarGroup</a></p>
             </div>
         </div>
     </footer>
