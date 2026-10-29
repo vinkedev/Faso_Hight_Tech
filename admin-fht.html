@@ -33,17 +33,11 @@ body{background:var(--light);color:var(--dark);line-height:1.5;padding:24px}
 .btn--ghost{background:#fff;color:var(--primary);border:1px solid var(--primary)}
 .btn--ghost:hover{background:var(--primary);color:#fff}
 
-/* ---------- Stats ---------- */
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:24px}
-.stat-card{background:#fff;border-radius:var(--radius);padding:18px;box-shadow:var(--shadow);border-left:4px solid var(--primary)}
-.stat-card .num{font-size:1.8rem;font-weight:700;color:var(--primary);font-family:'Montserrat',sans-serif}
-.stat-card .label{font-size:.82rem;color:var(--gray);text-transform:uppercase;letter-spacing:.03em;margin-top:2px}
-.stat-card.orange{border-left-color:var(--secondary)}
-.stat-card.orange .num{color:var(--secondary)}
-.stat-card.green{border-left-color:var(--success)}
-.stat-card.green .num{color:var(--success)}
-.stat-card.gray{border-left-color:var(--gray)}
-.stat-card.gray .num{color:var(--gray)}
+/* ---------- Stats (une seule carte) ---------- */
+.stats{display:grid;grid-template-columns:1fr;gap:14px;margin-bottom:24px;max-width:300px}
+.stat-card{background:#fff;border-radius:var(--radius);padding:20px 22px;box-shadow:var(--shadow);border-left:4px solid var(--primary)}
+.stat-card .num{font-size:2.2rem;font-weight:700;color:var(--primary);font-family:'Montserrat',sans-serif;line-height:1}
+.stat-card .label{font-size:.82rem;color:var(--gray);text-transform:uppercase;letter-spacing:.04em;margin-top:6px}
 
 /* ---------- Toolbar ---------- */
 .toolbar{display:flex;justify-content:space-between;gap:14px;margin-bottom:16px;flex-wrap:wrap;align-items:center}
@@ -67,7 +61,7 @@ img.thumb{width:56px;height:56px;object-fit:cover;border-radius:8px;border:1px s
 .thumb-empty{width:56px;height:56px;border-radius:8px;border:1px solid #eef2f7;background:#f8f9fa;display:flex;align-items:center;justify-content:center;color:#cbd5e1;font-size:1.2rem}
 
 .product-name{font-weight:600;color:var(--primary);margin-bottom:2px}
-.product-desc{font-size:.78rem;color:var(--gray);display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;max-width:340px}
+.product-desc{font-size:.78rem;color:var(--gray);display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;max-width:420px}
 
 .badge{display:inline-block;padding:3px 9px;border-radius:12px;font-size:.7rem;font-weight:700;color:#fff;white-space:nowrap}
 .badge.hot{background:var(--danger)}
@@ -78,7 +72,6 @@ img.thumb{width:56px;height:56px;object-fit:cover;border-radius:8px;border:1px s
 .badge--empty{color:var(--gray);font-size:.78rem}
 
 .price{font-weight:600;color:var(--dark);white-space:nowrap}
-.order-num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:#eef2f7;color:var(--primary);font-size:.78rem;font-weight:700}
 
 .row-actions{display:flex;gap:6px;flex-wrap:nowrap}
 .icon-btn{width:32px;height:32px;border:none;border-radius:6px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;font-size:.82rem;transition:.2s;font-family:inherit}
@@ -97,14 +90,13 @@ img.thumb{width:56px;height:56px;object-fit:cover;border-radius:8px;border:1px s
 /* ---------- Modal ---------- */
 .modal-bg{position:fixed;inset:0;background:rgba(15,20,40,.6);backdrop-filter:blur(4px);display:none;align-items:flex-start;justify-content:center;padding:24px;z-index:100;overflow-y:auto}
 .modal-bg.open{display:flex}
-.modal{background:#fff;border-radius:14px;width:100%;max-width:640px;box-shadow:0 30px 80px rgba(0,0,0,.4);position:relative;margin:auto;overflow:hidden;border-top:5px solid var(--secondary)}
+.modal{background:#fff;border-radius:14px;width:100%;max-width:600px;box-shadow:0 30px 80px rgba(0,0,0,.4);position:relative;margin:auto;overflow:hidden;border-top:5px solid var(--secondary)}
 .modal__header{padding:22px 24px 14px;border-bottom:1px solid #eef2f7;display:flex;justify-content:space-between;align-items:center;gap:12px}
 .modal__header h2{color:var(--primary);font-size:1.1rem;font-family:'Montserrat',sans-serif;margin:0}
 .modal__close{width:32px;height:32px;border:none;border-radius:50%;background:#f1f5f9;color:var(--primary);cursor:pointer;font-size:.9rem;font-weight:700;transition:.2s;flex-shrink:0}
 .modal__close:hover{background:var(--secondary);color:#fff;transform:rotate(90deg)}
 
 .form{padding:20px 24px 24px;display:grid;gap:14px}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .field{display:flex;flex-direction:column;gap:5px}
 .field label{font-size:.8rem;font-weight:600;color:var(--dark)}
 .field label .req{color:var(--danger);margin-left:2px}
@@ -154,10 +146,8 @@ img.thumb{width:56px;height:56px;object-fit:cover;border-radius:8px;border:1px s
   .top-actions{width:100%}
   .top-actions .btn{flex:1}
   th,td{padding:10px 8px;font-size:.8rem}
-  th:nth-child(5),td:nth-child(5){display:none}
   .product-desc{display:none}
   img.thumb,.thumb-empty{width:42px;height:42px}
-  .form-row{grid-template-columns:1fr}
   .modal__header{padding:16px}
   .form{padding:16px}
   .url-row{flex-direction:column;align-items:stretch}
@@ -184,12 +174,12 @@ img.thumb{width:56px;height:56px;object-fit:cover;border-radius:8px;border:1px s
     </div>
   </div>
 
-  <!-- STATS -->
+  <!-- STATS : une seule carte -->
   <div class="stats">
-    <div class="stat-card"><div class="num" id="statTotal">0</div><div class="label">Total produits</div></div>
-    <div class="stat-card green"><div class="num" id="statActive">0</div><div class="label">Actifs</div></div>
-    <div class="stat-card gray"><div class="num" id="statInactive">0</div><div class="label">Inactifs</div></div>
-    <div class="stat-card orange"><div class="num" id="statBadged">0</div><div class="label">Avec badge</div></div>
+    <div class="stat-card">
+      <div class="num" id="statTotal">0</div>
+      <div class="label">Total produits</div>
+    </div>
   </div>
 
   <!-- TOOLBAR -->
@@ -216,14 +206,13 @@ img.thumb{width:56px;height:56px;object-fit:cover;border-radius:8px;border:1px s
           <th style="width:70px">Image</th>
           <th>Produit</th>
           <th style="width:130px">Prix</th>
-          <th style="width:120px">Badge</th>
-          <th style="width:70px">Ordre</th>
+          <th style="width:130px">Badge</th>
           <th style="width:90px">Statut</th>
           <th style="width:120px">Actions</th>
         </tr>
       </thead>
       <tbody id="tbody">
-        <tr><td colspan="7" class="empty">
+        <tr><td colspan="6" class="empty">
           <i class="fas fa-spinner fa-spin"></i><p>Chargement…</p>
         </td></tr>
       </tbody>
@@ -252,23 +241,15 @@ img.thumb{width:56px;height:56px;object-fit:cover;border-radius:8px;border:1px s
         <textarea id="pDesc" placeholder="Courte description du produit…"></textarea>
       </div>
 
-      <div class="form-row">
-        <div class="field">
-          <label for="pPrice">Prix (FCFA) <span class="req">*</span></label>
-          <input id="pPrice" type="number" min="0" step="1" required placeholder="150000">
-        </div>
-        <div class="field">
-          <label for="pOrder">Ordre d'affichage</label>
-          <input id="pOrder" type="number" value="0" step="1">
-          <small>Plus petit = en premier</small>
-        </div>
+      <div class="field">
+        <label for="pPrice">Prix (FCFA) <span class="req">*</span></label>
+        <input id="pPrice" type="number" min="0" step="1" required placeholder="150000">
       </div>
 
       <!-- IMAGE -->
       <div class="field">
         <label>Image du produit</label>
         <div class="img-upload-block">
-
           <div class="file-input-wrap" id="fileDrop">
             <input type="file" id="pImgFile" accept="image/*">
             <i class="fas fa-cloud-arrow-up"></i>
@@ -288,30 +269,17 @@ img.thumb{width:56px;height:56px;object-fit:cover;border-radius:8px;border:1px s
               <i class="fas fa-xmark"></i>
             </button>
           </div>
-
-        </div>
-      </div>
-
-      <div class="form-row">
-        <div class="field">
-          <label for="pBadge">Type de badge</label>
-          <select id="pBadge">
-            <option value="">Aucun</option>
-            <option value="hot">🔥 Best Seller</option>
-            <option value="new">Nouveau</option>
-            <option value="promo">Promo</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="pBadgeLabel">Texte du badge</label>
-          <input id="pBadgeLabel" placeholder="🔥 Best Seller">
-          <small>Laisser vide pour masquer le texte</small>
         </div>
       </div>
 
       <div class="field">
-        <label for="pWa">Message WhatsApp pré-rempli</label>
-        <input id="pWa" placeholder="Bonjour, je suis intéressé(e) par…">
+        <label for="pBadge">Badge</label>
+        <select id="pBadge">
+          <option value="">Aucun</option>
+          <option value="hot">🔥 Best Seller</option>
+          <option value="new">Nouveau</option>
+          <option value="promo">Promo</option>
+        </select>
       </div>
 
       <div class="checkbox-row">
@@ -336,8 +304,8 @@ img.thumb{width:56px;height:56px;object-fit:cover;border-radius:8px;border:1px s
 <script src="https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script>
 /* ============================================================
-   ADMIN · FASO HIGH TECH
-   Table : fht_products | Bucket : fht-images (créé manuellement)
+   ADMIN · FASO HIGH TECH (version simplifiée)
+   Table : fht_products | Bucket : fht-images
    ============================================================ */
 
 /* ---------- AUTH GUARD ---------- */
@@ -357,6 +325,14 @@ const $  = s => document.querySelector(s);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c =>
   ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
 const fmt = n => new Intl.NumberFormat("fr-FR").format(Number(n) || 0) + " FCFA";
+
+/* ---------- MAP BADGE → LABEL AUTO ---------- */
+function autoBadgeLabel(type){
+  if (type === "hot")   return "🔥 Best Seller";
+  if (type === "new")   return "Nouveau";
+  if (type === "promo") return "Promo";
+  return null;
+}
 
 /* ---------- STATE ---------- */
 let PRODUCTS = [];
@@ -404,7 +380,7 @@ async function deleteImageFromStorage(imageUrl){
   if (!imageUrl) return;
   const marker = `/storage/v1/object/public/${BUCKET}/`;
   const idx = imageUrl.indexOf(marker);
-  if (idx === -1) return; // pas une URL de notre bucket → on ne touche pas
+  if (idx === -1) return;
   const path = imageUrl.substring(idx + marker.length);
   try {
     const { error } = await db.storage.from(BUCKET).remove([path]);
@@ -466,7 +442,7 @@ $("#fileDrop").addEventListener("drop", e => {
 /* ---------- LOAD ---------- */
 async function load(){
   const tbody = $("#tbody");
-  tbody.innerHTML = `<tr><td colspan="7" class="empty"><i class="fas fa-spinner fa-spin"></i><p>Chargement…</p></td></tr>`;
+  tbody.innerHTML = `<tr><td colspan="6" class="empty"><i class="fas fa-spinner fa-spin"></i><p>Chargement…</p></td></tr>`;
 
   const { data, error } = await db
     .from("fht_products")
@@ -476,7 +452,7 @@ async function load(){
 
   if (error){
     console.error(error);
-    tbody.innerHTML = `<tr><td colspan="7" class="empty">
+    tbody.innerHTML = `<tr><td colspan="6" class="empty">
       <i class="fas fa-triangle-exclamation" style="color:#dc3545"></i>
       <p>Erreur de chargement</p><small>${esc(error.message)}</small>
     </td></tr>`;
@@ -485,15 +461,8 @@ async function load(){
   }
 
   PRODUCTS = data || [];
-  updateStats();
+  $("#statTotal").textContent = PRODUCTS.length;
   render();
-}
-
-function updateStats(){
-  $("#statTotal").textContent    = PRODUCTS.length;
-  $("#statActive").textContent   = PRODUCTS.filter(p => p.active).length;
-  $("#statInactive").textContent = PRODUCTS.filter(p => !p.active).length;
-  $("#statBadged").textContent   = PRODUCTS.filter(p => p.badge_type).length;
 }
 
 function getFilteredProducts(){
@@ -518,7 +487,7 @@ function render(){
   const list = getFilteredProducts();
 
   if (!list.length){
-    tbody.innerHTML = `<tr><td colspan="7" class="empty">
+    tbody.innerHTML = `<tr><td colspan="6" class="empty">
       <i class="fas fa-box-open"></i>
       <p>${PRODUCTS.length ? "Aucun produit ne correspond à ta recherche" : "Aucun produit pour le moment"}</p>
       <small>${PRODUCTS.length ? "Essaie un autre filtre ou efface la recherche." : "Clique sur « Nouveau produit » pour commencer."}</small>
@@ -528,7 +497,7 @@ function render(){
 
   tbody.innerHTML = list.map(p => {
     const badge = p.badge_type
-      ? `<span class="badge ${esc(p.badge_type)}">${esc(p.badge_label || p.badge_type)}</span>`
+      ? `<span class="badge ${esc(p.badge_type)}">${esc(p.badge_label || autoBadgeLabel(p.badge_type) || p.badge_type)}</span>`
       : `<span class="badge--empty">—</span>`;
     const status = p.active
       ? `<span class="badge active">Actif</span>`
@@ -545,7 +514,6 @@ function render(){
         </td>
         <td><span class="price">${fmt(p.price)}</span></td>
         <td>${badge}</td>
-        <td><span class="order-num">${p.sort_order ?? 0}</span></td>
         <td>${status}</td>
         <td>
           <div class="row-actions">
@@ -564,17 +532,14 @@ function openModal(product = null){
     ? '<i class="fas fa-pen"></i> Modifier le produit'
     : '<i class="fas fa-plus"></i> Nouveau produit';
 
-  $("#pId").value         = product?.id ?? "";
-  $("#pName").value       = product?.name ?? "";
-  $("#pDesc").value       = product?.description ?? "";
-  $("#pPrice").value      = product?.price ?? "";
-  $("#pImg").value        = product?.image_url ?? "";
-  $("#pImgFile").value    = "";
-  $("#pBadge").value      = product?.badge_type ?? "";
-  $("#pBadgeLabel").value = product?.badge_label ?? "";
-  $("#pWa").value         = product?.whatsapp_message ?? "";
-  $("#pOrder").value      = product?.sort_order ?? 0;
-  $("#pActive").checked   = product?.active ?? true;
+  $("#pId").value       = product?.id ?? "";
+  $("#pName").value     = product?.name ?? "";
+  $("#pDesc").value     = product?.description ?? "";
+  $("#pPrice").value    = product?.price ?? "";
+  $("#pImg").value      = product?.image_url ?? "";
+  $("#pImgFile").value  = "";
+  $("#pBadge").value    = product?.badge_type ?? "";
+  $("#pActive").checked = product?.active ?? true;
 
   updatePreview();
   $("#modalBg").classList.add("open");
@@ -604,7 +569,7 @@ $("#productForm").addEventListener("submit", async (e) => {
   btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enregistrement…';
 
   try {
-    /* 1) Image : upload si fichier, sinon URL, sinon null */
+    /* 1) Image */
     let imageUrl = $("#pImg").value.trim() || null;
     const file = $("#pImgFile").files[0];
 
@@ -612,34 +577,36 @@ $("#productForm").addEventListener("submit", async (e) => {
       btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Upload image…';
       imageUrl = await uploadImage(file);
 
-      // Si on remplace une ancienne image stockée → on la supprime du bucket
       if (oldProduct?.image_url && oldProduct.image_url !== imageUrl){
         await deleteImageFromStorage(oldProduct.image_url);
       }
     }
 
-    /* 2) Payload */
+    /* 2) Payload simplifié */
+    const badgeType = $("#pBadge").value || null;
     const payload = {
-      name:             $("#pName").value.trim(),
-      description:      $("#pDesc").value.trim() || null,
-      price:            Number($("#pPrice").value || 0),
-      image_url:        imageUrl,
-      badge_type:       $("#pBadge").value || null,
-      badge_label:      $("#pBadgeLabel").value.trim() || null,
-      whatsapp_message: $("#pWa").value.trim() || null,
-      sort_order:       Number($("#pOrder").value || 0),
-      active:           $("#pActive").checked
+      name:        $("#pName").value.trim(),
+      description: $("#pDesc").value.trim() || null,
+      price:       Number($("#pPrice").value || 0),
+      image_url:   imageUrl,
+      badge_type:  badgeType,
+      badge_label: autoBadgeLabel(badgeType),
+      active:      $("#pActive").checked
     };
 
-    if (!payload.name){
-      throw new Error("Le nom est obligatoire");
-    }
+    if (!payload.name) throw new Error("Le nom est obligatoire");
 
     /* 3) Insert / Update */
     btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enregistrement…';
-    const res = id
-      ? await db.from("fht_products").update(payload).eq("id", id)
-      : await db.from("fht_products").insert(payload);
+
+    // Pour une mise à jour, on préserve le sort_order existant
+    let res;
+    if (id){
+      res = await db.from("fht_products").update(payload).eq("id", id);
+    } else {
+      payload.sort_order = 0; // valeur par défaut, l'ordre n'est plus géré manuellement
+      res = await db.from("fht_products").insert(payload);
+    }
 
     if (res.error) throw res.error;
 
@@ -681,10 +648,8 @@ document.addEventListener("click", async (e) => {
     if (!p) return;
     if (!confirm(`Supprimer définitivement « ${p.name} » ?\nL'image sera aussi supprimée du storage.`)) return;
 
-    // Supprime d'abord l'image du bucket
     await deleteImageFromStorage(p.image_url);
 
-    // Puis la ligne en base
     const { error } = await db.from("fht_products").delete().eq("id", delId);
     if (error) return toast("Erreur : " + error.message, "error");
     toast("Produit supprimé", "success");
