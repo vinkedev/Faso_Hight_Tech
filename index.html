@@ -3,220 +3,898 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin · Faso High Tech — Produits</title>
+<title>Faso High Tech - Matériel Informatique & Accessoires</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Roboto,sans-serif}
-body{background:#f1f5f9;color:#333;padding:24px}
-.wrap{max-width:1200px;margin:0 auto}
-h1{color:#0047AB;margin-bottom:4px}
-.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;flex-wrap:wrap;gap:12px}
-.sub{color:#6C757D;font-size:.9rem}
-.btn{display:inline-block;padding:10px 18px;border:none;border-radius:8px;font-weight:600;cursor:pointer;font-size:.9rem;transition:.2s}
-.btn--primary{background:#0047AB;color:#fff}.btn--primary:hover{background:#003788}
-.btn--ghost{background:#fff;color:#0047AB;border:1px solid #0047AB}
-.btn--danger{background:#dc3545;color:#fff}
-.btn--sm{padding:6px 12px;font-size:.8rem}
-table{width:100%;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,.06);border-collapse:collapse}
-thead{background:#0047AB;color:#fff}
-th,td{padding:12px 14px;text-align:left;font-size:.9rem;border-bottom:1px solid #eee;vertical-align:middle}
-th{font-weight:600;font-size:.82rem;text-transform:uppercase;letter-spacing:.04em}
-img.thumb{width:56px;height:56px;object-fit:cover;border-radius:8px;border:1px solid #eee}
-.badge{display:inline-block;padding:3px 8px;border-radius:12px;font-size:.7rem;font-weight:700;color:#fff}
-.badge.hot{background:#dc3545}.badge.new{background:#28a745}.badge.promo{background:#ffc107;color:#333}
-.badge.inactive{background:#6C757D}
-.row-actions{display:flex;gap:6px}
-/* Modal */
-.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;padding:24px;z-index:100}
-.modal-bg.open{display:flex}
-.modal{background:#fff;border-radius:14px;width:100%;max-width:560px;max-height:90vh;overflow-y:auto;padding:24px}
-.modal h2{margin-bottom:16px;color:#0047AB;font-size:1.2rem}
-.field{margin-bottom:14px;display:flex;flex-direction:column;gap:6px}
-.field label{font-size:.82rem;font-weight:600;color:#333}
-.field input,.field textarea,.field select{padding:10px 12px;border:1px solid #ddd;border-radius:8px;font-family:inherit;font-size:.9rem}
-.field textarea{min-height:80px;resize:vertical}
-.actions{display:flex;justify-content:flex-end;gap:8px;margin-top:16px}
-.empty{padding:40px;text-align:center;color:#6C757D}
-@media (max-width:640px){
-  th,td{padding:10px 8px;font-size:.82rem}
-  img.thumb{width:40px;height:40px}
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--primary-color:#0047AB;--secondary-color:#D4A13A;--dark-color:#333333;--light-color:#F8F9FA;--gray-color:#6C757D;--white:#FFFFFF;--shadow:0 4px 12px rgba(0,0,0,0.1);--border-radius:8px;--transition:all 0.3s ease;}
+body{font-family:'Roboto',sans-serif;color:var(--dark-color);line-height:1.6;background-color:var(--light-color);animation:fadeIn 1s ease-out}
+h1,h2,h3,h4{font-family:'Montserrat',sans-serif;font-weight:700;line-height:1.2;margin-bottom:1rem}
+h1{font-size:2.8rem}
+h2{font-size:2.2rem;color:var(--primary-color);position:relative;padding-bottom:10px}
+h2:after{content:'';position:absolute;bottom:0;left:0;width:80px;height:4px;background-color:var(--secondary-color)}
+h3{font-size:1.6rem}
+p{margin-bottom:1.2rem}
+a{text-decoration:none;color:inherit}
+ul{list-style:none}
+.container{width:100%;max-width:1200px;margin:0 auto;padding:0 20px}
+.btn{display:inline-block;background-color:var(--secondary-color);color:#333;padding:12px 28px;border-radius:var(--border-radius);font-weight:600;text-transform:uppercase;letter-spacing:1px;border:none;cursor:pointer;transition:var(--transition)}
+.btn:hover{background-color:#E6C300;transform:translateY(-3px);box-shadow:var(--shadow)}
+.btn-primary{background-color:var(--primary-color);color:var(--white)}
+.btn-primary:hover{background-color:#003788}
+.btn-whatsapp{background-color:#25D366;color:white;display:inline-flex;align-items:center;gap:8px}
+.btn-whatsapp:hover{background-color:#128C7E}
+.section{padding:80px 0;opacity:0;transform:translateY(30px);transition:opacity 0.8s ease,transform 0.8s ease}
+.section.visible{opacity:1;transform:translateY(0)}
+.text-center{text-align:center}
+.text-center h2:after{left:50%;transform:translateX(-50%)}
+.section-title{margin-bottom:50px}
+.section-title h2{animation:fadeInUp 0.8s ease-out 0.2s both}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulseWhatsapp{0%{box-shadow:0 0 0 0 rgba(37,211,102,0.7)}70%{box-shadow:0 0 0 15px rgba(37,211,102,0)}100%{box-shadow:0 0 0 0 rgba(37,211,102,0)}}
+header{background-color:var(--white);box-shadow:var(--shadow);position:fixed;top:0;left:0;width:100%;z-index:1000;transition:var(--transition)}
+.header-container{display:flex;justify-content:space-between;align-items:center;padding:15px 20px}
+.logo{display:flex;align-items:center;gap:10px;animation:fadeInUp 0.8s ease-out;cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent}
+.logo img{height:50px;max-width:200px;object-fit:contain;pointer-events:none}
+.logo-text h1{font-size:1.8rem;margin-bottom:0;color:var(--primary-color)}
+.logo-text span{color:var(--secondary-color)}
+.nav-links{display:flex;gap:30px}
+.nav-links li{animation:fadeInUp 0.6s ease-out both}
+.nav-links li:nth-child(1){animation-delay:0.1s}
+.nav-links li:nth-child(2){animation-delay:0.2s}
+.nav-links li:nth-child(3){animation-delay:0.3s}
+.nav-links li:nth-child(4){animation-delay:0.4s}
+.nav-links li:nth-child(5){animation-delay:0.5s}
+.nav-links a{font-weight:600;position:relative;padding:5px 0}
+.nav-links a:after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background-color:var(--secondary-color);transition:var(--transition)}
+.nav-links a:hover:after{width:100%}
+.mobile-menu-btn{display:none;font-size:1.5rem;cursor:pointer;color:var(--primary-color)}
+.hero{background:linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)),url('image/Splash.jpg');background-size:cover;background-position:center;background-attachment:fixed;background-repeat:no-repeat;color:var(--white);text-align:center;padding:180px 20px 100px;margin-top:80px;animation:fadeIn 1.2s ease-out;min-height:100vh;display:flex;align-items:center;justify-content:center}
+.hero .container{animation:fadeInUp 1s ease-out 0.5s both}
+.hero h1{font-size:3.2rem;margin-bottom:10px;text-shadow:2px 2px 5px rgba(0,0,0,0.5)}
+#typing{display:block;font-size:1.8rem;margin:20px 0 30px;min-height:60px;color:var(--secondary-color);font-weight:600;letter-spacing:1px;text-shadow:1px 1px 3px rgba(0,0,0,0.5)}
+.hero-buttons{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin-top:30px}
+.badge{position:absolute;top:15px;left:15px;padding:6px 12px;font-size:0.75rem;border-radius:20px;color:white;font-weight:bold;z-index:10}
+.badge.new{background:#28a745}
+.badge.hot{background:#dc3545}
+.badge.promo{background:#ffc107;color:#333}
+.product-card{transform-style:preserve-3d;perspective:1000px;opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease,box-shadow 0.3s ease}
+.product-card.visible{opacity:1;transform:translateY(0)}
+.product-card:hover{transform:perspective(1000px) rotateX(5deg) rotateY(-5deg) translateY(-10px);box-shadow:0 15px 30px rgba(0,0,0,0.15)}
+.services{background-color:#f1f5f9}
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:30px}
+.service-card{background-color:var(--white);border-radius:var(--border-radius);padding:40px 30px;text-align:center;box-shadow:var(--shadow);height:100%;display:flex;flex-direction:column;opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease,box-shadow 0.3s ease}
+.service-card.visible{opacity:1;transform:translateY(0)}
+.service-card:hover{transform:translateY(-10px);box-shadow:0 15px 30px rgba(0,0,0,0.15)}
+.service-icon{color:var(--primary-color);background-color:rgba(0,71,171,0.1);width:100px;height:100px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 25px;transition:var(--transition)}
+.service-card:hover .service-icon{background-color:var(--primary-color);color:white;transform:rotateY(180deg)}
+.service-content{flex:1;display:flex;flex-direction:column}
+.service-content h3{color:var(--primary-color);margin-bottom:15px;font-size:1.5rem}
+.service-content ul{list-style:none;text-align:left;margin:15px 0 20px;padding:0}
+.service-content ul li{margin-bottom:8px;padding-left:5px;font-size:0.95rem}
+.service-content .btn{margin-top:20px}
+.why-us{background-color:var(--white)}
+.why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:30px}
+.why-card{background-color:#f8f9fa;border-radius:var(--border-radius);padding:40px 30px;text-align:center;border:1px solid #eee;opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease,box-shadow 0.3s ease}
+.why-card.visible{opacity:1;transform:translateY(0)}
+.why-card:hover{transform:translateY(-10px);box-shadow:var(--shadow)}
+.why-card i{color:var(--primary-color);background-color:rgba(0,71,171,0.1);width:80px;height:80px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px}
+.stats{background:linear-gradient(135deg,var(--primary-color),#003788);color:white;text-align:center;padding:60px 0}
+.stats-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:30px}
+.stat-item h3{font-size:3rem;margin-bottom:10px;color:var(--secondary-color)}
+.stat-item p{font-size:1.2rem;opacity:0.9}
+.whatsapp-float{position:fixed;bottom:25px;right:25px;background:#25D366;color:white;width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2rem;box-shadow:0 10px 25px rgba(0,0,0,.3);z-index:999;animation:pulseWhatsapp 1.5s infinite;transition:var(--transition)}
+.whatsapp-float:hover{background:#128C7E;transform:scale(1.1)}
+.categories{background-color:var(--white);overflow:hidden}
+.category-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:30px}
+.category-card{background-color:var(--white);border-radius:var(--border-radius);overflow:hidden;box-shadow:var(--shadow);opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease,box-shadow 0.3s ease}
+.category-card.visible{opacity:1;transform:translateY(0)}
+.category-card:hover{transform:translateY(-10px);box-shadow:0 10px 20px rgba(0,0,0,0.15)}
+.category-icon{background-color:var(--primary-color);color:var(--white);height:120px;display:flex;align-items:center;justify-content:center;font-size:3rem}
+.category-content{padding:25px}
+.category-content h3{color:var(--primary-color);margin-bottom:10px}
+.products{background-color:#f1f5f9;overflow:hidden}
+.product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:30px}
+.product-card:nth-child(1){transition-delay:0.1s}
+.product-card:nth-child(2){transition-delay:0.2s}
+.product-card:nth-child(3){transition-delay:0.3s}
+.product-card:nth-child(4){transition-delay:0.4s}
+.product-card:nth-child(5){transition-delay:0.5s}
+.product-card:nth-child(6){transition-delay:0.6s}
+.product-image{height:450px;background-color:#f8f9fa;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:0;position:relative}
+.product-image img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease}
+.product-card:hover .product-image img{transform:scale(1.1)}
+.product-content{padding:20px}
+.product-title{font-size:1.3rem;margin-bottom:10px;color:var(--primary-color)}
+.product-price{color:var(--secondary-color);font-weight:700;font-size:1.2rem;margin-bottom:15px}
+.scroll-indicators{display:none;justify-content:center;gap:8px;margin-top:20px}
+.scroll-indicator{width:8px;height:8px;border-radius:50%;background-color:rgba(0,71,171,0.3);transition:var(--transition)}
+.scroll-indicator.active{background-color:var(--primary-color);transform:scale(1.3)}
+.about-content{display:flex;align-items:center;gap:50px}
+.about-text{flex:1}
+.about-image{flex:1;border-radius:var(--border-radius);overflow:hidden;box-shadow:var(--shadow);height:400px}
+.about-image img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.5s ease}
+.about-image:hover img{transform:scale(1.05)}
+.contact{background-color:var(--white)}
+.contact-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:50px}
+.contact-info{display:flex;flex-direction:column;gap:25px}
+.contact-item{display:flex;align-items:flex-start;gap:15px}
+.contact-icon{background-color:var(--primary-color);color:var(--white);width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem;transition:var(--transition)}
+.contact-item:hover .contact-icon{background-color:var(--secondary-color);transform:rotateY(180deg)}
+.contact-form input,.contact-form textarea{width:100%;padding:12px 15px;margin-bottom:20px;border:1px solid #ddd;border-radius:var(--border-radius);font-family:'Roboto',sans-serif;font-size:1rem}
+.contact-form textarea{min-height:150px;resize:vertical}
+footer{background-color:var(--dark-color);color:var(--white);padding:60px 0 30px}
+.footer-content{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:40px;margin-bottom:40px}
+.footer-logo h2{color:var(--white);margin-bottom:15px}
+.footer-logo h2:after{display:none}
+.footer-links h3,.footer-social h3{font-size:1.3rem;margin-bottom:20px;color:var(--secondary-color)}
+.footer-links ul li{margin-bottom:10px}
+.footer-links ul li a:hover{color:var(--secondary-color)}
+.social-icons{display:flex;gap:15px}
+.social-icons a{display:flex;align-items:center;justify-content:center;width:40px;height:40px;background-color:rgba(255,255,255,0.1);border-radius:50%;transition:var(--transition)}
+.social-icons a:hover{background-color:var(--secondary-color);color:#333;transform:translateY(-5px)}
+.copyright{text-align:center;padding-top:30px;border-top:1px solid rgba(255,255,255,0.1);font-size:0.9rem;color:var(--gray-color)}
+.footer-credit{margin-top:8px;font-size:0.9rem;color:rgba(255,255,255,0.55);letter-spacing:0.02em}
+.footer-credit a{color:var(--secondary-color);font-weight:700;position:relative;display:inline-block;transition:color 0.3s ease}
+
+/* ==== LOGIN MODAL ADMIN (nouveau) ==== */
+.login-modal{position:fixed;inset:0;background:rgba(20,25,45,.78);backdrop-filter:blur(8px);z-index:99999;display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;visibility:hidden;transition:opacity .3s ease,visibility .3s ease}
+.login-modal.open{opacity:1;visibility:visible}
+.login-modal__content{background:#fff;border-radius:18px;width:100%;max-width:400px;position:relative;box-shadow:0 30px 80px rgba(0,0,0,.4);border-top:6px solid var(--secondary-color);overflow:hidden}
+.login-modal__close{position:absolute;top:12px;right:12px;width:34px;height:34px;border-radius:50%;background:#f1f5f9;border:none;cursor:pointer;font-size:1rem;font-weight:700;color:var(--primary-color);transition:.25s ease;z-index:2}
+.login-modal__close:hover{background:var(--secondary-color);color:#fff;transform:rotate(90deg)}
+.login-modal__header{text-align:center;padding:28px 28px 8px}
+.login-modal__icon{width:60px;height:60px;border-radius:50%;background:rgba(0,71,171,.1);display:flex;align-items:center;justify-content:center;font-size:1.6rem;margin:0 auto 14px}
+.login-modal__header h3{font-size:1.2rem;color:var(--primary-color);margin-bottom:4px}
+.login-modal__header p{font-size:.82rem;color:#6C757D;font-family:'Roboto',sans-serif}
+.login-modal__body{padding:16px 28px 28px;display:grid;gap:10px}
+.login-modal__body label{font-size:.82rem;font-weight:600;color:#333;display:block;margin-bottom:6px;font-family:'Roboto',sans-serif}
+.login-modal__body input{width:100%;padding:12px 16px;border:1px solid #ddd;border-radius:10px;font-family:'Roboto',sans-serif;font-size:.92rem}
+.login-modal__body input:focus{outline:none;border-color:var(--secondary-color);box-shadow:0 0 0 3px rgba(212,161,58,.15)}
+.login-btn{width:100%;padding:13px;background:var(--primary-color);color:#fff;border:none;border-radius:10px;font-weight:600;cursor:pointer;font-family:'Roboto',sans-serif;font-size:.95rem;transition:.25s ease}
+.login-btn:hover{background:#003788}
+.login-error{color:#dc2626;font-size:.82rem;text-align:center;min-height:18px;margin:0;font-family:'Roboto',sans-serif}
+
+@media (max-width:992px){
+  h1{font-size:2.4rem}
+  h2{font-size:1.8rem}
+  .hero h1{font-size:2.8rem}
+  .about-content{flex-direction:column}
+  .product-card:hover{transform:perspective(1000px) rotateX(2deg) rotateY(-2deg) translateY(-5px)}
+}
+@media (max-width:768px){
+  h1{font-size:1.8rem!important;line-height:1.3}
+  h2{font-size:1.5rem!important;margin-bottom:.8rem}
+  h3{font-size:1.3rem!important}
+  p{font-size:.95rem;line-height:1.5}
+  .mobile-menu-btn{display:block}
+  .nav-links{position:fixed;top:80px;left:0;width:100%;background-color:var(--white);flex-direction:column;padding:20px;box-shadow:var(--shadow);transform:translateY(-100%);opacity:0;visibility:hidden;transition:var(--transition);max-height:0;overflow:hidden}
+  .nav-links.active{transform:translateY(0);opacity:1;visibility:visible;max-height:400px;padding:20px}
+  .nav-links li{margin:10px 0;animation:none!important}
+  .hero{padding:120px 15px 60px!important;min-height:auto!important;background-attachment:scroll!important}
+  .hero h1{font-size:1.8rem!important;margin-bottom:15px}
+  #typing{font-size:1.1rem!important;min-height:40px;margin:10px 0 20px}
+  .hero-buttons{flex-direction:column;align-items:center;gap:10px}
+  .section{padding:50px 0!important}
+  .btn{padding:12px 20px;font-size:.9rem;width:100%;max-width:300px;margin:5px auto}
+  .stat-item h3{font-size:2.2rem}
+  .stat-item p{font-size:1rem}
+  .category-grid,.product-grid{display:none!important}
+  .category-carousel-container,.product-carousel-container{display:block!important}
+  .carousel-container{position:relative;overflow:visible}
+  .carousel-wrapper{display:flex;gap:20px;padding:10px 20px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;padding-bottom:20px;margin-bottom:10px}
+  .carousel-wrapper::-webkit-scrollbar{display:none}
+  .carousel-wrapper{-ms-overflow-style:none;scrollbar-width:none}
+  .carousel-wrapper .category-card,.carousel-wrapper .product-card{flex:0 0 calc(85vw - 40px);min-width:calc(85vw - 40px);scroll-snap-align:start;transform:none;opacity:1;box-shadow:var(--shadow);margin:0;animation:none;transition:none}
+  .carousel-wrapper .product-card{transform-style:flat;perspective:none}
+  .carousel-wrapper .product-card:hover{transform:translateY(-5px);box-shadow:0 10px 20px rgba(0,0,0,0.15)}
+  .carousel-wrapper .category-card:hover{transform:translateY(-5px);box-shadow:0 10px 20px rgba(0,0,0,0.15)}
+  .carousel-wrapper .product-image{height:300px!important}
+  .scroll-indicators{display:flex}
+  .about-content{flex-direction:column;gap:30px}
+  .about-image{height:250px;order:-1}
+  .contact-container{grid-template-columns:1fr;gap:30px}
+  .footer-content{grid-template-columns:1fr;text-align:center;gap:30px}
+  .social-icons{justify-content:center}
+  .section-title{margin-bottom:30px}
+  .section-title h2{margin-bottom:10px}
+  .logo img{height:35px!important}
+  .logo-text h1{font-size:1.3rem!important}
+}
+@media (max-width:480px){
+  h1{font-size:1.6rem!important}
+  h2{font-size:1.3rem!important}
+  .hero h1{font-size:1.6rem!important}
+  #typing{font-size:1rem!important}
+  .container{padding:0 15px}
+  .product-title{font-size:1.1rem}
+  .product-price{font-size:1.1rem}
+  .carousel-wrapper .category-card,.carousel-wrapper .product-card{flex:0 0 calc(90vw - 40px);min-width:calc(90vw - 40px)}
+  .carousel-wrapper{padding:10px 15px;gap:15px}
 }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="top">
-    <div>
-      <h1>Produits · Faso High Tech</h1>
-      <div class="sub">Gestion dynamique (table <code>fht_products</code>)</div>
+
+<!-- Header -->
+<header>
+  <div class="container header-container">
+    <div class="logo" id="logo">
+      <div class="logo-img">
+        <img src="image/Logo.jpg" alt="Faso High Tech Logo">
+      </div>
+      <div class="logo-text">
+        <h1>Faso <span>High Tech</span></h1>
+      </div>
     </div>
-    <div>
-      <button class="btn btn--primary" id="addBtn">+ Nouveau produit</button>
-      <button class="btn btn--ghost" id="logoutBtn">Déconnexion</button>
+    <div class="mobile-menu-btn">
+      <i class="fas fa-bars"></i>
+    </div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#accueil">Accueil</a></li>
+        <li><a href="#categories">Catégories</a></li>
+        <li><a href="#produits">Produits</a></li>
+        <li><a href="#pourquoi">Pourquoi nous ?</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#apropos">À propos</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero" id="accueil">
+  <div class="container">
+    <h1>Faso High Tech</h1>
+    <span id="typing"></span>
+    <div class="hero-buttons">
+      <a href="#produits" class="btn">Découvrir nos produits 🚀</a>
+      <a href="https://wa.me/22674958509" class="btn btn-whatsapp" target="_blank">
+        <i class="fab fa-whatsapp"></i> Commander sur WhatsApp
+      </a>
     </div>
   </div>
+</section>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Image</th><th>Nom</th><th>Prix</th><th>Badge</th><th>Ordre</th><th>Actif</th><th>Actions</th>
-      </tr>
-    </thead>
-    <tbody id="tbody">
-      <tr><td colspan="7" class="empty">Chargement…</td></tr>
-    </tbody>
-  </table>
-</div>
+<!-- Statistiques -->
+<section class="stats">
+  <div class="container">
+    <div class="stats-container">
+      <div class="stat-item"><h3><span class="counter" data-target="1500">0</span>+</h3><p>Clients satisfaits</p></div>
+      <div class="stat-item"><h3><span class="counter" data-target="500">0</span>+</h3><p>Produits disponibles</p></div>
+      <div class="stat-item"><h3><span class="counter" data-target="3">0</span>+</h3><p>Années d'expérience</p></div>
+      <div class="stat-item"><h3><span class="counter" data-target="24">0</span>/7</h3><p>Support client</p></div>
+    </div>
+  </div>
+</section>
 
-<!-- Modal -->
-<div class="modal-bg" id="modalBg">
-  <div class="modal">
-    <h2 id="modalTitle">Nouveau produit</h2>
-    <form id="productForm">
-      <input type="hidden" id="pId">
-      <div class="field"><label>Nom *</label><input id="pName" required></div>
-      <div class="field"><label>Description</label><textarea id="pDesc"></textarea></div>
-      <div class="field"><label>Prix (FCFA) *</label><input id="pPrice" type="number" min="0" step="1" required></div>
-      <div class="field"><label>Image URL</label><input id="pImg" placeholder="image/HP4.jpg ou https://…"></div>
-      <div class="field"><label>Type de badge</label>
-        <select id="pBadge">
-          <option value="">Aucun</option>
-          <option value="hot">🔥 Best Seller (hot)</option>
-          <option value="new">Nouveau (new)</option>
-          <option value="promo">Promo (promo)</option>
-        </select>
+<!-- Catégories -->
+<section class="section categories" id="categories">
+  <div class="container">
+    <div class="section-title text-center">
+      <h2>Nos Catégories de Produits 💻📱⌚</h2>
+      <p>Découvrez notre large gamme de produits high-tech</p>
+    </div>
+
+    <div class="category-grid">
+      <div class="category-card">
+        <div class="category-icon"><i class="fas fa-laptop"></i></div>
+        <div class="category-content">
+          <h3>Ordinateurs</h3>
+          <p>PC portables, ordinateurs de bureau, stations de travail pour professionnels et particuliers.</p>
+        </div>
       </div>
-      <div class="field"><label>Texte du badge</label><input id="pBadgeLabel" placeholder="🔥 Best Seller"></div>
-      <div class="field"><label>Message WhatsApp</label><input id="pWa" placeholder="Bonjour, je suis intéressé(e) par…"></div>
-      <div class="field"><label>Ordre d'affichage</label><input id="pOrder" type="number" value="0" step="1"></div>
-      <div class="field" style="flex-direction:row;align-items:center;gap:10px">
-        <input type="checkbox" id="pActive" checked style="width:auto">
-        <label for="pActive" style="margin:0">Actif (visible sur le site)</label>
+      <div class="category-card">
+        <div class="category-icon"><i class="fas fa-mobile-alt"></i></div>
+        <div class="category-content">
+          <h3>Téléphones & Tablettes</h3>
+          <p>Smartphones, tablettes, accessoires mobiles des marques les plus populaires.</p>
+        </div>
       </div>
-      <div class="actions">
-        <button type="button" class="btn btn--ghost" id="cancelBtn">Annuler</button>
-        <button type="submit" class="btn btn--primary" id="saveBtn">Enregistrer</button>
+      <div class="category-card">
+        <div class="category-icon"><i class="fas fa-headphones"></i></div>
+        <div class="category-content">
+          <h3>Accessoires</h3>
+          <p>Casques, claviers, souris, disques durs externes, câbles et bien plus encore.</p>
+        </div>
       </div>
-    </form>
+      <div class="category-card">
+        <div class="category-icon"><i class="fas fa-clock"></i></div>
+        <div class="category-content">
+          <h3>Montres Connectées</h3>
+          <p>Montres intelligentes et bracelets connectés pour suivre votre activité physique.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="category-carousel-container" style="display: none;">
+      <div class="carousel-container">
+        <div class="carousel-wrapper">
+          <div class="category-card">
+            <div class="category-icon"><i class="fas fa-laptop"></i></div>
+            <div class="category-content"><h3>Ordinateurs</h3><p>PC portables, ordinateurs de bureau, stations de travail pour professionnels et particuliers.</p></div>
+          </div>
+          <div class="category-card">
+            <div class="category-icon"><i class="fas fa-mobile-alt"></i></div>
+            <div class="category-content"><h3>Téléphones & Tablettes</h3><p>Smartphones, tablettes, accessoires mobiles des marques les plus populaires.</p></div>
+          </div>
+          <div class="category-card">
+            <div class="category-icon"><i class="fas fa-headphones"></i></div>
+            <div class="category-content"><h3>Accessoires</h3><p>Casques, claviers, souris, disques durs externes, câbles et bien plus encore.</p></div>
+          </div>
+          <div class="category-card">
+            <div class="category-icon"><i class="fas fa-clock"></i></div>
+            <div class="category-content"><h3>Montres Connectées</h3><p>Montres intelligentes et bracelets connectés pour suivre votre activité physique.</p></div>
+          </div>
+        </div>
+        <div class="scroll-indicators" id="category-indicators">
+          <div class="scroll-indicator active"></div>
+          <div class="scroll-indicator"></div>
+          <div class="scroll-indicator"></div>
+          <div class="scroll-indicator"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PRODUITS — DYNAMIQUE (Supabase · fht_products)
+     ============================================================ -->
+<section class="section products" id="produits">
+  <div class="container">
+    <div class="section-title text-center">
+      <h2>Produits Populaires 🔥</h2>
+      <p>Découvrez nos best-sellers du moment</p>
+    </div>
+
+    <div class="product-grid" id="product-grid">
+      <p style="grid-column:1/-1;text-align:center;color:#6C757D;padding:40px 0;">Chargement des produits…</p>
+    </div>
+
+    <div class="product-carousel-container" style="display: none;">
+      <div class="carousel-container">
+        <div class="carousel-wrapper" id="product-carousel"></div>
+        <div class="scroll-indicators" id="product-indicators"></div>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 50px;">
+      <a href="https://wa.me/22674958509?text=Bonjour,%20je%20voudrais%20voir%20tous%20vos%20produits" class="btn btn-primary" target="_blank">
+        <i class="fab fa-whatsapp"></i> Voir tous nos produits
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Pourquoi nous -->
+<section class="section why-us" id="pourquoi">
+  <div class="container">
+    <div class="section-title text-center">
+      <h2>Pourquoi choisir Faso High Tech ? 🇧🇫</h2>
+      <p>Découvrez les raisons qui font de nous votre partenaire high-tech de confiance</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card">
+        <i class="fas fa-shield-alt fa-3x"></i>
+        <h3>Produits authentiques</h3>
+        <p>Garantie et qualité certifiée. Tous nos produits sont neufs et accompagnés de leur garantie officielle.</p>
+      </div>
+      <div class="why-card">
+        <i class="fas fa-truck-fast fa-3x"></i>
+        <h3>Livraison rapide</h3>
+        <p>Livraison express partout à Ouagadougou en moins de 24h. Livraison possible dans les autres villes.</p>
+      </div>
+      <div class="why-card">
+        <i class="fas fa-headset fa-3x"></i>
+        <h3>Support client</h3>
+        <p>Assistance avant et après vente. Notre équipe est disponible 7j/7 pour répondre à vos questions.</p>
+      </div>
+      <div class="why-card">
+        <i class="fas fa-handshake fa-3x"></i>
+        <h3>Paiement sécurisé</h3>
+        <p>Plusieurs moyens de paiement sécurisés : Mobile money, virement bancaire, cash à la livraison.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Services -->
+<section class="section services" id="services">
+  <div class="container">
+    <div class="section-title text-center">
+      <h2>Nos Services Professionnels 🛠️</h2>
+      <p>En plus de la vente, nous proposons des services complémentaires pour répondre à tous vos besoins informatiques</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-laptop-house fa-3x"></i></div>
+        <div class="service-content">
+          <h3>Location d'Équipements</h3>
+          <p><strong>Location à court et long terme :</strong></p>
+          <ul>
+            <li>💻 Ordinateurs portables (PC/Mac)</li>
+            <li>🖥️ Ordinateurs de bureau</li>
+            <li>📽️ Vidéoprojecteurs HD & 4K</li>
+            <li>🎤 Équipements audiovisuels</li>
+          </ul>
+          <p>Idéal pour formations, conférences, événements ou besoins temporaires.</p>
+          <a href="https://wa.me/22674958509?text=Bonjour,%20je%20suis%20intéressé(e)%20par%20la%20location%20d'équipements%20informatiques" class="btn btn-primary" target="_blank">
+            <i class="fab fa-whatsapp"></i> Demander un devis
+          </a>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-tools fa-3x"></i></div>
+        <div class="service-content">
+          <h3>Maintenance Informatique</h3>
+          <p><strong>Services de maintenance complète :</strong></p>
+          <ul>
+            <li>🔧 Dépannage et réparation PC/Mac</li>
+            <li>🛡️ Installation antivirus & sécurité</li>
+            <li>☁️ Sauvegarde et récupération de données</li>
+            <li>🔌 Installation réseau et Wi-Fi</li>
+            <li>⚡ Nettoyage et optimisation</li>
+          </ul>
+          <p>Intervention à domicile ou en entreprise. Service rapide et fiable.</p>
+          <a href="https://wa.me/22674958509?text=Bonjour,%20je%20voudrais%20un%20service%20de%20maintenance%20informatique" class="btn btn-primary" target="_blank">
+            <i class="fab fa-whatsapp"></i> Demander une intervention
+          </a>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-headset fa-3x"></i></div>
+        <div class="service-content">
+          <h3>Support Technique</h3>
+          <p><strong>Assistance et conseils :</strong></p>
+          <ul>
+            <li>📞 Support téléphonique et à distance</li>
+            <li>🎓 Formation aux logiciels</li>
+            <li>💡 Conseil en équipements</li>
+            <li>📋 Contrats de maintenance annuels</li>
+          </ul>
+          <p>Nos techniciens certifiés sont disponibles pour vous accompagner.</p>
+          <a href="https://wa.me/22674958509?text=Bonjour,%20je%20voudrais%20du%20support%20technique" class="btn btn-primary" target="_blank">
+            <i class="fab fa-whatsapp"></i> Contacter le support
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- À propos -->
+<section class="section about" id="apropos">
+  <div class="container">
+    <div class="section-title">
+      <h2>À Propos de Faso High Tech</h2>
+    </div>
+    <div class="about-content">
+      <div class="about-text">
+        <p><strong>Faso High Tech</strong> est une référence dans la vente de matériel informatique et high-tech au Burkina Faso.</p>
+        <p>Notre mission est de fournir des produits technologiques de qualité à des prix compétitifs, accompagnés d'un service client exceptionnel.</p>
+        <p>Nous proposons une large gamme de produits :</p>
+        <ul style="list-style-type: disc; padding-left: 20px; margin-bottom: 20px;">
+          <li>Ordinateurs portables et de bureau</li>
+          <li>Smartphones et tablettes</li>
+          <li>Accessoires informatiques</li>
+          <li>Montres connectées et wearables</li>
+          <li>Équipements réseau et périphériques</li>
+        </ul>
+        <p><strong>Nos services professionnels :</strong></p>
+        <ul style="list-style-type: disc; padding-left: 20px; margin-bottom: 20px;">
+          <li>📍 <strong>Location d'équipements</strong> : ordinateurs et vidéoprojecteurs</li>
+          <li>🔧 <strong>Maintenance informatique</strong> : dépannage, installation, réparation</li>
+          <li>🛡️ <strong>Support technique</strong> : assistance et conseils personnalisés</li>
+        </ul>
+        <p>Notre équipe de techniciens certifiés assure également le support technique et la maintenance de vos équipements.</p>
+        <a href="https://wa.me/22674958509" class="btn btn-whatsapp" target="_blank">
+          <i class="fab fa-whatsapp"></i> Commander sur WhatsApp
+        </a>
+      </div>
+      <div class="about-image">
+        <img src="image/Propos.jpg" alt="À propos de Faso High Tech">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section class="section contact" id="contact">
+  <div class="container">
+    <div class="section-title text-center">
+      <h2>Contactez-Nous</h2>
+      <p>N'hésitez pas à nous contacter pour toute demande d'information</p>
+    </div>
+    <div class="contact-container">
+      <div class="contact-info">
+        <div class="contact-item">
+          <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div><h3>Adresse</h3><p>Koulouba juste à proximité du siège de Orange<br>Ouagadougou, Burkina Faso</p></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon"><i class="fas fa-phone"></i></div>
+          <div><h3>Téléphone</h3><p>+226 74 95 85 09<br>+226 73 85 84 46</p></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+          <div><h3>Email</h3><p>contact@fasohightech.bf<br>ventes@fasohightech.bf</p></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon"><i class="fas fa-clock"></i></div>
+          <div><h3>Horaires d'ouverture</h3><p>Lun - Ven: 8h00 - 18h00<br>Samedi: 9h00 - 13h00</p></div>
+        </div>
+      </div>
+      <div class="contact-form">
+        <form id="contactForm">
+          <input type="text" placeholder="Votre nom complet" required>
+          <input type="email" placeholder="Votre adresse email" required>
+          <input type="tel" placeholder="Votre numéro de téléphone">
+          <input type="text" placeholder="Sujet de votre message">
+          <textarea placeholder="Votre message" required></textarea>
+          <button type="submit" class="btn btn-primary">Envoyer le message</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-logo">
+        <h2>Faso <span style="color: var(--secondary-color);">High Tech</span></h2>
+        <p>Votre partenaire high-tech de confiance au Burkina Faso depuis 2018.</p>
+      </div>
+      <div class="footer-links">
+        <h3>Liens rapides</h3>
+        <ul>
+          <li><a href="#accueil">Accueil</a></li>
+          <li><a href="#categories">Catégories</a></li>
+          <li><a href="#produits">Produits</a></li>
+          <li><a href="#pourquoi">Pourquoi nous ?</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#apropos">À propos</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-social">
+        <h3>Suivez-nous</h3>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="https://wa.me/22674958509" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        </div>
+        <p style="margin-top: 20px;">Commandez directement sur WhatsApp pour un service rapide et personnalisé !</p>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>&copy; 2026 Faso High Tech. Tous droits réservés.</p>
+      <p class="footer-credit">Conçu par <a href="#" target="_blank" rel="noopener">MahmarGroup</a></p>
+    </div>
+  </div>
+</footer>
+
+<a href="https://wa.me/22674958509" class="whatsapp-float" target="_blank">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+<!-- ============ MODAL LOGIN ADMIN (triple-clic logo) ============ -->
+<div class="login-modal" id="loginModal" role="dialog" aria-modal="true">
+  <div class="login-modal__content">
+    <button class="login-modal__close" id="loginClose" aria-label="Fermer">✕</button>
+    <div class="login-modal__header">
+      <div class="login-modal__icon">🔐</div>
+      <h3>Espace Administration</h3>
+      <p>Faso High Tech</p>
+    </div>
+    <div class="login-modal__body">
+      <div>
+        <label for="adminPassword">Mot de passe</label>
+        <div style="position:relative">
+          <input type="password" id="adminPassword" placeholder="••••••••" style="padding-right:44px" autocomplete="current-password">
+          <button type="button" id="togglePassword" aria-label="Afficher"
+                  style="position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:1.1rem">👁️</button>
+        </div>
+      </div>
+      <button id="submitLogin" class="login-btn">Se connecter</button>
+      <p class="login-error" id="loginError"></p>
+    </div>
   </div>
 </div>
 
+<!-- ============ SCRIPTS ============ -->
 <script src="https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script>
-// ----- AUTH -----
-if (sessionStorage.getItem("fht_admin") !== "true"){
-  window.location.href = "index.html";
-}
+/* ============================================================
+   FASO HIGH TECH — SEULS LES PRODUITS SONT DYNAMIQUES
+   ============================================================ */
 
-const SUPABASE_URL = "https://otdiywrvzappbmjfkkyi.supabase.co";
+const SUPABASE_URL     = "https://otdiywrvzappbmjfkkyi.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im90ZGl5d3J2emFwcGJtamZra3lpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk2MTQyMDcsImV4cCI6MjA4NTE5MDIwN30.O5gHqJF1SCvpu19Z0OFHhQsT_ZmeIFbuEu-bpBZXXtY";
+const ADMIN_PASSWORD   = "mahmar2026";
+const ADMIN_REDIRECT   = "admin-fht.html";
+const WHATSAPP         = "22674958509";
+
 const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-const $ = s => document.querySelector(s);
+const $  = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c =>
   ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
-const fmt = n => new Intl.NumberFormat("fr-FR").format(n) + " FCFA";
+const fmtFCFA = n => new Intl.NumberFormat("fr-FR").format(n) + " FCFA";
 
-let PRODUCTS = [];
-
-async function load(){
-  const { data, error } = await db.from("fht_products").select("*").order("sort_order");
-  if (error){ alert("Erreur : " + error.message); return; }
-  PRODUCTS = data || [];
-  render();
+/* ---------- TEMPLATE CARTE PRODUIT ---------- */
+function productCardHTML(p){
+  const badge = p.badge_type
+    ? `<div class="badge ${esc(p.badge_type)}">${esc(p.badge_label || "")}</div>` : "";
+  const waMsg = encodeURIComponent(p.whatsapp_message || `Bonjour, je suis intéressé(e) par ${p.name}`);
+  return `
+    <div class="product-card">
+      <div class="product-image">
+        ${badge}
+        <img src="${esc(p.image_url)}" alt="${esc(p.name)}" loading="lazy">
+      </div>
+      <div class="product-content">
+        <h3 class="product-title">${esc(p.name)}</h3>
+        <p>${esc(p.description)}</p>
+        <div class="product-price">${fmtFCFA(p.price)}</div>
+        <a href="https://wa.me/${WHATSAPP}?text=${waMsg}"
+           class="btn btn-whatsapp" target="_blank" rel="noopener">
+          <i class="fab fa-whatsapp"></i> Commander
+        </a>
+      </div>
+    </div>`;
 }
 
-function render(){
-  const tbody = $("#tbody");
-  if (!PRODUCTS.length){
-    tbody.innerHTML = `<tr><td colspan="7" class="empty">Aucun produit. Clique sur "Nouveau produit".</td></tr>`;
+/* ---------- CHARGEMENT DES PRODUITS ---------- */
+async function loadProducts(){
+  const grid     = $("#product-grid");
+  const carousel = $("#product-carousel");
+  const indBox   = $("#product-indicators");
+
+  const { data, error } = await db
+    .from("fht_products")
+    .select("*")
+    .eq("active", true)
+    .order("sort_order");
+
+  if (error){
+    console.error("❌ Produits:", error);
+    if (grid) grid.innerHTML = `<p style="grid-column:1/-1;text-align:center;color:#dc2626">Erreur de chargement : ${esc(error.message)}</p>`;
     return;
   }
-  tbody.innerHTML = PRODUCTS.map(p => `
-    <tr>
-      <td><img class="thumb" src="${esc(p.image_url || "")}" alt=""></td>
-      <td><strong>${esc(p.name)}</strong></td>
-      <td>${fmt(p.price)}</td>
-      <td>${p.badge_type ? `<span class="badge ${esc(p.badge_type)}">${esc(p.badge_label||p.badge_type)}</span>` : "—"}</td>
-      <td>${p.sort_order ?? 0}</td>
-      <td>${p.active ? "✅" : `<span class="badge inactive">inactif</span>`}</td>
-      <td>
-        <div class="row-actions">
-          <button class="btn btn--ghost btn--sm" data-edit="${p.id}">✏️</button>
-          <button class="btn btn--danger btn--sm" data-del="${p.id}">🗑️</button>
-        </div>
-      </td>
-    </tr>`).join("");
+
+  const html = (data || []).map(productCardHTML).join("") ||
+               `<p style="grid-column:1/-1;text-align:center;color:#6C757D">Aucun produit pour le moment.</p>`;
+  if (grid) grid.innerHTML = html;
+  if (carousel) carousel.innerHTML = html;
+
+  if (indBox){
+    indBox.innerHTML = (data || []).map((_, i) =>
+      `<div class="scroll-indicator${i === 0 ? " active" : ""}"></div>`).join("");
+  }
+
+  console.log(`✅ ${data?.length || 0} produits chargés`);
+
+  initProductObservers();
+  bindProductCarouselIndicators();
 }
 
-function openModal(product = null){
-  $("#modalTitle").textContent = product ? "Modifier le produit" : "Nouveau produit";
-  $("#pId").value       = product?.id ?? "";
-  $("#pName").value     = product?.name ?? "";
-  $("#pDesc").value     = product?.description ?? "";
-  $("#pPrice").value    = product?.price ?? 0;
-  $("#pImg").value      = product?.image_url ?? "";
-  $("#pBadge").value    = product?.badge_type ?? "";
-  $("#pBadgeLabel").value = product?.badge_label ?? "";
-  $("#pWa").value       = product?.whatsapp_message ?? "";
-  $("#pOrder").value    = product?.sort_order ?? 0;
-  $("#pActive").checked = product?.active ?? true;
-  $("#modalBg").classList.add("open");
+/* ---------- OBSERVERS PRODUITS ---------- */
+function initProductObservers(){
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting){
+        e.target.classList.add("visible");
+        obs.unobserve(e.target);
+      }
+    });
+  }, { rootMargin: "-50px 0px -100px 0px", threshold: 0.1 });
+  $$(".product-card").forEach(card => obs.observe(card));
 }
-function closeModal(){ $("#modalBg").classList.remove("open"); $("#productForm").reset(); }
 
-$("#addBtn").onclick = () => openModal();
-$("#cancelBtn").onclick = closeModal;
-$("#modalBg").addEventListener("click", e => { if (e.target === $("#modalBg")) closeModal(); });
-
-$("#productForm").addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const id = $("#pId").value;
-  const payload = {
-    name: $("#pName").value.trim(),
-    description: $("#pDesc").value.trim() || null,
-    price: Number($("#pPrice").value || 0),
-    image_url: $("#pImg").value.trim() || null,
-    badge_type: $("#pBadge").value || null,
-    badge_label: $("#pBadgeLabel").value.trim() || null,
-    whatsapp_message: $("#pWa").value.trim() || null,
-    sort_order: Number($("#pOrder").value || 0),
-    active: $("#pActive").checked
+/* ---------- CARROUSEL MOBILE PRODUITS ---------- */
+function bindProductCarouselIndicators(){
+  if (window.innerWidth > 768) return;
+  const wrap = document.querySelector(".product-carousel-container .carousel-wrapper");
+  if (!wrap || !wrap.firstElementChild) return;
+  const step = wrap.firstElementChild.offsetWidth + 20;
+  const dots = $$("#product-indicators .scroll-indicator");
+  wrap.onscroll = () => {
+    const idx = Math.round(wrap.scrollLeft / step);
+    dots.forEach((d, i) => d.classList.toggle("active", i === idx));
   };
-  const btn = $("#saveBtn");
-  btn.disabled = true; btn.textContent = "Enregistrement…";
+  dots.forEach((dot, i) => {
+    dot.onclick = () => wrap.scrollTo({ left: i * step, behavior: "smooth" });
+  });
+}
 
-  let res;
-  if (id) res = await db.from("fht_products").update(payload).eq("id", id);
-  else    res = await db.from("fht_products").insert(payload);
+function toggleProductCarousel(){
+  const mobile   = window.innerWidth <= 768;
+  const grid     = $(".product-grid");
+  const carousel = $(".product-carousel-container");
+  if (grid)     grid.style.display     = mobile ? "none"  : "grid";
+  if (carousel) carousel.style.display = mobile ? "block" : "none";
+  if (mobile) bindProductCarouselIndicators();
+}
 
-  btn.disabled = false; btn.textContent = "Enregistrer";
+/* ---------- TYPING HERO ---------- */
+(function startTyping(){
+  const texts = [
+    "La technologie à portée de main 🚀",
+    "Ordinateurs • Téléphones • Accessoires",
+    "Location • Maintenance • Support 🔧",
+    "Qualité & Fiabilité au Burkina Faso 🇧🇫"
+  ];
+  const el = document.getElementById("typing");
+  if (!el) return;
+  let i = 0, c = 0;
+  (function type(){
+    if (c < texts[i].length){ el.textContent += texts[i][c++]; setTimeout(type, 60); }
+    else setTimeout(erase, 2000);
+  })();
+  function erase(){
+    if (c > 0){ el.textContent = texts[i].substring(0, c--); setTimeout(erase, 40); }
+    else { i = (i + 1) % texts.length; setTimeout(type, 300); }
+  }
+})();
 
-  if (res.error){ alert("Erreur : " + res.error.message); return; }
-  closeModal();
-  await load();
+/* ---------- COUNTERS ---------- */
+function animateCounters(){
+  $$(".counter").forEach(counter => {
+    const target = +counter.dataset.target || 0;
+    let count = 0;
+    const inc = Math.max(1, target / 100);
+    const tick = () => {
+      count = Math.min(target, Math.ceil(count + inc));
+      counter.textContent = count;
+      if (count < target) setTimeout(tick, 20);
+    };
+    tick();
+  });
+}
+
+/* ---------- OBSERVERS GLOBAUX ---------- */
+function initGlobalObservers(){
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const t = e.target;
+      if (t.classList.contains("section") ||
+          t.classList.contains("category-card") ||
+          t.classList.contains("why-card") ||
+          t.classList.contains("service-card")){
+        t.classList.add("visible");
+      }
+      if (t.classList.contains("stats") && !t.dataset.animated){
+        t.dataset.animated = "1";
+        animateCounters();
+      }
+    });
+  }, { rootMargin: "-50px 0px -100px 0px", threshold: 0.1 });
+  $$(".section, .category-card, .why-card, .service-card, .stats").forEach(el => obs.observe(el));
+}
+
+/* ---------- MENU MOBILE + SMOOTH SCROLL ---------- */
+(function initNav(){
+  const btn = document.querySelector(".mobile-menu-btn");
+  const nav = document.querySelector(".nav-links");
+  if (btn && nav){
+    btn.addEventListener("click", () => {
+      nav.classList.toggle("active");
+      const i = btn.querySelector("i");
+      i.classList.toggle("fa-bars");
+      i.classList.toggle("fa-times");
+    });
+    nav.querySelectorAll("a").forEach(a => a.addEventListener("click", () => {
+      nav.classList.remove("active");
+      const i = btn.querySelector("i");
+      i.classList.add("fa-bars");
+      i.classList.remove("fa-times");
+    }));
+  }
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener("click", e => {
+      const id = a.getAttribute("href");
+      if (!id || id === "#") return;
+      const t = document.querySelector(id);
+      if (!t) return;
+      e.preventDefault();
+      const hh = document.querySelector("header").offsetHeight;
+      window.scrollTo({ top: t.offsetTop - hh, behavior: "smooth" });
+    });
+  });
+})();
+
+/* ---------- CONTACT FORM (comportement original) ---------- */
+(function initContactForm(){
+  const form = document.getElementById("contactForm");
+  if (!form) return;
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    alert("Merci pour votre message ! Nous vous répondrons dans les plus brefs délais.");
+    form.reset();
+  });
+})();
+
+/* ---------- LOGIN ADMIN (triple-clic sur logo) ---------- */
+const loginModal  = document.getElementById("loginModal");
+const loginClose  = document.getElementById("loginClose");
+const adminPwd    = document.getElementById("adminPassword");
+const loginError  = document.getElementById("loginError");
+const submitLogin = document.getElementById("submitLogin");
+const togglePwd   = document.getElementById("togglePassword");
+const logoTarget  = document.getElementById("logo");
+
+let clickCount = 0, clickTimer = null;
+if (logoTarget){
+  logoTarget.addEventListener("click", (e) => {
+    clickCount++;
+    clearTimeout(clickTimer);
+    clickTimer = setTimeout(() => clickCount = 0, 800);
+    if (clickCount >= 3){
+      clickCount = 0;
+      e.preventDefault();
+      openLogin();
+    }
+  });
+}
+
+function openLogin(){
+  if (!loginModal) return;
+  loginModal.classList.add("open");
+  document.body.style.overflow = "hidden";
+  setTimeout(() => adminPwd?.focus(), 200);
+}
+function closeLogin(){
+  if (!loginModal) return;
+  loginModal.classList.remove("open");
+  document.body.style.overflow = "";
+  if (adminPwd) adminPwd.value = "";
+  if (loginError) loginError.textContent = "";
+}
+
+loginClose?.addEventListener("click", closeLogin);
+loginModal?.addEventListener("click", e => { if (e.target === loginModal) closeLogin(); });
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape" && loginModal?.classList.contains("open")) closeLogin();
 });
 
-document.addEventListener("click", async (e) => {
-  const editId = e.target.closest("[data-edit]")?.dataset.edit;
-  const delId  = e.target.closest("[data-del]")?.dataset.del;
-  if (editId){
-    const p = PRODUCTS.find(x => String(x.id) === String(editId));
-    if (p) openModal(p);
-  }
-  if (delId){
-    if (!confirm("Supprimer ce produit ?")) return;
-    const { error } = await db.from("fht_products").delete().eq("id", delId);
-    if (error) alert("Erreur : " + error.message);
-    else await load();
-  }
+togglePwd?.addEventListener("click", () => {
+  const t = adminPwd.type === "password" ? "text" : "password";
+  adminPwd.type = t;
+  togglePwd.textContent = t === "password" ? "👁️" : "🙈";
 });
 
-$("#logoutBtn").onclick = () => {
-  sessionStorage.removeItem("fht_admin");
-  window.location.href = "index.html";
-};
+function attemptLogin(){
+  if (adminPwd.value === ADMIN_PASSWORD){
+    sessionStorage.setItem("fht_admin", "true");
+    window.location.href = ADMIN_REDIRECT;
+  } else {
+    if (loginError) loginError.textContent = "Mot de passe incorrect";
+    adminPwd.value = "";
+    adminPwd.focus();
+  }
+}
+submitLogin?.addEventListener("click", attemptLogin);
+adminPwd?.addEventListener("keydown", e => { if (e.key === "Enter") attemptLogin(); });
 
-load();
+/* ---------- INIT ---------- */
+document.addEventListener("DOMContentLoaded", async () => {
+  initGlobalObservers();
+  toggleProductCarousel();
+  await loadProducts();
+  window.addEventListener("resize", toggleProductCarousel);
+});
 </script>
 </body>
 </html>
