@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin · Faso High Tech — Gestion des produits</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Roboto','Segoe UI',sans-serif}
+:root{
+  --primary:#0047AB;--primary-dark:#003788;
+  --secondary:#D4A13A;--secondary-dark:#c89730;
+  --dark:#333;--gray:#6C757D;--light:#f1f5f9;--white:#fff;
+  --danger:#dc3545;--success:#28a745;
+  --shadow:0 4px 14px rgba(0,0,0,.08);
+  --radius:10px;
+}
+body{background:var(--light);color:var(--dark);line-height:1.5;padding:24px}
+.wrap{max-width:1300px;margin:0 auto}
+
+/* ---------- Header ---------- */
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;flex-wrap:wrap;gap:14px}
+.top h1{color:var(--primary);font-size:1.5rem;font-family:'Montserrat',sans-serif}
+.top .sub{color:var(--gray);font-size:.88rem;margin-top:2px}
+.top .sub code{background:#e2e8f0;padding:2px 6px;border-radius:4px;font-size:.82rem;color:var(--primary)}
+.top-actions{display:flex;gap:10px;flex-wrap:wrap}
+
+/* ---------- Buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:10px 18px;border:none;border-radius:8px;font-weight:600;cursor:pointer;font-size:.88rem;transition:.2s;font-family:inherit}
+.btn:disabled{opacity:.6;cursor:not-allowed}
+.btn--primary{background:var(--primary);color:#fff}
+.btn--primary:hover:not(:disabled){background:var(--primary-dark)}
+.btn--secondary{background:var(--secondary);color:#fff}
+.btn--secondary:hover:not(:disabled){background:var(--secondary-dark)}
+.btn--ghost{background:#fff;color:var(--primary);border:1px solid var(--primary)}
+.btn--ghost:hover{background:var(--primary);color:#fff}
+.btn--danger{background:var(--danger);color:#fff}
+.btn--danger:hover{background:#b52d3a}
+.btn--sm{padding:6px 12px;font-size:.78rem}
+
+/* ---------- Stats cards ---------- */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:24px}
+.stat-card{background:#fff;border-radius:var(--radius);padding:18px;box-shadow:var(--shadow);border-left:4px solid var(--primary)}
+.stat-card .num{font-size:1.8rem;font-weight:700;color:var(--primary);font-family:'Montserrat',sans-serif}
+.stat-card .label{font-size:.82rem;color:var(--gray);text-transform:uppercase;letter-spacing:.03em;margin-top:2px}
+.stat-card.orange{border-left-color:var(--secondary)}
+.stat-card.orange .num{color:var(--secondary)}
+.stat-card.green{border-left-color:var(--success)}
+.stat-card.green .num{color:var(--success)}
+.stat-card.gray{border-left-color:var(--gray)}
+.stat-card.gray .num{color:var(--gray)}
+
+/* ---------- Toolbar ---------- */
+.toolbar{display:flex;justify-content:space-between;gap:14px;margin-bottom:16px;flex-wrap:wrap;align-items:center}
+.search-box{position:relative;flex:1;max-width:340px}
+.search-box input{width:100%;padding:10px 14px 10px 38px;border:1px solid #ddd;border-radius:8px;font-size:.9rem;font-family:inherit;background:#fff}
+.search-box input:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(0,71,171,.08)}
+.search-box i{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--gray);font-size:.85rem}
+.filter-badge{padding:9px 14px;border:1px solid #ddd;border-radius:8px;font-size:.85rem;background:#fff;cursor:pointer;font-family:inherit}
+.filter-badge:focus{outline:none;border-color:var(--primary)}
+
+/* ---------- Table ---------- */
+.table-wrap{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+table{width:100%;border-collapse:collapse}
+thead{background:var(--primary);color:#fff}
+th,td{padding:12px 14px;text-align:left;font-size:.88rem;border-bottom:1px solid #eef2f7;vertical-align:middle}
+th{font-weight:600;font-size:.78rem;text-transform:uppercase;letter-spacing:.05em}
+tbody tr:hover{background:#f8fafc}
+tbody tr:last-child td{border-bottom:none}
+
+img.thumb{width:56px;height:56px;object-fit:cover;border-radius:8px;border:1px solid #eef2f7;background:#f8f9fa}
+.product-name{font-weight:600;color:var(--primary);margin-bottom:2px}
+.product-desc{font-size:.78rem;color:var(--gray);display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;max-width:340px}
+
+.badge{display:inline-block;padding:3px 9px;border-radius:12px;font-size:.7rem;font-weight:700;color:#fff;white-space:nowrap}
+.badge.hot{background:var(--danger)}
+.badge.new{background:var(--success)}
+.badge.promo{background:#ffc107;color:#333}
+.badge.inactive{background:var(--gray)}
+.badge.active{background:var(--success)}
+.badge--empty{color:var(--gray);font-size:.78rem}
+
+.price{font-weight:600;color:var(--dark);white-space:nowrap}
+.order-num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:#eef2f7;color:var(--primary);font-size:.78rem;font-weight:700}
+
+.row-actions{display:flex;gap:6px;flex-wrap:nowrap}
+.icon-btn{width:32px;height:32px;border:none;border-radius:6px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;font-size:.82rem;transition:.2s;font-family:inherit}
+.icon-btn.edit{background:#eef2f7;color:var(--primary)}
+.icon-btn.edit:hover{background:var(--primary);color:#fff}
+.icon-btn.toggle{background:#fff5e6;color:var(--secondary-dark)}
+.icon-btn.toggle:hover{background:var(--secondary);color:#fff}
+.icon-btn.delete{background:#fdecee;color:var(--danger)}
+.icon-btn.delete:hover{background:var(--danger);color:#fff}
+
+.empty{padding:60px 20px;text-align:center;color:var(--gray)}
+.empty i{font-size:2.5rem;color:#cbd5e1;margin-bottom:12px;display:block}
+.empty p{margin-bottom:4px;font-weight:500}
+.empty small{font-size:.82rem}
+
+/* ---------- Modal ---------- */
+.modal-bg{position:fixed;inset:0;background:rgba(15,20,40,.6);backdrop-filter:blur(4px);display:none;align-items:flex-start;justify-content:center;padding:24px;z-index:100;overflow-y:auto}
+.modal-bg.open{display:flex}
+.modal{background:#fff;border-radius:14px;width:100%;max-width:620px;box-shadow:0 30px 80px rgba(0,0,0,.4);position:relative;margin:auto;overflow:hidden;border-top:5px solid var(--secondary)}
+.modal__header{padding:22px 24px 14px;border-bottom:1px solid #eef2f7;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.modal__header h2{color:var(--primary);font-size:1.1rem;font-family:'Montserrat',sans-serif;margin:0}
+.modal__close{width:32px;height:32px;border:none;border-radius:50%;background:#f1f5f9;color:var(--primary);cursor:pointer;font-size:.9rem;font-weight:700;transition:.2s;flex-shrink:0}
+.modal__close:hover{background:var(--secondary);color:#fff;transform:rotate(90deg)}
+
+.form{padding:20px 24px 24px;display:grid;gap:14px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.field{display:flex;flex-direction:column;gap:5px}
+.field label{font-size:.8rem;font-weight:600;color:var(--dark)}
+.field label .req{color:var(--danger);margin-left:2px}
+.field input,.field textarea,.field select{padding:10px 12px;border:1px solid #ddd;border-radius:8px;font-family:inherit;font-size:.9rem;color:var(--dark);transition:.2s;background:#fff}
+.field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(0,71,171,.08)}
+.field textarea{min-height:80px;resize:vertical}
+.field small{font-size:.74rem;color:var(--gray)}
+
+.checkbox-row{display:flex;align-items:center;gap:10px;padding:10px 12px;background:#f8fafc;border-radius:8px;border:1px solid #eef2f7}
+.checkbox-row input{width:18px;height:18px;cursor:pointer;accent-color:var(--primary)}
+.checkbox-row label{font-size:.88rem;font-weight:500;cursor:pointer;margin:0}
+
+.form-actions{display:flex;justify-content:flex-end;gap:10px;padding-top:6px;margin-top:6px;border-top:1px solid #eef2f7;padding-top:18px}
+
+/* ---------- Toasts ---------- */
+.toast{position:fixed;bottom:24px;right:24px;background:#333;color:#fff;padding:14px 20px;border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,.3);font-size:.9rem;display:flex;align-items:center;gap:10px;opacity:0;transform:translateY(20px);pointer-events:none;transition:opacity .3s,transform .3s;z-index:9999;max-width:340px}
+.toast.show{opacity:1;transform:translateY(0)}
+.toast.success{background:var(--success)}
+.toast.error{background:var(--danger)}
+.toast i{font-size:1.1rem}
+
+/* ---------- Responsive ---------- */
+@media (max-width:900px){
+  .product-desc{max-width:200px}
+}
+@media (max-width:768px){
+  body{padding:14px}
+  .top h1{font-size:1.2rem}
+  .top-actions{width:100%}
+  .top-actions .btn{flex:1}
+  th,td{padding:10px 8px;font-size:.8rem}
+  th:nth-child(5),td:nth-child(5){display:none} /* hide order col */
+  .product-desc{display:none}
+  img.thumb{width:42px;height:42px}
+  .form-row{grid-template-columns:1fr}
+  .modal__header{padding:16px}
+  .form{padding:16px}
+}
+@media (max-width:480px){
+  th:nth-child(3),td:nth-child(3){display:none} /* hide price col */
+  .icon-btn{width:28px;height:28px;font-size:.72rem}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- Header -->
+  <div class="top">
+    <div>
+      <h1><i class="fas fa-box-open"></i> Produits · Faso High Tech</h1>
+      <div class="sub">Gestion dynamique · table <code>fht_products</code></div>
+    </div>
+    <div class="top-actions">
+      <button class="btn btn--primary" id="addBtn">
+        <i class="fas fa-plus"></i> Nouveau produit
+      </button>
+      <button class="btn btn--ghost" id="refreshBtn">
+        <i class="fas fa-rotate"></i> Actualiser
+      </button>
+      <button class="btn btn--ghost" id="logoutBtn">
+        <i class="fas fa-right-from-bracket"></i> Déconnexion
+      </button>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat-card">
+      <div class="num" id="statTotal">0</div>
+      <div class="label">Total produits</div>
+    </div>
+    <div class="stat-card green">
+      <div class="num" id="statActive">0</div>
+      <div class="label">Actifs</div>
+    </div>
+    <div class="stat-card gray">
+      <div class="num" id="statInactive">0</div>
+      <div class="label">Inactifs</div>
+    </div>
+    <div class="stat-card orange">
+      <div class="num" id="statBadged">0</div>
+      <div class="label">Avec badge</div>
+    </div>
+  </div>
+
+  <!-- Toolbar -->
+  <div class="toolbar">
+    <div class="search-box">
+      <i class="fas fa-search"></i>
+      <input type="text" id="searchInput" placeholder="Rechercher un produit…">
+    </div>
+    <select class="filter-badge" id="filterSelect">
+      <option value="all">Tous les produits</option>
+      <option value="active">Actifs uniquement</option>
+      <option value="inactive">Inactifs uniquement</option>
+      <option value="hot">Badge 🔥 Best Seller</option>
+      <option value="new">Badge Nouveau</option>
+      <option value="promo">Badge Promo</option>
+    </select>
+  </div>
+
+  <!-- Table -->
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th style="width:70px">Image</th>
+          <th>Produit</th>
+          <th style="width:130px">Prix</th>
+          <th style="width:120px">Badge</th>
+          <th style="width:70px">Ordre</th>
+          <th style="width:90px">Statut</th>
+          <th style="width:120px">Actions</th>
+        </tr>
+      </thead>
+      <tbody id="tbody">
+        <tr><td colspan="7" class="empty">
+          <i class="fas fa-spinner fa-spin"></i>
+          <p>Chargement…</p>
+        </td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Modal produit -->
+<div class="modal-bg" id="modalBg">
+  <div class="modal">
+    <div class="modal__header">
+      <h2 id="modalTitle"><i class="fas fa-plus"></i> Nouveau produit</h2>
+      <button class="modal__close" id="modalClose" aria-label="Fermer">✕</button>
+    </div>
+    <form class="form" id="productForm">
+      <input type="hidden" id="pId">
+
+      <div class="field">
+        <label for="pName">Nom <span class="req">*</span></label>
+        <input id="pName" required placeholder="Ex : HP EliteBook G3 💻">
+      </div>
+
+      <div class="field">
+        <label for="pDesc">Description</label>
+        <textarea id="pDesc" placeholder="Courte description du produit…"></textarea>
+      </div>
+
+      <div class="form-row">
+        <div class="field">
+          <label for="pPrice">Prix (FCFA) <span class="req">*</span></label>
+          <input id="pPrice" type="number" min="0" step="1" required placeholder="150000">
+        </div>
+        <div class="field">
+          <label for="pOrder">Ordre d'affichage</label>
+          <input id="pOrder" type="number" value="0" step="1">
+          <small>Plus petit = en premier</small>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="pImg">Image URL</label>
+        <input id="pImg" placeholder="image/HP4.jpg ou https://…">
+        <small>Chemin local (image/xxx.jpg) ou URL Supabase Storage</small>
+      </div>
+
+      <div class="form-row">
+        <div class="field">
+          <label for="pBadge">Type de badge</label>
+          <select id="pBadge">
+            <option value="">Aucun</option>
+            <option value="hot">🔥 Best Seller</option>
+            <option value="new">Nouveau</option>
+            <option value="promo">Promo</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="pBadgeLabel">Texte du badge</label>
+          <input id="pBadgeLabel" placeholder="🔥 Best Seller">
+          <small>Laisser vide pour masquer le texte</small>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="pWa">Message WhatsApp pré-rempli</label>
+        <input id="pWa" placeholder="Bonjour, je suis intéressé(e) par…">
+      </div>
+
+      <div class="checkbox-row">
+        <input type="checkbox" id="pActive" checked>
+        <label for="pActive">Afficher ce produit sur le site</label>
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="btn btn--ghost" id="cancelBtn">Annuler</button>
+        <button type="submit" class="btn btn--primary" id="saveBtn">
+          <i class="fas fa-check"></i> Enregistrer
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<!-- Supabase SDK -->
+<script src="https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script>
+/* ============================================================
+   ADMIN · FASO HIGH TECH — Gestion des produits
+   Table : fht_products
+   ============================================================ */
+
+/* ---------- AUTH GUARD ---------- */
+if (sessionStorage.getItem("fht_admin") !== "true"){
+  window.location.href = "index.html";
+}
+
+/* ---------- SUPABASE CONFIG ---------- */
+const SUPABASE_URL      = "https://otdiywrvzappbmjfkkyi.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im90ZGl5d3J2emFwcGJtamZra3lpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk2MTQyMDcsImV4cCI6MjA4NTE5MDIwN30.O5gHqJF1SCvpu19Z0OFHhQsT_ZmeIFbuEu-bpBZXXtY";
+
+const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+/* ---------- HELPERS ---------- */
+const $  = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c =>
+  ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
+const fmt = n => new Intl.NumberFormat("fr-FR").format(Number(n) || 0) + " FCFA";
+
+/* ---------- STATE ---------- */
+let PRODUCTS = [];
+let CURRENT_FILTER = "all";
+let CURRENT_SEARCH = "";
+
+/* ---------- TOAST ---------- */
+let toastTimer = null;
+function toast(msg, type = "success"){
+  const el = $("#toast");
+  el.className = "toast " + type;
+  el.innerHTML = `<i class="fas fa-${type === "success" ? "circle-check" : "circle-exclamation"}"></i><span>${esc(msg)}</span>`;
+  el.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove("show"), 3000);
+}
+
+/* ---------- DATA LOAD ---------- */
+async function load(){
+  const tbody = $("#tbody");
+  tbody.innerHTML = `<tr><td colspan="7" class="empty"><i class="fas fa-spinner fa-spin"></i><p>Chargement…</p></td></tr>`;
+
+  const { data, error } = await db
+    .from("fht_products")
+    .select("*")
+    .order("sort_order", { ascending: true })
+    .order("id", { ascending: false });
+
+  if (error){
+    console.error(error);
+    tbody.innerHTML = `<tr><td colspan="7" class="empty">
+      <i class="fas fa-triangle-exclamation" style="color:#dc3545"></i>
+      <p>Erreur de chargement</p>
+      <small>${esc(error.message)}</small>
+    </td></tr>`;
+    toast("Erreur : " + error.message, "error");
+    return;
+  }
+
+  PRODUCTS = data || [];
+  updateStats();
+  render();
+}
+
+/* ---------- STATS ---------- */
+function updateStats(){
+  $("#statTotal").textContent    = PRODUCTS.length;
+  $("#statActive").textContent   = PRODUCTS.filter(p => p.active).length;
+  $("#statInactive").textContent = PRODUCTS.filter(p => !p.active).length;
+  $("#statBadged").textContent   = PRODUCTS.filter(p => p.badge_type).length;
+}
+
+/* ---------- FILTER ---------- */
+function getFilteredProducts(){
+  let list = [...PRODUCTS];
+  // Search
+  if (CURRENT_SEARCH){
+    const q = CURRENT_SEARCH.toLowerCase();
+    list = list.filter(p =>
+      (p.name || "").toLowerCase().includes(q) ||
+      (p.description || "").toLowerCase().includes(q)
+    );
+  }
+  // Filter
+  if (CURRENT_FILTER === "active")   list = list.filter(p => p.active);
+  if (CURRENT_FILTER === "inactive") list = list.filter(p => !p.active);
+  if (CURRENT_FILTER === "hot")      list = list.filter(p => p.badge_type === "hot");
+  if (CURRENT_FILTER === "new")      list = list.filter(p => p.badge_type === "new");
+  if (CURRENT_FILTER === "promo")    list = list.filter(p => p.badge_type === "promo");
+  return list;
+}
+
+/* ---------- RENDER TABLE ---------- */
+function render(){
+  const tbody = $("#tbody");
+  const list = getFilteredProducts();
+
+  if (!list.length){
+    tbody.innerHTML = `<tr><td colspan="7" class="empty">
+      <i class="fas fa-box-open"></i>
+      <p>${PRODUCTS.length ? "Aucun produit ne correspond à ta recherche" : "Aucun produit pour le moment"}</p>
+      <small>${PRODUCTS.length ? "Essaie un autre filtre ou efface la recherche." : "Clique sur « Nouveau produit » pour commencer."}</small>
+    </td></tr>`;
+    return;
+  }
+
+  tbody.innerHTML = list.map(p => {
+    const badge = p.badge_type
+      ? `<span class="badge ${esc(p.badge_type)}">${esc(p.badge_label || p.badge_type)}</span>`
+      : `<span class="badge--empty">—</span>`;
+    const status = p.active
+      ? `<span class="badge active">Actif</span>`
+      : `<span class="badge inactive">Inactif</span>`;
+    return `
+      <tr data-id="${p.id}">
+        <td><img class="thumb" src="${esc(p.image_url || "image/Logo.jpg")}" alt="" loading="lazy"></td>
+        <td>
+          <div class="product-name">${esc(p.name)}</div>
+          <div class="product-desc">${esc(p.description || "")}</div>
+        </td>
+        <td><span class="price">${fmt(p.price)}</span></td>
+        <td>${badge}</td>
+        <td><span class="order-num">${p.sort_order ?? 0}</span></td>
+        <td>${status}</td>
+        <td>
+          <div class="row-actions">
+            <button class="icon-btn edit"   title="Modifier"    data-edit="${p.id}"><i class="fas fa-pen"></i></button>
+            <button class="icon-btn toggle" title="Activer / Désactiver" data-toggle="${p.id}"><i class="fas fa-power-off"></i></button>
+            <button class="icon-btn delete" title="Supprimer"   data-del="${p.id}"><i class="fas fa-trash"></i></button>
+          </div>
+        </td>
+      </tr>`;
+  }).join("");
+}
+
+/* ---------- MODAL OPEN / CLOSE ---------- */
+function openModal(product = null){
+  $("#modalTitle").innerHTML = product
+    ? '<i class="fas fa-pen"></i> Modifier le produit'
+    : '<i class="fas fa-plus"></i> Nouveau produit';
+
+  $("#pId").value         = product?.id ?? "";
+  $("#pName").value       = product?.name ?? "";
+  $("#pDesc").value       = product?.description ?? "";
+  $("#pPrice").value      = product?.price ?? "";
+  $("#pImg").value        = product?.image_url ?? "";
+  $("#pBadge").value      = product?.badge_type ?? "";
+  $("#pBadgeLabel").value = product?.badge_label ?? "";
+  $("#pWa").value         = product?.whatsapp_message ?? "";
+  $("#pOrder").value      = product?.sort_order ?? 0;
+  $("#pActive").checked   = product?.active ?? true;
+
+  $("#modalBg").classList.add("open");
+  document.body.style.overflow = "hidden";
+  setTimeout(() => $("#pName").focus(), 120);
+}
+
+function closeModal(){
+  $("#modalBg").classList.remove("open");
+  document.body.style.overflow = "";
+  $("#productForm").reset();
+  $("#pId").value = "";
+}
+
+/* ---------- FORM SUBMIT (create / update) ---------- */
+$("#productForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const id = $("#pId").value;
+  const payload = {
+    name:             $("#pName").value.trim(),
+    description:      $("#pDesc").value.trim() || null,
+    price:            Number($("#pPrice").value || 0),
+    image_url:        $("#pImg").value.trim() || null,
+    badge_type:       $("#pBadge").value || null,
+    badge_label:      $("#pBadgeLabel").value.trim() || null,
+    whatsapp_message: $("#pWa").value.trim() || null,
+    sort_order:       Number($("#pOrder").value || 0),
+    active:           $("#pActive").checked
+  };
+
+  if (!payload.name){
+    toast("Le nom est obligatoire", "error");
+    return;
+  }
+
+  const btn = $("#saveBtn");
+  const originalHTML = btn.innerHTML;
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enregistrement…';
+
+  let res;
+  if (id){
+    res = await db.from("fht_products").update(payload).eq("id", id);
+  } else {
+    res = await db.from("fht_products").insert(payload);
+  }
+
+  btn.disabled = false;
+  btn.innerHTML = originalHTML;
+
+  if (res.error){
+    toast("Erreur : " + res.error.message, "error");
+    console.error(res.error);
+    return;
+  }
+
+  toast(id ? "Produit mis à jour ✅" : "Produit ajouté ✅", "success");
+  closeModal();
+  await load();
+});
+
+/* ---------- CLICK DELEGATION ---------- */
+document.addEventListener("click", async (e) => {
+  // Edit
+  const editId = e.target.closest("[data-edit]")?.dataset.edit;
+  if (editId){
+    const p = PRODUCTS.find(x => String(x.id) === String(editId));
+    if (p) openModal(p);
+    return;
+  }
+
+  // Toggle actif
+  const toggleId = e.target.closest("[data-toggle]")?.dataset.toggle;
+  if (toggleId){
+    const p = PRODUCTS.find(x => String(x.id) === String(toggleId));
+    if (!p) return;
+    const { error } = await db.from("fht_products").update({ active: !p.active }).eq("id", toggleId);
+    if (error) return toast("Erreur : " + error.message, "error");
+    toast(!p.active ? "Produit activé" : "Produit désactivé", "success");
+    await load();
+    return;
+  }
+
+  // Delete
+  const delId = e.target.closest("[data-del]")?.dataset.del;
+  if (delId){
+    const p = PRODUCTS.find(x => String(x.id) === String(delId));
+    if (!p) return;
+    if (!confirm(`Supprimer définitivement « ${p.name} » ?`)) return;
+    const { error } = await db.from("fht_products").delete().eq("id", delId);
+    if (error) return toast("Erreur : " + error.message, "error");
+    toast("Produit supprimé", "success");
+    await load();
+    return;
+  }
+});
+
+/* ---------- BUTTONS ---------- */
+$("#addBtn").onclick     = () => openModal();
+$("#cancelBtn").onclick  = closeModal;
+$("#modalClose").onclick = closeModal;
+$("#modalBg").addEventListener("click", e => { if (e.target === $("#modalBg")) closeModal(); });
+
+$("#refreshBtn").onclick = () => { load(); toast("Actualisé", "success"); };
+
+$("#logoutBtn").onclick = () => {
+  if (!confirm("Se déconnecter de l'espace admin ?")) return;
+  sessionStorage.removeItem("fht_admin");
+  window.location.href = "index.html";
+};
+
+/* ---------- SEARCH & FILTER ---------- */
+$("#searchInput").addEventListener("input", e => {
+  CURRENT_SEARCH = e.target.value.trim();
+  render();
+});
+
+$("#filterSelect").addEventListener("change", e => {
+  CURRENT_FILTER = e.target.value;
+  render();
+});
+
+/* ---------- KEYBOARD ---------- */
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape" && $("#modalBg").classList.contains("open")) closeModal();
+});
+
+/* ---------- INIT ---------- */
+load();
+</script>
+</body>
+</html>
