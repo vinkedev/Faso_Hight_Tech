@@ -11,7 +11,7 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--primary-color:#0047AB;--secondary-color:#D4A13A;--dark-color:#333333;--light-color:#F8F9FA;--gray-color:#6C757D;--white:#FFFFFF;--shadow:0 4px 12px rgba(0,0,0,0.1);--border-radius:8px;--transition:all 0.3s ease;}
-body{font-family:'Roboto',sans-serif;color:var(--dark-color);line-height:1.6;background-color:var(--light-color);animation:fadeIn 1s ease-out}
+body{font-family:'Roboto',sans-serif;color:var(--dark-color);line-height:1.6;background-color:var(--light-color);animation:fadeIn 1s ease-out;overflow-x:hidden;overscroll-behavior-x:none}
 h1,h2,h3,h4{font-family:'Montserrat',sans-serif;font-weight:700;line-height:1.2;margin-bottom:1rem}
 h1{font-size:2.8rem}
 h2{font-size:2.2rem;color:var(--primary-color);position:relative;padding-bottom:10px}
@@ -141,7 +141,7 @@ footer{background-color:var(--dark-color);color:var(--white);padding:60px 0 30px
 .footer-credit{margin-top:8px;font-size:0.9rem;color:rgba(255,255,255,0.55);letter-spacing:0.02em}
 .footer-credit a{color:var(--secondary-color);font-weight:700;position:relative;display:inline-block;transition:color 0.3s ease}
 
-/* ==== LOGIN MODAL ADMIN (nouveau) ==== */
+/* ==== LOGIN MODAL ADMIN ==== */
 .login-modal{position:fixed;inset:0;background:rgba(20,25,45,.78);backdrop-filter:blur(8px);z-index:99999;display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;visibility:hidden;transition:opacity .3s ease,visibility .3s ease}
 .login-modal.open{opacity:1;visibility:visible}
 .login-modal__content{background:#fff;border-radius:18px;width:100%;max-width:400px;position:relative;box-shadow:0 30px 80px rgba(0,0,0,.4);border-top:6px solid var(--secondary-color);overflow:hidden}
@@ -186,7 +186,7 @@ footer{background-color:var(--dark-color);color:var(--white);padding:60px 0 30px
   .category-grid,.product-grid{display:none!important}
   .category-carousel-container,.product-carousel-container{display:block!important}
   .carousel-container{position:relative;overflow:visible}
-  .carousel-wrapper{display:flex;gap:20px;padding:10px 20px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;padding-bottom:20px;margin-bottom:10px}
+  .carousel-wrapper{display:flex;gap:20px;padding:10px 20px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;touch-action:pan-x;padding-bottom:20px;margin-bottom:10px}
   .carousel-wrapper::-webkit-scrollbar{display:none}
   .carousel-wrapper{-ms-overflow-style:none;scrollbar-width:none}
   .carousel-wrapper .category-card,.carousel-wrapper .product-card{flex:0 0 calc(85vw - 40px);min-width:calc(85vw - 40px);scroll-snap-align:start;transform:none;opacity:1;box-shadow:var(--shadow);margin:0;animation:none;transition:none}
@@ -344,9 +344,7 @@ footer{background-color:var(--dark-color);color:var(--white);padding:60px 0 30px
   </div>
 </section>
 
-<!-- ============================================================
-     PRODUITS — DYNAMIQUE (Supabase · fht_products)
-     ============================================================ -->
+<!-- PRODUITS — DYNAMIQUE -->
 <section class="section products" id="produits">
   <div class="container">
     <div class="section-title text-center">
@@ -587,7 +585,7 @@ footer{background-color:var(--dark-color);color:var(--white);padding:60px 0 30px
   <i class="fab fa-whatsapp"></i>
 </a>
 
-<!-- ============ MODAL LOGIN ADMIN (triple-clic logo) ============ -->
+<!-- MODAL LOGIN ADMIN -->
 <div class="login-modal" id="loginModal" role="dialog" aria-modal="true">
   <div class="login-modal__content">
     <button class="login-modal__close" id="loginClose" aria-label="Fermer">✕</button>
@@ -611,18 +609,17 @@ footer{background-color:var(--dark-color);color:var(--white);padding:60px 0 30px
   </div>
 </div>
 
-<!-- ============ SCRIPTS ============ -->
 <script src="https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script>
 /* ============================================================
    FASO HIGH TECH — SEULS LES PRODUITS SONT DYNAMIQUES
    ============================================================ */
 
-const SUPABASE_URL     = "https://otdiywrvzappbmjfkkyi.supabase.co";
+const SUPABASE_URL      = "https://otdiywrvzappbmjfkkyi.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im90ZGl5d3J2emFwcGJtamZra3lpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk2MTQyMDcsImV4cCI6MjA4NTE5MDIwN30.O5gHqJF1SCvpu19Z0OFHhQsT_ZmeIFbuEu-bpBZXXtY";
-const ADMIN_PASSWORD   = "mahmar2026";
-const ADMIN_REDIRECT   = "admin-fht.html";
-const WHATSAPP         = "22674958509";
+const ADMIN_PASSWORD    = "FasoHighTech@2026";
+const ADMIN_REDIRECT    = "admin-fht.html";
+const WHATSAPP          = "22674958509";
 
 const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
@@ -815,7 +812,7 @@ function initGlobalObservers(){
   });
 })();
 
-/* ---------- CONTACT FORM (comportement original) ---------- */
+/* ---------- CONTACT FORM ---------- */
 (function initContactForm(){
   const form = document.getElementById("contactForm");
   if (!form) return;
