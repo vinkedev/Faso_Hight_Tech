@@ -30,15 +30,10 @@ body{background:var(--light);color:var(--dark);line-height:1.5;padding:24px}
 .btn:disabled{opacity:.6;cursor:not-allowed}
 .btn--primary{background:var(--primary);color:#fff}
 .btn--primary:hover:not(:disabled){background:var(--primary-dark)}
-.btn--secondary{background:var(--secondary);color:#fff}
-.btn--secondary:hover:not(:disabled){background:var(--secondary-dark)}
 .btn--ghost{background:#fff;color:var(--primary);border:1px solid var(--primary)}
 .btn--ghost:hover{background:var(--primary);color:#fff}
-.btn--danger{background:var(--danger);color:#fff}
-.btn--danger:hover{background:#b52d3a}
-.btn--sm{padding:6px 12px;font-size:.78rem}
 
-/* ---------- Stats cards ---------- */
+/* ---------- Stats ---------- */
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:24px}
 .stat-card{background:#fff;border-radius:var(--radius);padding:18px;box-shadow:var(--shadow);border-left:4px solid var(--primary)}
 .stat-card .num{font-size:1.8rem;font-weight:700;color:var(--primary);font-family:'Montserrat',sans-serif}
@@ -69,6 +64,8 @@ tbody tr:hover{background:#f8fafc}
 tbody tr:last-child td{border-bottom:none}
 
 img.thumb{width:56px;height:56px;object-fit:cover;border-radius:8px;border:1px solid #eef2f7;background:#f8f9fa}
+.thumb-empty{width:56px;height:56px;border-radius:8px;border:1px solid #eef2f7;background:#f8f9fa;display:flex;align-items:center;justify-content:center;color:#cbd5e1;font-size:1.2rem}
+
 .product-name{font-weight:600;color:var(--primary);margin-bottom:2px}
 .product-desc{font-size:.78rem;color:var(--gray);display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;max-width:340px}
 
@@ -100,7 +97,7 @@ img.thumb{width:56px;height:56px;object-fit:cover;border-radius:8px;border:1px s
 /* ---------- Modal ---------- */
 .modal-bg{position:fixed;inset:0;background:rgba(15,20,40,.6);backdrop-filter:blur(4px);display:none;align-items:flex-start;justify-content:center;padding:24px;z-index:100;overflow-y:auto}
 .modal-bg.open{display:flex}
-.modal{background:#fff;border-radius:14px;width:100%;max-width:620px;box-shadow:0 30px 80px rgba(0,0,0,.4);position:relative;margin:auto;overflow:hidden;border-top:5px solid var(--secondary)}
+.modal{background:#fff;border-radius:14px;width:100%;max-width:640px;box-shadow:0 30px 80px rgba(0,0,0,.4);position:relative;margin:auto;overflow:hidden;border-top:5px solid var(--secondary)}
 .modal__header{padding:22px 24px 14px;border-bottom:1px solid #eef2f7;display:flex;justify-content:space-between;align-items:center;gap:12px}
 .modal__header h2{color:var(--primary);font-size:1.1rem;font-family:'Montserrat',sans-serif;margin:0}
 .modal__close{width:32px;height:32px;border:none;border-radius:50%;background:#f1f5f9;color:var(--primary);cursor:pointer;font-size:.9rem;font-weight:700;transition:.2s;flex-shrink:0}
@@ -111,18 +108,36 @@ img.thumb{width:56px;height:56px;object-fit:cover;border-radius:8px;border:1px s
 .field{display:flex;flex-direction:column;gap:5px}
 .field label{font-size:.8rem;font-weight:600;color:var(--dark)}
 .field label .req{color:var(--danger);margin-left:2px}
-.field input,.field textarea,.field select{padding:10px 12px;border:1px solid #ddd;border-radius:8px;font-family:inherit;font-size:.9rem;color:var(--dark);transition:.2s;background:#fff}
+.field input:not([type="file"]),.field textarea,.field select{padding:10px 12px;border:1px solid #ddd;border-radius:8px;font-family:inherit;font-size:.9rem;color:var(--dark);transition:.2s;background:#fff}
 .field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(0,71,171,.08)}
 .field textarea{min-height:80px;resize:vertical}
 .field small{font-size:.74rem;color:var(--gray)}
+
+/* ---------- Image upload ---------- */
+.img-upload-block{display:grid;gap:10px}
+.file-input-wrap{position:relative;border:2px dashed #d0d7e2;border-radius:10px;padding:18px;text-align:center;cursor:pointer;transition:.2s;background:#fafbfd}
+.file-input-wrap:hover{border-color:var(--primary);background:#f0f6ff}
+.file-input-wrap.dragover{border-color:var(--primary);background:#e6f0ff}
+.file-input-wrap input[type="file"]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.file-input-wrap i{font-size:1.7rem;color:var(--primary);margin-bottom:6px;display:block}
+.file-input-wrap .label{font-weight:600;color:var(--primary);font-size:.88rem;margin-bottom:2px}
+.file-input-wrap .hint{font-size:.74rem;color:var(--gray)}
+
+.url-row{display:flex;align-items:center;gap:8px}
+.url-row .field{flex:1;margin:0}
+
+.img-preview{display:none;margin-top:8px;position:relative;width:fit-content}
+.img-preview img{width:130px;height:130px;object-fit:cover;border-radius:10px;border:2px solid #eef2f7;display:block;background:#f8f9fa}
+.img-preview .btn-clear{position:absolute;top:-8px;right:-8px;width:26px;height:26px;border-radius:50%;background:var(--danger);color:#fff;border:2px solid #fff;cursor:pointer;font-size:.72rem;display:flex;align-items:center;justify-content:center;transition:.2s}
+.img-preview .btn-clear:hover{transform:scale(1.15)}
 
 .checkbox-row{display:flex;align-items:center;gap:10px;padding:10px 12px;background:#f8fafc;border-radius:8px;border:1px solid #eef2f7}
 .checkbox-row input{width:18px;height:18px;cursor:pointer;accent-color:var(--primary)}
 .checkbox-row label{font-size:.88rem;font-weight:500;cursor:pointer;margin:0}
 
-.form-actions{display:flex;justify-content:flex-end;gap:10px;padding-top:6px;margin-top:6px;border-top:1px solid #eef2f7;padding-top:18px}
+.form-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:6px;border-top:1px solid #eef2f7;padding-top:18px}
 
-/* ---------- Toasts ---------- */
+/* ---------- Toast ---------- */
 .toast{position:fixed;bottom:24px;right:24px;background:#333;color:#fff;padding:14px 20px;border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,.3);font-size:.9rem;display:flex;align-items:center;gap:10px;opacity:0;transform:translateY(20px);pointer-events:none;transition:opacity .3s,transform .3s;z-index:9999;max-width:340px}
 .toast.show{opacity:1;transform:translateY(0)}
 .toast.success{background:var(--success)}
@@ -139,15 +154,16 @@ img.thumb{width:56px;height:56px;object-fit:cover;border-radius:8px;border:1px s
   .top-actions{width:100%}
   .top-actions .btn{flex:1}
   th,td{padding:10px 8px;font-size:.8rem}
-  th:nth-child(5),td:nth-child(5){display:none} /* hide order col */
+  th:nth-child(5),td:nth-child(5){display:none}
   .product-desc{display:none}
-  img.thumb{width:42px;height:42px}
+  img.thumb,.thumb-empty{width:42px;height:42px}
   .form-row{grid-template-columns:1fr}
   .modal__header{padding:16px}
   .form{padding:16px}
+  .url-row{flex-direction:column;align-items:stretch}
 }
 @media (max-width:480px){
-  th:nth-child(3),td:nth-child(3){display:none} /* hide price col */
+  th:nth-child(3),td:nth-child(3){display:none}
   .icon-btn{width:28px;height:28px;font-size:.72rem}
 }
 </style>
@@ -155,46 +171,28 @@ img.thumb{width:56px;height:56px;object-fit:cover;border-radius:8px;border:1px s
 <body>
 <div class="wrap">
 
-  <!-- Header -->
+  <!-- HEADER -->
   <div class="top">
     <div>
       <h1><i class="fas fa-box-open"></i> Produits · Faso High Tech</h1>
-      <div class="sub">Gestion dynamique · table <code>fht_products</code></div>
+      <div class="sub">Table <code>fht_products</code> · Images dans <code>fht-images</code></div>
     </div>
     <div class="top-actions">
-      <button class="btn btn--primary" id="addBtn">
-        <i class="fas fa-plus"></i> Nouveau produit
-      </button>
-      <button class="btn btn--ghost" id="refreshBtn">
-        <i class="fas fa-rotate"></i> Actualiser
-      </button>
-      <button class="btn btn--ghost" id="logoutBtn">
-        <i class="fas fa-right-from-bracket"></i> Déconnexion
-      </button>
+      <button class="btn btn--primary" id="addBtn"><i class="fas fa-plus"></i> Nouveau produit</button>
+      <button class="btn btn--ghost" id="refreshBtn"><i class="fas fa-rotate"></i> Actualiser</button>
+      <button class="btn btn--ghost" id="logoutBtn"><i class="fas fa-right-from-bracket"></i> Déconnexion</button>
     </div>
   </div>
 
-  <!-- Stats -->
+  <!-- STATS -->
   <div class="stats">
-    <div class="stat-card">
-      <div class="num" id="statTotal">0</div>
-      <div class="label">Total produits</div>
-    </div>
-    <div class="stat-card green">
-      <div class="num" id="statActive">0</div>
-      <div class="label">Actifs</div>
-    </div>
-    <div class="stat-card gray">
-      <div class="num" id="statInactive">0</div>
-      <div class="label">Inactifs</div>
-    </div>
-    <div class="stat-card orange">
-      <div class="num" id="statBadged">0</div>
-      <div class="label">Avec badge</div>
-    </div>
+    <div class="stat-card"><div class="num" id="statTotal">0</div><div class="label">Total produits</div></div>
+    <div class="stat-card green"><div class="num" id="statActive">0</div><div class="label">Actifs</div></div>
+    <div class="stat-card gray"><div class="num" id="statInactive">0</div><div class="label">Inactifs</div></div>
+    <div class="stat-card orange"><div class="num" id="statBadged">0</div><div class="label">Avec badge</div></div>
   </div>
 
-  <!-- Toolbar -->
+  <!-- TOOLBAR -->
   <div class="toolbar">
     <div class="search-box">
       <i class="fas fa-search"></i>
@@ -210,7 +208,7 @@ img.thumb{width:56px;height:56px;object-fit:cover;border-radius:8px;border:1px s
     </select>
   </div>
 
-  <!-- Table -->
+  <!-- TABLE -->
   <div class="table-wrap">
     <table>
       <thead>
@@ -226,15 +224,15 @@ img.thumb{width:56px;height:56px;object-fit:cover;border-radius:8px;border:1px s
       </thead>
       <tbody id="tbody">
         <tr><td colspan="7" class="empty">
-          <i class="fas fa-spinner fa-spin"></i>
-          <p>Chargement…</p>
+          <i class="fas fa-spinner fa-spin"></i><p>Chargement…</p>
         </td></tr>
       </tbody>
     </table>
   </div>
+
 </div>
 
-<!-- Modal produit -->
+<!-- MODAL PRODUIT -->
 <div class="modal-bg" id="modalBg">
   <div class="modal">
     <div class="modal__header">
@@ -266,10 +264,32 @@ img.thumb{width:56px;height:56px;object-fit:cover;border-radius:8px;border:1px s
         </div>
       </div>
 
+      <!-- IMAGE -->
       <div class="field">
-        <label for="pImg">Image URL</label>
-        <input id="pImg" placeholder="image/HP4.jpg ou https://…">
-        <small>Chemin local (image/xxx.jpg) ou URL Supabase Storage</small>
+        <label>Image du produit</label>
+        <div class="img-upload-block">
+
+          <div class="file-input-wrap" id="fileDrop">
+            <input type="file" id="pImgFile" accept="image/*">
+            <i class="fas fa-cloud-arrow-up"></i>
+            <div class="label">Clique ou glisse une image ici</div>
+            <div class="hint">JPG · PNG · WEBP · GIF — 5 Mo max</div>
+          </div>
+
+          <div class="url-row">
+            <div class="field">
+              <input id="pImg" placeholder="… ou colle une URL d'image existante">
+            </div>
+          </div>
+
+          <div class="img-preview" id="imgPreview">
+            <img id="imgPreviewEl" src="" alt="Aperçu">
+            <button type="button" class="btn-clear" id="imgClear" title="Retirer l'image">
+              <i class="fas fa-xmark"></i>
+            </button>
+          </div>
+
+        </div>
       </div>
 
       <div class="form-row">
@@ -309,15 +329,15 @@ img.thumb{width:56px;height:56px;object-fit:cover;border-radius:8px;border:1px s
   </div>
 </div>
 
-<!-- Toast -->
+<!-- TOAST -->
 <div class="toast" id="toast"></div>
 
-<!-- Supabase SDK -->
+<!-- SUPABASE SDK -->
 <script src="https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script>
 /* ============================================================
-   ADMIN · FASO HIGH TECH — Gestion des produits
-   Table : fht_products
+   ADMIN · FASO HIGH TECH
+   Table : fht_products | Bucket : fht-images (créé manuellement)
    ============================================================ */
 
 /* ---------- AUTH GUARD ---------- */
@@ -329,11 +349,11 @@ if (sessionStorage.getItem("fht_admin") !== "true"){
 const SUPABASE_URL      = "https://otdiywrvzappbmjfkkyi.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im90ZGl5d3J2emFwcGJtamZra3lpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk2MTQyMDcsImV4cCI6MjA4NTE5MDIwN30.O5gHqJF1SCvpu19Z0OFHhQsT_ZmeIFbuEu-bpBZXXtY";
 
+const BUCKET = "fht-images";
 const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 /* ---------- HELPERS ---------- */
 const $  = s => document.querySelector(s);
-const $$ = s => [...document.querySelectorAll(s)];
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c =>
   ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
 const fmt = n => new Intl.NumberFormat("fr-FR").format(Number(n) || 0) + " FCFA";
@@ -354,7 +374,96 @@ function toast(msg, type = "success"){
   toastTimer = setTimeout(() => el.classList.remove("show"), 3000);
 }
 
-/* ---------- DATA LOAD ---------- */
+/* ---------- UPLOAD IMAGE → STORAGE ---------- */
+async function uploadImage(file){
+  const allowed = ["image/jpeg","image/png","image/webp","image/gif"];
+  if (!allowed.includes(file.type)){
+    throw new Error("Format non supporté (JPG, PNG, WEBP, GIF uniquement)");
+  }
+  if (file.size > 5 * 1024 * 1024){
+    throw new Error("Image trop lourde (5 Mo max)");
+  }
+
+  const ext = (file.name.split(".").pop() || "jpg").toLowerCase().replace(/[^a-z0-9]/g, "");
+  const safeName = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
+  const path = `products/${safeName}`;
+
+  const { error } = await db.storage.from(BUCKET).upload(path, file, {
+    cacheControl: "3600",
+    upsert: false,
+    contentType: file.type
+  });
+  if (error) throw error;
+
+  const { data } = db.storage.from(BUCKET).getPublicUrl(path);
+  return data.publicUrl;
+}
+
+/* ---------- SUPPRIMER IMAGE DU STORAGE ---------- */
+async function deleteImageFromStorage(imageUrl){
+  if (!imageUrl) return;
+  const marker = `/storage/v1/object/public/${BUCKET}/`;
+  const idx = imageUrl.indexOf(marker);
+  if (idx === -1) return; // pas une URL de notre bucket → on ne touche pas
+  const path = imageUrl.substring(idx + marker.length);
+  try {
+    const { error } = await db.storage.from(BUCKET).remove([path]);
+    if (error) console.warn("Suppression image:", error.message);
+  } catch(e){
+    console.warn("Suppression image:", e);
+  }
+}
+
+/* ---------- APERÇU IMAGE ---------- */
+function getPreviewSource(){
+  const file = $("#pImgFile").files[0];
+  if (file) return URL.createObjectURL(file);
+  const url = $("#pImg").value.trim();
+  if (url) return url;
+  return null;
+}
+function updatePreview(){
+  const src = getPreviewSource();
+  if (src){
+    $("#imgPreviewEl").src = src;
+    $("#imgPreview").style.display = "block";
+  } else {
+    $("#imgPreview").style.display = "none";
+    $("#imgPreviewEl").src = "";
+  }
+}
+
+$("#pImgFile").addEventListener("change", updatePreview);
+$("#pImg").addEventListener("input", updatePreview);
+$("#imgClear").addEventListener("click", () => {
+  $("#pImgFile").value = "";
+  $("#pImg").value = "";
+  updatePreview();
+});
+
+/* Drag & drop */
+["dragover","dragenter"].forEach(ev => {
+  $("#fileDrop").addEventListener(ev, e => {
+    e.preventDefault();
+    $("#fileDrop").classList.add("dragover");
+  });
+});
+["dragleave","drop"].forEach(ev => {
+  $("#fileDrop").addEventListener(ev, e => {
+    e.preventDefault();
+    $("#fileDrop").classList.remove("dragover");
+  });
+});
+$("#fileDrop").addEventListener("drop", e => {
+  const file = e.dataTransfer.files[0];
+  if (!file) return;
+  const dt = new DataTransfer();
+  dt.items.add(file);
+  $("#pImgFile").files = dt.files;
+  updatePreview();
+});
+
+/* ---------- LOAD ---------- */
 async function load(){
   const tbody = $("#tbody");
   tbody.innerHTML = `<tr><td colspan="7" class="empty"><i class="fas fa-spinner fa-spin"></i><p>Chargement…</p></td></tr>`;
@@ -369,8 +478,7 @@ async function load(){
     console.error(error);
     tbody.innerHTML = `<tr><td colspan="7" class="empty">
       <i class="fas fa-triangle-exclamation" style="color:#dc3545"></i>
-      <p>Erreur de chargement</p>
-      <small>${esc(error.message)}</small>
+      <p>Erreur de chargement</p><small>${esc(error.message)}</small>
     </td></tr>`;
     toast("Erreur : " + error.message, "error");
     return;
@@ -381,7 +489,6 @@ async function load(){
   render();
 }
 
-/* ---------- STATS ---------- */
 function updateStats(){
   $("#statTotal").textContent    = PRODUCTS.length;
   $("#statActive").textContent   = PRODUCTS.filter(p => p.active).length;
@@ -389,10 +496,8 @@ function updateStats(){
   $("#statBadged").textContent   = PRODUCTS.filter(p => p.badge_type).length;
 }
 
-/* ---------- FILTER ---------- */
 function getFilteredProducts(){
   let list = [...PRODUCTS];
-  // Search
   if (CURRENT_SEARCH){
     const q = CURRENT_SEARCH.toLowerCase();
     list = list.filter(p =>
@@ -400,7 +505,6 @@ function getFilteredProducts(){
       (p.description || "").toLowerCase().includes(q)
     );
   }
-  // Filter
   if (CURRENT_FILTER === "active")   list = list.filter(p => p.active);
   if (CURRENT_FILTER === "inactive") list = list.filter(p => !p.active);
   if (CURRENT_FILTER === "hot")      list = list.filter(p => p.badge_type === "hot");
@@ -409,7 +513,6 @@ function getFilteredProducts(){
   return list;
 }
 
-/* ---------- RENDER TABLE ---------- */
 function render(){
   const tbody = $("#tbody");
   const list = getFilteredProducts();
@@ -430,9 +533,12 @@ function render(){
     const status = p.active
       ? `<span class="badge active">Actif</span>`
       : `<span class="badge inactive">Inactif</span>`;
+    const thumb = p.image_url
+      ? `<img class="thumb" src="${esc(p.image_url)}" alt="" loading="lazy">`
+      : `<div class="thumb-empty"><i class="fas fa-image"></i></div>`;
     return `
       <tr data-id="${p.id}">
-        <td><img class="thumb" src="${esc(p.image_url || "image/Logo.jpg")}" alt="" loading="lazy"></td>
+        <td>${thumb}</td>
         <td>
           <div class="product-name">${esc(p.name)}</div>
           <div class="product-desc">${esc(p.description || "")}</div>
@@ -443,16 +549,16 @@ function render(){
         <td>${status}</td>
         <td>
           <div class="row-actions">
-            <button class="icon-btn edit"   title="Modifier"    data-edit="${p.id}"><i class="fas fa-pen"></i></button>
-            <button class="icon-btn toggle" title="Activer / Désactiver" data-toggle="${p.id}"><i class="fas fa-power-off"></i></button>
-            <button class="icon-btn delete" title="Supprimer"   data-del="${p.id}"><i class="fas fa-trash"></i></button>
+            <button class="icon-btn edit"   title="Modifier" data-edit="${p.id}"><i class="fas fa-pen"></i></button>
+            <button class="icon-btn toggle" title="Activer/Désactiver" data-toggle="${p.id}"><i class="fas fa-power-off"></i></button>
+            <button class="icon-btn delete" title="Supprimer" data-del="${p.id}"><i class="fas fa-trash"></i></button>
           </div>
         </td>
       </tr>`;
   }).join("");
 }
 
-/* ---------- MODAL OPEN / CLOSE ---------- */
+/* ---------- MODAL ---------- */
 function openModal(product = null){
   $("#modalTitle").innerHTML = product
     ? '<i class="fas fa-pen"></i> Modifier le produit'
@@ -463,12 +569,14 @@ function openModal(product = null){
   $("#pDesc").value       = product?.description ?? "";
   $("#pPrice").value      = product?.price ?? "";
   $("#pImg").value        = product?.image_url ?? "";
+  $("#pImgFile").value    = "";
   $("#pBadge").value      = product?.badge_type ?? "";
   $("#pBadgeLabel").value = product?.badge_label ?? "";
   $("#pWa").value         = product?.whatsapp_message ?? "";
   $("#pOrder").value      = product?.sort_order ?? 0;
   $("#pActive").checked   = product?.active ?? true;
 
+  updatePreview();
   $("#modalBg").classList.add("open");
   document.body.style.overflow = "hidden";
   setTimeout(() => $("#pName").focus(), 120);
@@ -479,59 +587,76 @@ function closeModal(){
   document.body.style.overflow = "";
   $("#productForm").reset();
   $("#pId").value = "";
+  $("#pImgFile").value = "";
+  updatePreview();
 }
 
-/* ---------- FORM SUBMIT (create / update) ---------- */
+/* ---------- SUBMIT (create / update) ---------- */
 $("#productForm").addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const id = $("#pId").value;
-  const payload = {
-    name:             $("#pName").value.trim(),
-    description:      $("#pDesc").value.trim() || null,
-    price:            Number($("#pPrice").value || 0),
-    image_url:        $("#pImg").value.trim() || null,
-    badge_type:       $("#pBadge").value || null,
-    badge_label:      $("#pBadgeLabel").value.trim() || null,
-    whatsapp_message: $("#pWa").value.trim() || null,
-    sort_order:       Number($("#pOrder").value || 0),
-    active:           $("#pActive").checked
-  };
-
-  if (!payload.name){
-    toast("Le nom est obligatoire", "error");
-    return;
-  }
+  const oldProduct = id ? PRODUCTS.find(x => String(x.id) === String(id)) : null;
 
   const btn = $("#saveBtn");
   const originalHTML = btn.innerHTML;
   btn.disabled = true;
   btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enregistrement…';
 
-  let res;
-  if (id){
-    res = await db.from("fht_products").update(payload).eq("id", id);
-  } else {
-    res = await db.from("fht_products").insert(payload);
+  try {
+    /* 1) Image : upload si fichier, sinon URL, sinon null */
+    let imageUrl = $("#pImg").value.trim() || null;
+    const file = $("#pImgFile").files[0];
+
+    if (file){
+      btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Upload image…';
+      imageUrl = await uploadImage(file);
+
+      // Si on remplace une ancienne image stockée → on la supprime du bucket
+      if (oldProduct?.image_url && oldProduct.image_url !== imageUrl){
+        await deleteImageFromStorage(oldProduct.image_url);
+      }
+    }
+
+    /* 2) Payload */
+    const payload = {
+      name:             $("#pName").value.trim(),
+      description:      $("#pDesc").value.trim() || null,
+      price:            Number($("#pPrice").value || 0),
+      image_url:        imageUrl,
+      badge_type:       $("#pBadge").value || null,
+      badge_label:      $("#pBadgeLabel").value.trim() || null,
+      whatsapp_message: $("#pWa").value.trim() || null,
+      sort_order:       Number($("#pOrder").value || 0),
+      active:           $("#pActive").checked
+    };
+
+    if (!payload.name){
+      throw new Error("Le nom est obligatoire");
+    }
+
+    /* 3) Insert / Update */
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enregistrement…';
+    const res = id
+      ? await db.from("fht_products").update(payload).eq("id", id)
+      : await db.from("fht_products").insert(payload);
+
+    if (res.error) throw res.error;
+
+    toast(id ? "Produit mis à jour ✅" : "Produit ajouté ✅", "success");
+    closeModal();
+    await load();
+  } catch(err){
+    console.error(err);
+    toast(err.message || "Erreur inconnue", "error");
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = originalHTML;
   }
-
-  btn.disabled = false;
-  btn.innerHTML = originalHTML;
-
-  if (res.error){
-    toast("Erreur : " + res.error.message, "error");
-    console.error(res.error);
-    return;
-  }
-
-  toast(id ? "Produit mis à jour ✅" : "Produit ajouté ✅", "success");
-  closeModal();
-  await load();
 });
 
 /* ---------- CLICK DELEGATION ---------- */
 document.addEventListener("click", async (e) => {
-  // Edit
   const editId = e.target.closest("[data-edit]")?.dataset.edit;
   if (editId){
     const p = PRODUCTS.find(x => String(x.id) === String(editId));
@@ -539,7 +664,6 @@ document.addEventListener("click", async (e) => {
     return;
   }
 
-  // Toggle actif
   const toggleId = e.target.closest("[data-toggle]")?.dataset.toggle;
   if (toggleId){
     const p = PRODUCTS.find(x => String(x.id) === String(toggleId));
@@ -551,12 +675,16 @@ document.addEventListener("click", async (e) => {
     return;
   }
 
-  // Delete
   const delId = e.target.closest("[data-del]")?.dataset.del;
   if (delId){
     const p = PRODUCTS.find(x => String(x.id) === String(delId));
     if (!p) return;
-    if (!confirm(`Supprimer définitivement « ${p.name} » ?`)) return;
+    if (!confirm(`Supprimer définitivement « ${p.name} » ?\nL'image sera aussi supprimée du storage.`)) return;
+
+    // Supprime d'abord l'image du bucket
+    await deleteImageFromStorage(p.image_url);
+
+    // Puis la ligne en base
     const { error } = await db.from("fht_products").delete().eq("id", delId);
     if (error) return toast("Erreur : " + error.message, "error");
     toast("Produit supprimé", "success");
@@ -584,7 +712,6 @@ $("#searchInput").addEventListener("input", e => {
   CURRENT_SEARCH = e.target.value.trim();
   render();
 });
-
 $("#filterSelect").addEventListener("change", e => {
   CURRENT_FILTER = e.target.value;
   render();
